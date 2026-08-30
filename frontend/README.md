@@ -1,16 +1,180 @@
-# React + Vite
+# PlaceInRu — frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Лендинг о путешествиях по России, перенесённый из макета Figma. Проект собран на React и Vite, адаптирован для десктопных и мобильных экранов и не зависит от внешней загрузки изображений во время работы.
 
-Currently, two official plugins are available:
+## Что реализовано
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- hero-экран с навигацией и основным призывом к действию;
+- географическая SVG-карта всех 89 субъектов: каждый регион доступен мышью и клавиатурой, для будущих страниц предусмотрены заглушки;
+- карточка выбранного региона появляется только после клика, закрывается вручную и автоматически освобождает карту;
+- блок выбора настроения путешествия;
+- редакционная история с фотоколлажем;
+- секция о цели проекта и отзывы, объединённые оригинальной фактурной волной из Figma;
+- интерактивная подборка публикаций с циклическим слайдером;
+- выбор даты через компактную иконку с нативным календарём;
+- финальный CTA и подвал;
+- плавная навигация по секциям;
+- адаптивная вёрстка для планшетов и телефонов;
+- пропорциональное заполнение широких экранов секциями после карты без пустых боковых полей;
+- оригинальные растровые материалы, экспортированные из Figma в `src/assets/figma`.
 
-## React Compiler
+## Запуск
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Требуется Node.js 20+.
 
-## Expanding the Oxlint configuration
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Vite покажет локальный адрес, обычно `http://localhost:5173`.
+
+Проверки перед отправкой изменений:
+
+```bash
+npm run lint
+npm run build
+npm run format:check
+```
+
+`npm run format` автоматически приводит JSX, CSS, Markdown и конфигурационные файлы к единому стилю.
+
+## Архитектура
+
+```text
+Frontend/
+├── public/                  # файлы, доступные браузеру без обработки Vite
+├── src/
+│   ├── assets/
+│   │   ├── data/           # локальные геоданные карты
+│   │   └── figma/          # оригинальные изображения и SVG из макета
+│   ├── components/
+│   │   ├── CtaSection/
+│   │   ├── Footer/
+│   │   ├── Header/
+│   │   ├── Hero/
+│   │   ├── InteractiveRussiaMap/ # интерактивные SVG-районы и заглушка региона
+│   │   ├── MapSection/
+│   │   ├── MissionSection/
+│   │   ├── MissionReviewsFlow/ # общий переход-волна между целью и отзывами
+│   │   ├── PlacesSection/
+│   │   ├── QuizSection/
+│   │   ├── StorySection/
+│   │   ├── UserIcon/       # оригинальная составная иконка входа из Figma
+│   ├── hooks/
+│   │   └── useLoopSlider.js # общая механика циклических слайдеров
+│   ├── pages/
+│   │   └── HomePage/       # композиция главной страницы
+│   ├── App.jsx             # корневой компонент приложения
+│   ├── App.css             # токены и общие стили проекта
+│   ├── index.css           # минимальный reset
+│   └── main.jsx            # точка входа React
+├── index.html
+├── CODE_REVIEW.md           # результаты последнего технического ревью
+├── package.json
+├── .prettierrc.json
+└── vite.config.js
+```
+
+Каждая крупная секция находится в своей папке и состоит из JSX-компонента и локального CSS-файла. `HomePage` только собирает секции в нужном порядке. `MissionReviewsFlow` отвечает за единую декоративную композицию, которая начинается в `MissionSection`, проходит через `PlacesSection` и рваным краем заходит на следующий белый экран. Общие цвета, размеры контейнера, кнопки и базовые правила находятся в `App.css`.
+
+На экранах шире 1280 px секции после карты пропорционально масштабируют исходную композицию Figma до ширины окна. Высота каждого экрана пересчитывается вместе с масштабом, поэтому между секциями не появляются разрывы. Для блока цели, волн и отзывов предусмотрены отдельные планшетная и мобильная раскладки: преимущества переходят в сетку, волны остаются видимыми, а слайдер показывает одну или две целые карточки в зависимости от ширины.
+
+### Назначение файлов
+
+#### Точка входа и страница
+
+| Файл                              | Ответственность                                                                         |
+| --------------------------------- | --------------------------------------------------------------------------------------- |
+| `src/main.jsx`                    | Подключает локальные шрифты, глобальный reset и монтирует React в `#root`.              |
+| `src/App.jsx`                     | Корневой компонент. Сейчас выводит единственную страницу приложения.                    |
+| `src/App.css`                     | Глобальные цвета, семейства шрифтов, box-sizing и базовые правила документа.            |
+| `src/index.css`                   | Минимальный reset для `body` и корневого контейнера.                                    |
+| `src/pages/HomePage/HomePage.jsx` | Задаёт порядок экранов и рассчитывает коэффициент масштабирования сцен шириной 1280 px. |
+
+#### Компоненты
+
+| Файл                                                       | Ответственность                                                                                             |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `components/Hero/Hero.jsx`                                 | Первый экран с главным сообщением, CTA и переходом к карте.                                                 |
+| `components/Hero/Hero.css`                                 | Фоновая фотография, затемнение и адаптивное положение hero-контента.                                        |
+| `components/Header/Header.jsx`                             | Логотип, якорная навигация и кнопка входа.                                                                  |
+| `components/Header/Header.css`                             | Раскладка шапки поверх hero и мобильное состояние без меню.                                                 |
+| `components/MapSection/MapSection.jsx`                     | Текстовое обрамление и фон секции карты.                                                                    |
+| `components/MapSection/MapSection.css`                     | Позиционирование карты, заголовка и лесного нижнего слоя.                                                   |
+| `components/InteractiveRussiaMap/InteractiveRussiaMap.jsx` | Преобразует TopoJSON в 89 SVG-путей, обрабатывает hover, клавиатуру, выбор и автозакрытие карточки региона. |
+| `components/InteractiveRussiaMap/InteractiveRussiaMap.css` | Цвета регионов, состояния наведения и оформление tooltip/карточки.                                          |
+| `components/QuizSection/QuizSection.jsx`                   | Форма подбора поездки, календарь и данные карточек направлений.                                             |
+| `components/QuizSection/QuizSection.css`                   | Сцена помощника, поле поиска и размеры слайдера направлений.                                                |
+| `components/StorySection/StorySection.jsx`                 | Фотоколлаж, описание платформы, социальные ссылки и статистика.                                             |
+| `components/StorySection/StorySection.css`                 | Координаты коллажа 1280 × 800 и его мобильная перестройка.                                                  |
+| `components/MissionSection/MissionSection.jsx`             | Текст миссии и список четырёх принципов проекта.                                                            |
+| `components/MissionSection/MissionSection.css`             | Десктопная композиция миссии и сетки для планшета/телефона.                                                 |
+| `components/MissionReviewsFlow/MissionReviewsFlow.jsx`     | Объединяет миссию и отзывы в одну сцену с общими бумажными слоями.                                          |
+| `components/MissionReviewsFlow/MissionReviewsFlow.css`     | Центрирует волны, создаёт цветную страховочную подложку и управляет переходом к белому фону.                |
+| `components/PlacesSection/PlacesSection.jsx`               | Данные публикаций, лайки и целые движущиеся карточки отзывов.                                               |
+| `components/PlacesSection/PlacesSection.css`               | Геометрия карточек, track, стрелки и одно-/двухкарточные адаптивные режимы.                                 |
+| `components/CtaSection/CtaSection.jsx`                     | Финальный призыв к гидам.                                                                                   |
+| `components/CtaSection/CtaSection.css`                     | Масштабируемая фоновая карточка CTA.                                                                        |
+| `components/Footer/Footer.jsx`                             | Создаёт четыре колонки ссылок из массива данных.                                                            |
+| `components/Footer/Footer.css`                             | Адаптивная сетка подвала.                                                                                   |
+| `components/UserIcon/UserIcon.jsx`                         | Собирает иконку пользователя из четырёх оригинальных SVG-слоёв.                                             |
+| `components/UserIcon/UserIcon.css`                         | Совмещает слои иконки по координатам Figma.                                                                 |
+
+#### Общая логика, данные и конфигурация
+
+| Файл                                  | Ответственность                                                                                    |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `src/hooks/useLoopSlider.js`          | Единая логика циклических лент: переход, блокировка повторного клика и незаметный возврат с клона. |
+| `src/assets/data/russia-regions.json` | TopoJSON-геометрия 89 отображаемых регионов.                                                       |
+| `src/assets/figma/*`                  | Оригинальные фотографии, иллюстрации и иконки из Figma.                                            |
+| `src/assets/mission-reviews-wave.png` | Верхняя фактурная волна между миссией и отзывами.                                                  |
+| `src/assets/reviews-paper.png`        | Нижний рваный слой, завершающий секцию отзывов.                                                    |
+| `index.html`                          | HTML-оболочка и DOM-узел `#root`.                                                                  |
+| `CODE_REVIEW.md`                      | Зафиксированные результаты ревью, выполненные исправления и рекомендации для следующих обновлений. |
+| `vite.config.js`                      | Подключение React-плагина и настройки Vite.                                                        |
+| `.prettierrc.json`                    | Правила автоматического форматирования.                                                            |
+| `.prettierignore`                     | Исключает сборку, зависимости, геоданные и экспортированные SVG из форматирования.                 |
+| `.oxlintrc.json`                      | Настройки статического анализа JavaScript/JSX.                                                     |
+| `package.json`                        | Зависимости и команды разработки, проверки, сборки и форматирования.                               |
+
+## Шрифты
+
+Шрифты из макета подключены локально через пакеты Fontsource: `Inter`, `Manrope`, `JetBrains Mono`, `IBM Plex Mono`, `Iosevka Charon`, `Madimi One` и `Balsamiq Sans`. Файлы попадают в production-сборку автоматически, поэтому внешние CDN не используются.
+
+## Интерактивная карта
+
+`InteractiveRussiaMap` преобразует локальный TopoJSON в 89 отдельных SVG-путей через `d3-geo` и `topojson-client`. Нажатие на субъект обновляет hash вида `#region-kamchatka` и выводит временную карточку. При подключении роутера обработчик `select` можно заменить переходом на маршрут `/regions/:slug`, не меняя геометрию и стили карты.
+
+Геоданные лежат локально в `src/assets/data/russia-regions.json`. За основу взят открытый набор [karta-rossii](https://github.com/prokopenkoad42-creator/karta-rossii), собранный из границ `victorcheney/russian_regions_map` (GADM/OSM) и `geoBoundaries` (gbOpen). Набор отражает заявленный РФ состав из 89 субъектов; статус части отображённых территорий оспаривается и не признан большинством государств.
+
+## Слайдеры
+
+Карточки помощника и публикации сообщества используют циклическую ленту с клонами крайних элементов. Переход выполняется через CSS transform с плавной cubic-bezier-анимацией, а после завершения лента незаметно возвращается в исходную позицию. У публикации фотография, автор, реакции и белая подложка находятся внутри одного слайда и перемещаются как единое целое.
+
+## Работа с изображениями
+
+Все изображения импортируются из `src/assets`, поэтому Vite добавляет хеши к именам файлов при production-сборке и корректно формирует пути.
+
+- `assets/figma` — изображения, экспортированные непосредственно из слоёв исходного Figma-файла.
+- `assets/mission-reviews-wave.png` и `reviews-paper.png` — активные слои общей фактурной волны.
+- `assets/reviews-wave.svg` — сохранённый оригинальный экспорт из Figma; в текущей композиции не используется, но оставлен для будущей сверки с макетом.
+
+При добавлении изображения используйте понятное имя в `kebab-case`, импортируйте файл в компонент и укажите осмысленный `alt`. Для чисто декоративных изображений используйте пустой `alt=""`.
+
+Не заменяйте изображения похожими фотографиями из сторонних источников: визуальные материалы привязаны к слоям исходного макета Figma.
+
+## Как добавить новую секцию
+
+1. Создайте `src/components/SectionName/SectionName.jsx`.
+2. Рядом создайте `SectionName.css` и импортируйте его в компонент.
+3. Подключите секцию в `src/pages/HomePage/HomePage.jsx`.
+4. Проверьте desktop и mobile версии.
+5. Запустите `npm run lint` и `npm run build`.
+
+## Технологии
+
+- React 19;
+- Vite 8;
+- CSS без UI-фреймворка;
+- Oxlint.

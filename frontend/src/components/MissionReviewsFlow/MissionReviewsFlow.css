@@ -1,0 +1,142 @@
+/* Общая бумажная композиция, соединяющая миссию и отзывы без видимого шва. */
+.mission-reviews-flow {
+  position: relative;
+  z-index: 1;
+  height: 1380px;
+  background: #fff;
+}
+
+.mission-reviews-flow__stage {
+  position: relative;
+  width: 1280px;
+  height: 1380px;
+  margin: 0 auto;
+  isolation: isolate;
+  background: linear-gradient(to bottom, #f7ecdf 0 800px, #dfeaec 800px 1280px, #fff 1280px 100%);
+}
+
+.mission-reviews-flow + .guide {
+  position: relative;
+  z-index: 0;
+}
+
+.mission-reviews-flow__art {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 1280px;
+  height: 1558px;
+  pointer-events: none;
+}
+
+.mission-reviews-flow__art img {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+
+.mission-reviews-flow__wave {
+  left: 50%;
+  top: 329px;
+  width: 1400px;
+  height: 706px;
+  transform: translateX(-50%);
+}
+
+.mission-reviews-flow__paper {
+  left: 50%;
+  top: 1004px;
+  width: 1400px;
+  height: 554px;
+  transform: translateX(-50%) rotate(180deg);
+}
+
+.mission-reviews-flow__stage > .mission,
+.mission-reviews-flow__stage > .community {
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 1280px) {
+  .mission-reviews-flow__stage {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin: 0;
+    transform: translateX(-50%);
+    transform-origin: top center;
+  }
+}
+
+@media (min-width: 1281px) {
+  .mission-reviews-flow {
+    height: var(--scaled-1380);
+  }
+  .mission-reviews-flow__stage {
+    transform: translateX(-50%) scale(var(--wide-scale));
+  }
+}
+
+@media (max-width: 1279px) {
+  .mission-reviews-flow {
+    height: auto;
+    background: linear-gradient(
+      to bottom,
+      #f7ecdf 0 1050px,
+      #dfeaec 1050px 1650px,
+      #fff 1650px 100%
+    );
+  }
+
+  .mission-reviews-flow__stage {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    transform: none;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .mission-reviews-flow__art {
+    display: block;
+    width: 100%;
+    height: 1770px;
+  }
+
+  .mission-reviews-flow__wave {
+    top: 650px;
+    width: 145%;
+    height: 650px;
+    object-fit: cover;
+  }
+  .mission-reviews-flow__paper {
+    top: 1270px;
+    width: 145%;
+    height: 610px;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 620px) {
+  .mission-reviews-flow {
+    background: linear-gradient(
+      to bottom,
+      #f7ecdf 0 1160px,
+      #dfeaec 1160px 1760px,
+      #fff 1760px 100%
+    );
+  }
+  .mission-reviews-flow__art {
+    height: 1880px;
+  }
+  .mission-reviews-flow__wave {
+    top: 760px;
+  }
+  .mission-reviews-flow__paper {
+    top: 1380px;
+  }
+}

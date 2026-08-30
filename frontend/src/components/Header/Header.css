@@ -1,0 +1,72 @@
+/* Десктопная навигация поверх hero и компактное состояние для телефона. */
+.header {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1200px, calc(100% - 52px));
+  height: 94px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+}
+.brand strong {
+  font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+  font-size: 35px;
+  letter-spacing: -4px;
+  padding-right: 16px;
+  border-right: 1px solid rgba(255, 255, 255, 0.7);
+}
+.brand span {
+  font-weight: 800;
+  margin-left: 12px;
+  font-size: 14px;
+  text-shadow: 0 3px 5px #000;
+}
+.header nav {
+  margin-left: auto;
+  display: flex;
+  gap: 55px;
+}
+.header nav a,
+.login {
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 700;
+}
+.login {
+  height: 44px;
+  min-width: 114px;
+  margin-left: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+@media (max-width: 760px) {
+  .header {
+    width: calc(100% - 28px);
+    height: 70px;
+  }
+  .header nav {
+    display: none;
+  }
+  .brand strong {
+    font-size: 28px;
+  }
+  .login {
+    margin-left: auto;
+    min-width: 90px;
+    height: 38px;
+  }
+}

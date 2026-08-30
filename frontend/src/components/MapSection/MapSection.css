@@ -1,0 +1,54 @@
+/* Контейнер карты и декоративный лесной градиент у нижней границы. */
+.map-section {
+  height: 800px;
+  position: relative;
+  background: #f5f1e8;
+  overflow: hidden;
+}
+.map-section__forest {
+  position: absolute;
+  inset: auto 0 0;
+  height: 340px;
+  background-image: linear-gradient(0deg, rgba(235, 244, 241, 0.25), #f5f1e8), var(--forest);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.48;
+}
+.map-section__content {
+  position: relative;
+  width: min(1180px, calc(100% - 50px));
+  height: 100%;
+  margin: auto;
+}
+.map-section__copy {
+  position: absolute;
+  z-index: 3;
+  left: 30px;
+  top: 145px;
+}
+.map-section h2 {
+  font: 700 54px/1 var(--serif);
+  margin: 0 0 30px;
+}
+.map-section__copy p {
+  font: 600 16px/1.8 var(--mono);
+  color: #3d4b43;
+}
+@media (max-width: 800px) {
+  .map-section {
+    height: 720px;
+  }
+  .map-section__content {
+    width: calc(100% - 24px);
+  }
+  .map-section__copy {
+    left: 8px;
+    top: 70px;
+  }
+  .map-section h2 {
+    font-size: 43px;
+  }
+  .map-section__copy p {
+    font-size: 12px;
+  }
+}

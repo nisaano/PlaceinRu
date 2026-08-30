@@ -1,0 +1,102 @@
+/* Финальная карточка масштабируется вместе с широкоформатной сценой. */
+.guide {
+  height: 650px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+.guide__stage {
+  width: 100%;
+  height: 650px;
+  padding: 145px 55px 60px;
+}
+.guide__card {
+  height: 425px;
+  max-width: 1168px;
+  margin: auto;
+  border-radius: 12px;
+  background: var(--guide) center/cover;
+  position: relative;
+  overflow: hidden;
+}
+.guide__card > div {
+  width: 570px;
+  padding: 48px 60px;
+}
+.guide h2 {
+  font: 700 43px/1.12 var(--serif);
+  margin: 0 0 22px;
+}
+.guide p {
+  font: 600 15px/1.5 var(--mono);
+  width: 330px;
+}
+.guide span {
+  display: inline-block;
+  margin: 25px 12px 0 85px;
+  font-weight: 800;
+}
+.guide a {
+  display: inline-block;
+  background: #586c43;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-weight: 800;
+}
+.guide__card > b {
+  position: absolute;
+  right: 34px;
+  top: 30px;
+  font-size: 39px;
+}
+.guide__card > strong {
+  position: absolute;
+  right: 22px;
+  top: 90px;
+}
+@media (min-width: 901px) {
+  .guide__stage {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 1280px;
+    transform: translateX(-50%);
+    transform-origin: top center;
+  }
+}
+@media (min-width: 1281px) {
+  .guide {
+    height: var(--scaled-650);
+  }
+  .guide__stage {
+    transform: translateX(-50%) scale(var(--wide-scale));
+  }
+}
+@media (max-width: 700px) {
+  .guide {
+    height: 560px;
+  }
+  .guide__stage {
+    height: 560px;
+    padding: 65px 15px;
+  }
+  .guide__card {
+    height: 460px;
+    background-position: 62% center;
+  }
+  .guide__card > div {
+    width: 100%;
+    padding: 40px 25px;
+  }
+  .guide h2 {
+    font-size: 35px;
+  }
+  .guide p {
+    width: 80%;
+  }
+  .guide span {
+    margin-left: 0;
+  }
+}

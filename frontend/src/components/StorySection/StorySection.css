@@ -1,0 +1,399 @@
+/* Абсолютная композиция коллажа в координатах исходной сцены 1280 × 800. */
+.about {
+  height: 800px;
+  position: relative;
+  overflow: hidden;
+  background: #f8e9d1;
+  color: #fff;
+}
+.about__stage {
+  position: relative;
+  width: 1280px;
+  height: 800px;
+  margin: auto;
+  overflow: hidden;
+  background: #f8e9d1;
+}
+.about__gallery {
+  position: absolute;
+  inset: 0;
+}
+.about__image {
+  position: absolute;
+  width: 290px;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+.about__image--1 {
+  left: 8px;
+  top: 32px;
+}
+.about__image--2 {
+  left: 306px;
+  top: 32px;
+  width: 370px;
+  height: 468px;
+}
+.about__image--3 {
+  left: 684px;
+  top: 32px;
+}
+.about__image--4 {
+  left: 982px;
+  top: 32px;
+}
+.about__image--5 {
+  left: 8px;
+  top: 270px;
+}
+.about__image--6 {
+  left: 684px;
+  top: 270px;
+}
+.about__image--7 {
+  left: 982px;
+  top: 270px;
+}
+.about__gallery:before,
+.about__gallery:after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 32px;
+  width: 198px;
+  height: 467px;
+  pointer-events: none;
+}
+.about__gallery:before {
+  left: 8px;
+  background: linear-gradient(90deg, rgba(248, 233, 209, 0.42), transparent);
+}
+.about__gallery:after {
+  right: 8px;
+  background: linear-gradient(270deg, rgba(248, 233, 209, 0.42), transparent);
+}
+.about__polaroid {
+  position: absolute;
+  z-index: 5;
+  left: 89px;
+  top: 190px;
+  width: 306px;
+  height: 298px;
+  padding: 14px;
+  background: #fff;
+  border-radius: 15px;
+  transform: rotate(-15deg);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.17);
+}
+.about__polaroid > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.about__polaroid span {
+  position: absolute;
+  right: 18px;
+  top: 8px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: #8ac6ed;
+  color: #fff;
+  font:
+    400 20px/1 'Madimi One',
+    sans-serif;
+  transform: rotate(7deg);
+}
+.about__mountains {
+  position: absolute;
+  z-index: 4;
+  left: 306px;
+  top: 350px;
+  width: 447px;
+  height: 300px;
+  object-fit: contain;
+}
+.about__route {
+  position: absolute;
+  z-index: 3;
+  left: 57px;
+  top: 515px;
+  width: 244px;
+  height: 145px;
+  object-fit: contain;
+}
+.about h2 {
+  position: absolute;
+  z-index: 6;
+  left: 313px;
+  top: 58px;
+  width: 356px;
+  margin: 0;
+  text-align: center;
+  font:
+    400 44px/1.05 'Madimi One',
+    sans-serif;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.45);
+}
+.about__social {
+  position: absolute;
+  z-index: 7;
+  left: 341px;
+  top: 121px;
+  width: 321px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font: 500 16px/1 var(--mono);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
+}
+.about__social a {
+  display: block;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+}
+.about__social img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.about__lead {
+  position: absolute;
+  z-index: 6;
+  left: 378px;
+  top: 203px;
+  width: 292px;
+  margin: 0;
+  text-align: right;
+  color: #fff;
+  font: 500 20px/1.4 var(--mono);
+  text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.62);
+}
+.about__ribbon {
+  position: absolute;
+  z-index: 6;
+  left: 849px;
+  top: 480px;
+  width: 402px;
+  height: 77px;
+}
+.about__ribbon > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.about h3 {
+  position: absolute;
+  inset: 7px 8px 14px;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  font: 800 28px/1 var(--mono);
+}
+.about__promise {
+  position: absolute;
+  z-index: 6;
+  left: 705px;
+  top: 556px;
+  width: 559px;
+  margin: 0;
+  color: #184a34;
+  font: 700 28px/1.15 var(--mono);
+}
+.about__stats {
+  position: absolute;
+  z-index: 8;
+  left: 54px;
+  top: 662px;
+  width: 1169px;
+  height: 97px;
+  display: grid;
+  grid-template-columns: 1.05fr 1.25fr 0.82fr 1.05fr;
+  align-items: center;
+}
+.about__stats-bg {
+  position: absolute;
+  z-index: -1;
+  left: -4px;
+  top: 0;
+  width: 1182px;
+  height: 105px;
+  max-width: none;
+}
+.about-stat {
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.27);
+  color: #fff;
+}
+.about-stat:last-child {
+  border-right: 0;
+}
+.about-stat > img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+}
+.about-stat:nth-of-type(5) > img {
+  width: 68px;
+}
+.about-stat > span {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.about-stat b {
+  font:
+    800 20px/1.15 Manrope,
+    sans-serif;
+}
+.about-stat small {
+  margin-top: 5px;
+  font:
+    600 11px/1.2 Manrope,
+    sans-serif;
+  white-space: nowrap;
+}
+
+.about__social {
+  left: 306px;
+  width: 370px;
+  justify-content: center;
+  gap: 14px;
+}
+.about-stat {
+  border-right: 0;
+}
+@media (min-width: 901px) {
+  .about__stage {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin: 0;
+    transform: translateX(-50%);
+    transform-origin: top center;
+  }
+}
+@media (min-width: 1281px) {
+  .about {
+    height: var(--scaled-800);
+  }
+  .about__stage {
+    transform: translateX(-50%) scale(var(--wide-scale));
+  }
+}
+@media (max-width: 900px) {
+  .about {
+    height: 850px;
+  }
+  .about__stage {
+    width: 100%;
+    height: 850px;
+  }
+  .about__image--2 {
+    left: 50%;
+    width: 370px;
+    transform: translateX(-50%);
+  }
+  .about__image--1,
+  .about__image--3,
+  .about__image--4,
+  .about__image--5,
+  .about__image--6,
+  .about__image--7,
+  .about__gallery:before,
+  .about__gallery:after {
+    display: none;
+  }
+  .about h2 {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .about__social {
+    left: 50%;
+    top: 120px;
+    width: auto;
+    transform: translateX(-50%);
+  }
+  .about__social > span,
+  .about__lead {
+    left: 50%;
+    top: 180px;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+  .about__polaroid {
+    left: 50%;
+    top: 340px;
+    transform: translateX(-50%) rotate(-8deg);
+  }
+  .about__mountains {
+    left: 50%;
+    top: 470px;
+    width: 390px;
+    transform: translateX(-50%);
+  }
+  .about__route {
+    display: none;
+  }
+  .about__ribbon {
+    left: 50%;
+    top: 600px;
+    width: 340px;
+    transform: translateX(-50%);
+  }
+  .about h3 {
+    font-size: 22px;
+  }
+  .about__promise {
+    left: 50%;
+    top: 665px;
+    width: 340px;
+    transform: translateX(-50%);
+    font-size: 17px;
+    text-align: center;
+  }
+  .about__stats {
+    left: 12px;
+    top: auto;
+    right: 12px;
+    bottom: 14px;
+    width: auto;
+    height: 112px;
+    grid-template-columns: 1fr 1fr;
+    background: #334329;
+    border-radius: 10px;
+  }
+  .about__stats-bg {
+    display: none;
+  }
+  .about-stat {
+    height: 46px;
+    border: 0;
+    gap: 7px;
+  }
+  .about-stat > img {
+    width: 35px;
+    height: 35px;
+  }
+  .about-stat b {
+    font-size: 16px;
+  }
+  .about-stat small {
+    font-size: 9px;
+  }
+}

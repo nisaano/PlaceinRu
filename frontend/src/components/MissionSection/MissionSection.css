@@ -1,0 +1,256 @@
+/* Миссия проекта: точная десктопная композиция и самостоятельные мобильные сетки. */
+.mission {
+  height: 800px;
+  color: #334329;
+  background: transparent;
+}
+.mission__stage {
+  position: relative;
+  width: min(1280px, 100%);
+  height: 800px;
+  margin: 0 auto;
+}
+.mission__brand {
+  position: absolute;
+  z-index: 4;
+  left: 43px;
+  top: 61px;
+  display: flex;
+  align-items: flex-start;
+  height: 55px;
+}
+.mission__brand::after {
+  content: '';
+  position: absolute;
+  left: 83px;
+  top: 0;
+  width: 1px;
+  height: 50px;
+  background: #536746;
+}
+.mission__brand b {
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 55px;
+  color: #f7ecdf;
+  border-radius: 8px;
+  background: #536746;
+  font:
+    400 43px/1 'Madimi One',
+    sans-serif;
+}
+.mission__brand span {
+  margin: 14px 0 0 24px;
+  color: #334329;
+  font: 800 16px/1.2 var(--sans);
+}
+.mission__intro {
+  position: absolute;
+  z-index: 4;
+  left: 354px;
+  top: 78px;
+  width: 472px;
+  text-align: center;
+}
+.mission__intro h2 {
+  height: 64px;
+  margin: 0;
+  font:
+    italic 700 72px/64px Inter,
+    sans-serif;
+  letter-spacing: -2.2px;
+}
+.mission__intro p {
+  margin: 18px 0 0;
+  font:
+    700 20px/28px 'Iosevka Charon',
+    var(--mono);
+}
+.mission__items {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+}
+.mission__items article {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  color: #96a47d;
+  font:
+    italic 800 24px/30px 'JetBrains Mono',
+    monospace;
+  letter-spacing: 1.2px;
+}
+.mission__items article:nth-child(1) {
+  left: 16px;
+  top: 219px;
+  width: 342px;
+}
+.mission__items article:nth-child(2) {
+  left: 14px;
+  top: 364px;
+  width: 602px;
+}
+.mission__items article:nth-child(3) {
+  left: 376px;
+  top: 286px;
+  width: 348px;
+}
+.mission__items article:nth-child(4) {
+  left: 458px;
+  top: 441px;
+  width: 338px;
+}
+.mission__items img {
+  flex: 0 0 auto;
+  width: 103px;
+  height: 103px;
+  object-fit: contain;
+}
+.mission__items article:nth-child(2) img {
+  width: 104px;
+  height: 108px;
+}
+.mission__items article:nth-child(3) img {
+  width: 101px;
+  height: 101px;
+}
+.mission__items span {
+  margin: 17px 0 0 7px;
+}
+.mission__items article:nth-child(2) span {
+  margin-top: 19px;
+}
+.mission__items article:nth-child(3) span {
+  margin: 4px 0 0 13px;
+}
+.mission__items article:nth-child(4) span {
+  margin: 16px 0 0 1px;
+}
+.mission__route {
+  position: absolute;
+  z-index: 3;
+  left: 744px;
+  top: -19px;
+  width: 537px;
+  height: 537px;
+  object-fit: contain;
+}
+.mission__trees {
+  position: absolute;
+  z-index: 4;
+  left: 18px;
+  top: 431px;
+  width: 405px;
+  height: 342px;
+  object-fit: contain;
+}
+
+@media (max-width: 1279px) {
+  .mission {
+    height: 1050px;
+    overflow: hidden;
+  }
+  .mission__stage {
+    width: 100%;
+    height: 1050px;
+  }
+  .mission__brand {
+    left: 20px;
+    top: 24px;
+  }
+  .mission__intro {
+    left: 20px;
+    right: 20px;
+    top: 105px;
+    width: auto;
+  }
+  .mission__intro h2 {
+    height: auto;
+    font-size: 50px;
+    line-height: 1;
+  }
+  .mission__intro p {
+    margin-top: 18px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .mission__items {
+    left: 24px;
+    right: 24px;
+    top: 310px;
+    bottom: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .mission__items article {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    width: auto !important;
+    min-height: 130px;
+    align-items: center;
+    padding: 14px;
+    border-radius: 18px;
+    background: rgba(247, 236, 223, 0.78);
+    font-size: 16px;
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+  .mission__items span {
+    margin: 0 0 0 12px !important;
+  }
+  .mission__items img {
+    width: 76px !important;
+    height: 76px !important;
+  }
+  .mission__route {
+    left: auto;
+    right: -90px;
+    top: 245px;
+    width: 430px;
+    height: 430px;
+    opacity: 0.18;
+  }
+  .mission__trees {
+    left: 50%;
+    top: 730px;
+    width: 360px;
+    height: auto;
+    opacity: 0.82;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 620px) {
+  .mission {
+    height: 1160px;
+  }
+  .mission__stage {
+    height: 1160px;
+  }
+  .mission__intro {
+    top: 98px;
+  }
+  .mission__intro h2 {
+    font-size: 44px;
+  }
+  .mission__items {
+    top: 290px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .mission__items article {
+    min-height: 112px;
+    padding: 10px 14px;
+  }
+  .mission__route {
+    display: none;
+  }
+  .mission__trees {
+    top: 820px;
+    width: 330px;
+  }
+}
