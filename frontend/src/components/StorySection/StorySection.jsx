@@ -13,7 +13,6 @@ import routes from '../../assets/figma/stat-routes.png'
 import places from '../../assets/figma/stat-places.png'
 import users from '../../assets/figma/stat-users.png'
 import statsPanel from '../../assets/figma/about-stats-panel.svg'
-import titleRibbon from '../../assets/figma/about-title-ribbon.svg'
 import vk from '../../assets/figma/vk.svg'
 import telegram from '../../assets/figma/telegram.svg'
 import max from '../../assets/figma/max.svg'
@@ -64,11 +63,10 @@ export function StorySection() {
           Платформа для тех, кто любит путешествовать, выбирать направления и открывать Россию
           по-новому.
         </p>
-        <div className="about__ribbon">
-          <img src={titleRibbon} alt="" />
+        <div className="about__promise-group">
           <h3>Мы собираем лучшее</h3>
+          <p className="about__promise">делая ваши путешествия лёгкими, яркими и запоминающимися</p>
         </div>
-        <p className="about__promise">делая ваши путешествия лёгкими, яркими и запоминающимися</p>
         <div className="about__stats">
           <img className="about__stats-bg" src={statsPanel} alt="" />
           <Stat image={regions} number="89" label="Регионов России" />

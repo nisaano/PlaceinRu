@@ -1,72 +1,155 @@
-/* Десктопная навигация поверх hero и компактное состояние для телефона. */
+/* Единая фиксированная навигация остаётся доступной на всех экранах лендинга. */
 .header {
-  position: absolute;
-  z-index: 4;
+  position: fixed;
+  z-index: 100;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(1200px, calc(100% - 52px));
-  height: 94px;
+  left: 0;
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 94px;
+  padding: 0 clamp(20px, 4.8vw, 92px);
   color: #fff;
+  /* Полупрозрачная растяжка сохраняет ощущение «стекла» и не даёт белому меню
+     теряться ни на светлых секциях, ни на фотографиях. */
+  background: linear-gradient(
+    180deg,
+    rgba(16, 34, 29, 0.68) 0%,
+    rgba(16, 34, 29, 0.4) 58%,
+    rgba(16, 34, 29, 0) 100%
+  );
+  pointer-events: none;
 }
+
 .brand {
   display: flex;
   align-items: center;
+  flex: 0 0 auto;
   color: #fff;
   text-decoration: none;
+  pointer-events: auto;
 }
+
 .brand strong {
-  font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
-  font-size: 35px;
-  letter-spacing: -4px;
-  padding-right: 16px;
-  border-right: 1px solid rgba(255, 255, 255, 0.7);
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 68px;
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  background: rgba(28, 52, 48, 0.74);
+  box-shadow: 0 9px 13px rgba(13, 28, 25, 0.32);
+  font:
+    400 48px/1 'Madimi One',
+    sans-serif;
+  letter-spacing: -2px;
 }
+
 .brand span {
-  font-weight: 800;
-  margin-left: 12px;
-  font-size: 14px;
-  text-shadow: 0 3px 5px #000;
-}
-.header nav {
-  margin-left: auto;
   display: flex;
-  gap: 55px;
+  align-items: center;
+  height: 52px;
+  margin-left: 18px;
+  padding-left: 18px;
+  border-left: 2px solid rgba(255, 255, 255, 0.9);
+  font:
+    400 27px/1 'Madimi One',
+    sans-serif;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.82);
 }
+
+.header nav {
+  display: flex;
+  gap: clamp(28px, 3.4vw, 58px);
+  margin-left: auto;
+  pointer-events: auto;
+}
+
 .header nav a,
 .login {
-  color: rgba(255, 255, 255, 0.88);
+  color: #fff;
   text-decoration: none;
   font-size: 16px;
   font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.82);
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease,
+    background 0.2s ease;
 }
+
+.header nav a:hover {
+  color: #fff;
+  opacity: 0.72;
+}
+
 .login {
-  height: 44px;
-  min-width: 114px;
-  margin-left: 44px;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
+  gap: 10px;
+  min-width: 132px;
+  height: 58px;
+  margin-left: clamp(28px, 3.4vw, 58px);
+  border: 0;
+  border-radius: 28px;
+  background: rgba(28, 52, 48, 0.9);
+  box-shadow: 0 9px 13px rgba(13, 28, 25, 0.32);
+  pointer-events: auto;
+  font-size: 18px;
+  text-transform: uppercase;
 }
-@media (max-width: 760px) {
-  .header {
-    width: calc(100% - 28px);
-    height: 70px;
-  }
+
+.login:hover {
+  background: rgba(38, 68, 61, 0.96);
+}
+
+.login .user-icon {
+  margin-right: 5px;
+  transform: scale(1.35);
+}
+
+@media (max-width: 980px) {
   .header nav {
     display: none;
   }
-  .brand strong {
-    font-size: 28px;
-  }
+
   .login {
     margin-left: auto;
-    min-width: 90px;
-    height: 38px;
+  }
+}
+
+@media (max-width: 760px) {
+  .header {
+    height: 68px;
+    padding-inline: 14px;
+  }
+
+  .brand strong {
+    width: 58px;
+    height: 50px;
+    border-radius: 15px;
+    font-size: 34px;
+  }
+
+  .brand span {
+    height: 40px;
+    margin-left: 10px;
+    padding-left: 10px;
+    font-size: 18px;
+  }
+
+  .login {
+    min-width: 100px;
+    height: 44px;
+    margin-left: auto;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 430px) {
+  .brand span {
+    display: none;
   }
 }

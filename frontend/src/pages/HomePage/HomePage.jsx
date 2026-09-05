@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Header } from '../../components/Header/Header'
 import { Hero } from '../../components/Hero/Hero'
 import { MapSection } from '../../components/MapSection/MapSection'
 import { QuizSection } from '../../components/QuizSection/QuizSection'
@@ -35,11 +36,12 @@ export function HomePage() {
     '--wide-scale': wideScale,
     '--scaled-650': `${650 * wideScale}px`,
     '--scaled-800': `${800 * wideScale}px`,
-    '--scaled-1380': `${1380 * wideScale}px`,
+    '--scaled-1200': `${1200 * wideScale}px`,
   }
 
   return (
     <>
+      <Header />
       <Hero />
       <main style={responsiveSizes}>
         <MapSection />

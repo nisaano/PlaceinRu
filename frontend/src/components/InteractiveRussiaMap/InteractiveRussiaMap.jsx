@@ -4,17 +4,6 @@ import { feature } from 'topojson-client'
 import topo from '../../assets/data/russia-regions.json'
 import './InteractiveRussiaMap.css'
 
-const districtColors = {
-  ЦФО: '#8fbd72',
-  СЗФО: '#79ad69',
-  ЮФО: '#a6ca82',
-  СКФО: '#91bc70',
-  ПФО: '#76ad66',
-  УФО: '#9ac77b',
-  СФО: '#84b66c',
-  ДФО: '#a1c77d',
-}
-
 /** Строит кликабельные SVG-пути субъектов из локального TopoJSON. */
 export function InteractiveRussiaMap() {
   // Геометрию 89 регионов вычисляем один раз: повторная проекция на каждом рендере дорогая.
@@ -65,7 +54,6 @@ export function InteractiveRussiaMap() {
             <path
               key={region.properties.id}
               d={paths.get(region.properties.id)}
-              style={{ '--region-color': districtColors[region.properties.fd] || '#91bd72' }}
               className={selected?.properties.id === region.properties.id ? 'is-active' : ''}
               role="button"
               tabIndex="0"

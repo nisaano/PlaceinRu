@@ -1,7 +1,7 @@
 import { UserIcon } from '../UserIcon/UserIcon'
 import './Header.css'
 
-/** Навигация hero-экрана с якорными переходами по одностраничному сайту. */
+/** Единая фиксированная навигация с оригинальной составной иконкой пользователя. */
 export function Header() {
   return (
     <header className="header">

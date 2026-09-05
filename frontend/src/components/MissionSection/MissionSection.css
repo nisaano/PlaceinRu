@@ -1,256 +1,245 @@
-/* Миссия проекта: точная десктопная композиция и самостоятельные мобильные сетки. */
+/* Экран о проекте построен на исходной сцене Figma шириной 1280 px. */
 .mission {
-  height: 800px;
-  color: #334329;
+  height: 620px;
+  color: #2d4428;
   background: transparent;
 }
+
 .mission__stage {
   position: relative;
   width: min(1280px, 100%);
-  height: 800px;
+  height: 620px;
   margin: 0 auto;
 }
-.mission__brand {
+
+.mission__title {
   position: absolute;
   z-index: 4;
-  left: 43px;
-  top: 61px;
-  display: flex;
-  align-items: flex-start;
-  height: 55px;
-}
-.mission__brand::after {
-  content: '';
-  position: absolute;
-  left: 83px;
-  top: 0;
-  width: 1px;
-  height: 50px;
-  background: #536746;
-}
-.mission__brand b {
-  display: grid;
-  place-items: center;
-  width: 70px;
-  height: 55px;
-  color: #f7ecdf;
-  border-radius: 8px;
-  background: #536746;
-  font:
-    400 43px/1 'Madimi One',
-    sans-serif;
-}
-.mission__brand span {
-  margin: 14px 0 0 24px;
-  color: #334329;
-  font: 800 16px/1.2 var(--sans);
-}
-.mission__intro {
-  position: absolute;
-  z-index: 4;
-  left: 354px;
-  top: 78px;
-  width: 472px;
-  text-align: center;
-}
-.mission__intro h2 {
-  height: 64px;
+  top: 121px;
+  left: 56px;
+  width: 790px;
   margin: 0;
+  color: #2d4428;
   font:
-    italic 700 72px/64px Inter,
+    italic 800 68px/61px Inter,
     sans-serif;
-  letter-spacing: -2.2px;
+  letter-spacing: -2.8px;
 }
-.mission__intro p {
-  margin: 18px 0 0;
-  font:
-    700 20px/28px 'Iosevka Charon',
-    var(--mono);
-}
-.mission__items {
+
+.mission__description {
   position: absolute;
   z-index: 4;
-  inset: 0;
-}
-.mission__items article {
-  position: absolute;
-  display: flex;
-  align-items: flex-start;
-  color: #96a47d;
+  top: 328px;
+  left: 334px;
+  width: 540px;
+  margin: 0;
+  color: #334329;
+  text-align: center;
   font:
-    italic 800 24px/30px 'JetBrains Mono',
-    monospace;
-  letter-spacing: 1.2px;
+    700 17px/29px 'Iosevka Charon',
+    var(--mono);
+  letter-spacing: 0.25px;
 }
-.mission__items article:nth-child(1) {
-  left: 16px;
-  top: 219px;
-  width: 342px;
-}
-.mission__items article:nth-child(2) {
-  left: 14px;
-  top: 364px;
-  width: 602px;
-}
-.mission__items article:nth-child(3) {
-  left: 376px;
-  top: 286px;
-  width: 348px;
-}
-.mission__items article:nth-child(4) {
-  left: 458px;
-  top: 441px;
-  width: 338px;
-}
-.mission__items img {
-  flex: 0 0 auto;
-  width: 103px;
-  height: 103px;
-  object-fit: contain;
-}
-.mission__items article:nth-child(2) img {
-  width: 104px;
-  height: 108px;
-}
-.mission__items article:nth-child(3) img {
-  width: 101px;
-  height: 101px;
-}
-.mission__items span {
-  margin: 17px 0 0 7px;
-}
-.mission__items article:nth-child(2) span {
-  margin-top: 19px;
-}
-.mission__items article:nth-child(3) span {
-  margin: 4px 0 0 13px;
-}
-.mission__items article:nth-child(4) span {
-  margin: 16px 0 0 1px;
-}
-.mission__route {
+
+.mission__bus {
   position: absolute;
   z-index: 3;
-  left: 744px;
-  top: -19px;
-  width: 537px;
-  height: 537px;
+  top: 82px;
+  right: 28px;
+  width: 405px;
+  height: 295px;
   object-fit: contain;
 }
-.mission__trees {
+
+.mission__advantages {
   position: absolute;
   z-index: 4;
-  left: 18px;
-  top: 431px;
-  width: 405px;
-  height: 342px;
+  right: 42px;
+  /* Оставляем чистый зазор до начала бумажной волны на десктопе. */
+  bottom: 68px;
+  left: 42px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 36px;
+}
+
+.mission-advantage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  text-align: center;
+}
+
+.mission-advantage img {
+  width: 96px;
+  height: 96px;
   object-fit: contain;
+}
+
+.mission-advantage span {
+  max-width: 280px;
+  margin-top: 4px;
+  color: #96a47d;
+  font:
+    italic 800 23px/24px 'JetBrains Mono',
+    monospace;
+  letter-spacing: -1.2px;
+}
+
+/* На широком мониторе вся Figma-сцена увеличивается. Компенсируем масштаб
+   вертикальных координат, чтобы композиция начиналась сразу под хедером. */
+@media (min-width: 1280px) {
+  .mission__title {
+    top: clamp(70px, calc(121px - (100vw - 1280px) * 0.12), 121px);
+  }
+
+  .mission__description {
+    top: clamp(268px, calc(328px - (100vw - 1280px) * 0.14), 328px);
+  }
+
+  .mission__bus {
+    top: clamp(38px, calc(82px - (100vw - 1280px) * 0.11), 82px);
+  }
+
+  .mission__advantages {
+    bottom: clamp(68px, calc(68px + (100vw - 1280px) * 0.09), 108px);
+  }
 }
 
 @media (max-width: 1279px) {
   .mission {
-    height: 1050px;
+    height: 900px;
     overflow: hidden;
   }
+
   .mission__stage {
     width: 100%;
-    height: 1050px;
+    height: 900px;
   }
-  .mission__brand {
-    left: 20px;
-    top: 24px;
+
+  .mission__title {
+    top: 112px;
+    left: 32px;
+    width: min(640px, 61vw);
+    font-size: clamp(48px, 5.2vw, 62px);
+    line-height: 0.94;
   }
-  .mission__intro {
-    left: 20px;
-    right: 20px;
-    top: 105px;
-    width: auto;
-  }
-  .mission__intro h2 {
+
+  .mission__bus {
+    top: 145px;
+    right: 10px;
+    width: min(385px, 36vw);
     height: auto;
-    font-size: 50px;
-    line-height: 1;
   }
-  .mission__intro p {
-    margin-top: 18px;
-    font-size: 14px;
-    line-height: 1.55;
+
+  .mission__description {
+    top: 338px;
+    left: 110px;
+    width: min(610px, 62vw);
+    text-align: center;
   }
-  .mission__items {
-    left: 24px;
-    right: 24px;
-    top: 310px;
-    bottom: auto;
-    display: grid;
+
+  .mission__advantages {
+    right: 32px;
+    bottom: 80px;
+    left: 32px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
+    gap: 30px 24px;
   }
-  .mission__items article {
-    position: relative;
-    left: auto !important;
-    top: auto !important;
-    width: auto !important;
-    min-height: 130px;
-    align-items: center;
-    padding: 14px;
-    border-radius: 18px;
-    background: rgba(247, 236, 223, 0.78);
-    font-size: 16px;
-    line-height: 1.35;
-    letter-spacing: 0;
-  }
-  .mission__items span {
-    margin: 0 0 0 12px !important;
-  }
-  .mission__items img {
-    width: 76px !important;
-    height: 76px !important;
-  }
-  .mission__route {
-    left: auto;
-    right: -90px;
-    top: 245px;
-    width: 430px;
-    height: 430px;
-    opacity: 0.18;
-  }
-  .mission__trees {
-    left: 50%;
-    top: 730px;
-    width: 360px;
-    height: auto;
-    opacity: 0.82;
-    transform: translateX(-50%);
+
+  .mission-advantage span {
+    font-size: 19px;
+    line-height: 1.1;
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 999px) {
   .mission {
-    height: 1160px;
+    height: 1050px;
   }
+
   .mission__stage {
-    height: 1160px;
+    height: 1050px;
   }
-  .mission__intro {
-    top: 98px;
+
+  .mission__title {
+    top: 105px;
+    left: 28px;
+    width: calc(100% - 56px);
+    font-size: clamp(43px, 6.8vw, 56px);
   }
-  .mission__intro h2 {
-    font-size: 44px;
+
+  .mission__description {
+    top: 300px;
+    left: 28px;
+    width: calc(100% - 56px);
   }
-  .mission__items {
-    top: 290px;
-    grid-template-columns: 1fr;
-    gap: 10px;
+
+  .mission__bus {
+    top: 365px;
+    right: 50%;
+    width: min(390px, 55vw);
+    transform: translateX(50%);
   }
-  .mission__items article {
-    min-height: 112px;
-    padding: 10px 14px;
+
+  .mission__advantages {
+    bottom: 50px;
   }
-  .mission__route {
+}
+
+@media (max-width: 700px) {
+  .mission {
+    height: 1100px;
+  }
+
+  .mission__stage {
+    height: 1100px;
+  }
+
+  .mission__title {
+    top: 96px;
+    left: 20px;
+    width: calc(100% - 40px);
+    font-size: clamp(30px, 9vw, 42px);
+    line-height: 0.98;
+    letter-spacing: -1.2px;
+  }
+
+  .mission__description {
+    top: 258px;
+    left: 20px;
+    width: calc(100% - 40px);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .mission__description br {
     display: none;
   }
-  .mission__trees {
-    top: 820px;
-    width: 330px;
+
+  .mission__bus {
+    top: 360px;
+    right: 50%;
+    width: min(405px, 92vw);
+    transform: translateX(50%);
+  }
+
+  .mission__advantages {
+    right: 18px;
+    bottom: 42px;
+    left: 18px;
+    gap: 18px 12px;
+  }
+
+  .mission-advantage img {
+    width: 82px;
+    height: 82px;
+  }
+
+  .mission-advantage span {
+    font-size: 15px;
+    line-height: 1.15;
+    letter-spacing: -0.6px;
   }
 }

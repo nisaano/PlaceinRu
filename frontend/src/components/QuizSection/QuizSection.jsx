@@ -2,7 +2,6 @@ import { useState } from 'react'
 import background from '../../assets/figma/assistant-background.png'
 import moscow from '../../assets/figma/assistant-moscow.png'
 import region from '../../assets/figma/assistant-region.png'
-import { UserIcon } from '../UserIcon/UserIcon'
 import { useLoopSlider } from '../../hooks/useLoopSlider'
 import './QuizSection.css'
 
@@ -29,13 +28,6 @@ export function QuizSection() {
     <section className="assistant" id="assistant">
       <div className="assistant__stage">
         <div className="assistant__panel" style={{ '--assistant': `url(${background})` }}>
-          <div className="assistant__brand">
-            <b>PR</b>
-            <span>PlaceinRu</span>
-          </div>
-          <a className="assistant__login" href="#top">
-            <UserIcon /> вход
-          </a>
           <h2>Куда хотите поехать?</h2>
           <p className="assistant__subtitle">Миша подберёт идеальные места и подходящие маршруты</p>
           <form className="assistant__search" onSubmit={(event) => event.preventDefault()}>

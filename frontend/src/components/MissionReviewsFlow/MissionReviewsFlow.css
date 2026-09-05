@@ -2,17 +2,17 @@
 .mission-reviews-flow {
   position: relative;
   z-index: 1;
-  height: 1380px;
+  height: 1200px;
   background: #fff;
 }
 
 .mission-reviews-flow__stage {
   position: relative;
   width: 1280px;
-  height: 1380px;
+  height: 1200px;
   margin: 0 auto;
   isolation: isolate;
-  background: linear-gradient(to bottom, #f7ecdf 0 800px, #dfeaec 800px 1280px, #fff 1280px 100%);
+  background: linear-gradient(to bottom, #f7ecdf 0 620px, #dfeaec 620px 1100px, #fff 1100px 100%);
 }
 
 .mission-reviews-flow + .guide {
@@ -38,7 +38,7 @@
 
 .mission-reviews-flow__wave {
   left: 50%;
-  top: 329px;
+  top: 240px;
   width: 1400px;
   height: 706px;
   transform: translateX(-50%);
@@ -46,7 +46,7 @@
 
 .mission-reviews-flow__paper {
   left: 50%;
-  top: 1004px;
+  top: 824px;
   width: 1400px;
   height: 554px;
   transform: translateX(-50%) rotate(180deg);
@@ -71,7 +71,7 @@
 
 @media (min-width: 1281px) {
   .mission-reviews-flow {
-    height: var(--scaled-1380);
+    height: var(--scaled-1200);
   }
   .mission-reviews-flow__stage {
     transform: translateX(-50%) scale(var(--wide-scale));
@@ -81,12 +81,7 @@
 @media (max-width: 1279px) {
   .mission-reviews-flow {
     height: auto;
-    background: linear-gradient(
-      to bottom,
-      #f7ecdf 0 1050px,
-      #dfeaec 1050px 1650px,
-      #fff 1650px 100%
-    );
+    background: linear-gradient(to bottom, #f7ecdf 0 900px, #dfeaec 900px 1500px, #fff 1500px 100%);
   }
 
   .mission-reviews-flow__stage {
@@ -104,39 +99,59 @@
   .mission-reviews-flow__art {
     display: block;
     width: 100%;
-    height: 1770px;
+    height: 1670px;
   }
 
   .mission-reviews-flow__wave {
-    top: 650px;
+    top: 560px;
     width: 145%;
     height: 650px;
     object-fit: cover;
   }
   .mission-reviews-flow__paper {
-    top: 1270px;
+    top: 1170px;
     width: 145%;
     height: 610px;
     object-fit: cover;
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 999px) {
   .mission-reviews-flow {
     background: linear-gradient(
       to bottom,
-      #f7ecdf 0 1160px,
-      #dfeaec 1160px 1760px,
-      #fff 1760px 100%
+      #f7ecdf 0 1050px,
+      #dfeaec 1050px 1650px,
+      #fff 1650px 100%
     );
   }
   .mission-reviews-flow__art {
-    height: 1880px;
+    height: 1770px;
   }
   .mission-reviews-flow__wave {
-    top: 760px;
+    top: 730px;
   }
   .mission-reviews-flow__paper {
-    top: 1380px;
+    top: 1270px;
+  }
+}
+
+@media (max-width: 700px) {
+  .mission-reviews-flow {
+    background: linear-gradient(
+      to bottom,
+      #f7ecdf 0 1100px,
+      #dfeaec 1100px 1700px,
+      #fff 1700px 100%
+    );
+  }
+  .mission-reviews-flow__art {
+    height: 1820px;
+  }
+  .mission-reviews-flow__wave {
+    top: 780px;
+  }
+  .mission-reviews-flow__paper {
+    top: 1320px;
   }
 }

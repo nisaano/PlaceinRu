@@ -31,19 +31,41 @@
   font: 600 15px/1.5 var(--mono);
   width: 330px;
 }
-.guide span {
-  display: inline-block;
-  margin: 25px 12px 0 85px;
-  font-weight: 800;
+.guide__action {
+  position: relative;
+  width: 300px;
+  margin-top: 40px;
 }
-.guide a {
-  display: inline-block;
-  background: #586c43;
+.guide__action a {
+  display: grid;
+  place-items: center;
+  width: 300px;
+  height: 68px;
+  border-radius: 20px;
+  background: #344a2c;
   color: #fff;
   text-decoration: none;
-  border-radius: 6px;
-  padding: 12px 24px;
-  font-weight: 800;
+  box-shadow: 0 12px 12px rgba(29, 42, 25, 0.3);
+  font:
+    700 30px/1 var(--sans),
+    sans-serif;
+}
+.guide__action span {
+  position: absolute;
+  z-index: 2;
+  top: -28px;
+  right: -62px;
+  display: grid;
+  place-items: center;
+  width: 165px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.84);
+  color: #586650;
+  box-shadow: 0 10px 12px rgba(34, 44, 30, 0.3);
+  font:
+    italic 700 27px/1 Inter,
+    sans-serif;
 }
 .guide__card > b {
   position: absolute;
@@ -96,7 +118,21 @@
   .guide p {
     width: 80%;
   }
-  .guide span {
-    margin-left: 0;
+  .guide__action {
+    width: min(270px, calc(100% - 10px));
+    margin-top: 48px;
+  }
+  .guide__action a {
+    width: 100%;
+    height: 62px;
+    border-radius: 19px;
+    font-size: clamp(24px, 7vw, 28px);
+  }
+  .guide__action span {
+    top: -27px;
+    right: -2px;
+    width: 145px;
+    height: 44px;
+    font-size: 25px;
   }
 }

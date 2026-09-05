@@ -2,17 +2,12 @@
 .map-section {
   height: 800px;
   position: relative;
-  background: #f5f1e8;
-  overflow: hidden;
-}
-.map-section__forest {
-  position: absolute;
-  inset: auto 0 0;
-  height: 340px;
-  background-image: linear-gradient(0deg, rgba(235, 244, 241, 0.25), #f5f1e8), var(--forest);
-  background-size: cover;
+  background-color: #f7f1e8;
+  background-image: var(--map-background);
+  background-repeat: no-repeat;
   background-position: center;
-  opacity: 0.48;
+  background-size: cover;
+  overflow: hidden;
 }
 .map-section__content {
   position: relative;

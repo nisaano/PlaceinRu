@@ -10,8 +10,10 @@ export function CtaSection() {
           <div>
             <h2>Есть места, о которых хочется рассказать...</h2>
             <p>Проводите людей по любимым местам, открывайте им знакомую Россию с новой стороны.</p>
-            <span>Для гидов</span>
-            <a href="#assistant">Разместить тур</a>
+            <div className="guide__action">
+              <a href="#assistant">Разместить тур</a>
+              <span>Для гидов</span>
+            </div>
           </div>
           <b>PR</b>
           <strong>PlaceinRu</strong>
