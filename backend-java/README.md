@@ -1,50 +1,82 @@
-# 🚀 PlaceinRu — Java Backend Service
+# 🚀 PlaceinRu — Java Backend
 
-Основной микросервис бизнес-логики, аутентификации, планирования путешествий, валидации маршрутов и финансового расчёта для туристической платформы **PlaceinRu**.
+Java backend-сервис туристической платформы **PlaceinRu**.
+
+Основная ответственность сервиса — аутентификация пользователей, управление поездками, работа с маршрутами, валидация маршрутов, расчёт бюджета и работа с гидами.
 
 ---
 
 ## 🛠 Технологический стек
 
-* **Язык программирования:** Java 17+
-* **Фреймворк:** Spring Boot 3.x (Spring Web, Spring Data JPA, Spring Security)
-* **Безопасность:** JWT (JSON Web Tokens) + BCrypt
-* **База данных:** PostgreSQL
-* **Документация API:** Springdoc OpenAPI / Swagger UI
-* **Инструменты сборки и вспомогательные библиотеки:** Maven, Lombok
+* Java 17+
+* Spring Boot 3
+* Spring Web
+* Spring Data JPA / Hibernate
+* Spring Security + JWT
+* BCrypt
+* PostgreSQL
+* Maven
+* Lombok
+* Springdoc OpenAPI / Swagger UI
 
 ---
 
-## 📋 Основной функционал сервиса
+## 📋 Основной функционал
 
-1. **🔐 Аутентификация и авторизация (`AuthService`)**
+### Аутентификация
 
-   * Регистрация пользователей с хешированием паролей (BCrypt).
-   * Выдача двух токенов: `Access Token` и `Refresh Token`.
-   * Получение профиля текущего пользователя (`/api/v1/auth/me`).
+* Регистрация и авторизация пользователей.
+* JWT Access / Refresh Token.
+* Получение текущего пользователя.
 
-2. **🧳 Управление поездками (`TripService`)**
+### Поездки
 
-   * Создание, просмотр, обновление и удаление поездок (CRUD).
-   * Автоматическая генерация дней поездки (`TripDay`) при указании дат.
-   * Управление точками маршрута (`RouteItem`): замена, удаление, перестройка.
-   * Фильтрация и пагинация списков поездок (`TripSpecification`).
+* Создание и редактирование поездок.
+* Получение списка поездок.
+* Удаление поездок.
+* Пагинация и фильтрация.
+* Автоматическое создание дней поездки.
 
-3. **📐 Движок валидации маршрутов (`RouteValidationService`)**
+### Маршруты
 
-   * Автоматическая проверка корректности временных интервалов (время начала не может быть позже времени окончания).
-   * Обнаружение наложений (пересечений) посещаемых мест по времени.
-   * Проверка запаса времени на перемещение между локациями (`travelTimeFromPreviousMinutes`).
+* Получение маршрута по дням.
+* Добавление и удаление точек.
+* Изменение элементов маршрута.
+* Замена отдельных элементов.
+* Полная перестройка маршрута.
 
-4. **💰 Финансовый калькулятор бюджета (`TripBudgetService`)**
+### Валидация
 
-   * Расчёт полной стоимости поездки с разбивкой по категориям (`HOTEL`, `TRANSPORT`, `RESTAURANT`, `ATTRACTION`, `GUIDE`).
-   * Учёт расходов на автомобиль: расчёт топлива по расстоянию, среднему расходу и цене бензина, а также платных дорог.
-   * Отслеживание превышения установленного лимита бюджета.
+`RouteValidationService` проверяет:
 
-5. **🧭 Модуль гидов**
+* даты и время посещений;
+* длительность;
+* пересечения временных интервалов;
+* время перемещения между точками;
+* расстояния и последовательность маршрута;
+* доступность объектов;
+* возможность выполнения маршрута.
 
-   * Запрос, назначение и открепление гида от конкретной поездки.
+### Бюджет
+
+`TripBudgetService` рассчитывает общую стоимость поездки:
+
+* отели;
+* транспорт;
+* рестораны;
+* достопримечательности;
+* гид;
+* автомобиль;
+* топливо;
+* платные дороги.
+
+Также учитывается установленный пользователем бюджет.
+
+### Гиды
+
+* Работа с каталогом гидов.
+* Назначение гида на поездку.
+* Открепление гида.
 
 ---
 
@@ -55,159 +87,125 @@ backend-java/
 ├── src/
 │   ├── main/
 │   │   ├── java/com/example/placeinru/
-│   │   │   ├── config/         # Настройки Spring Security, JWT и Swagger
-│   │   │   ├── controller/     # REST-контроллеры API
-│   │   │   ├── dto/            # Data Transfer Objects (запросы и ответы)
-│   │   │   ├── entity/         # JPA-сущности БД (User, Trip, TripDay, RouteItem)
-│   │   │   ├── exception/      # Глобальная обработка ошибок и исключений
-│   │   │   ├── repository/     # Spring Data JPA-репозитории
-│   │   │   └── service/        # Сервисный слой бизнес-логики
+│   │   │   ├── config/
+│   │   │   ├── controller/
+│   │   │   ├── dto/
+│   │   │   ├── entity/
+│   │   │   ├── exception/
+│   │   │   ├── repository/
+│   │   │   └── service/
 │   │   └── resources/
-│   │       └── application.properties # Конфигурация приложения
-└── pom.xml                     # Спецификация зависимостей Maven
+│   │       └── application.properties
+│   └── test/
+└── pom.xml
+```
+
+---
+
+## 🔗 Основные API
+
+### Auth
+
+```text
+POST   /auth/register
+POST   /auth/login
+POST   /auth/refresh
+GET    /auth/me
+```
+
+### Trips
+
+```text
+POST   /trips
+GET    /trips
+GET    /trips/{id}
+PATCH  /trips/{id}
+DELETE /trips/{id}
+```
+
+### Route
+
+```text
+GET   /trips/{id}/route
+POST  /trips/{id}/route/rebuild
+PATCH /trips/{id}/route
+```
+
+### Route Items
+
+```text
+POST   /trips/{id}/items
+PATCH  /trips/{id}/items/{item_id}
+DELETE /trips/{id}/items/{item_id}
+POST   /trips/{id}/items/{item_id}/replace
 ```
 
 ---
 
 ## ⚙️ Переменные окружения
 
-Перед запуском приложения необходимо задать следующие переменные окружения:
-
 ```env
 DB_URL=jdbc:postgresql://localhost:5432/placeinru_db
 DB_USERNAME=postgres
-DB_PASSWORD=your_database_password_here
+DB_PASSWORD=your_database_password
 
-JWT_SECRET=your_long_secret_string_here
+JWT_SECRET=your_secret
 JWT_EXPIRATION=86400000
 JWT_REFRESH_EXPIRATION=604800000
 ```
 
-> ⚠️ Не храните реальные пароли и `JWT_SECRET` в репозитории. Для локальной разработки используйте переменные окружения или `.env`-файл, добавленный в `.gitignore`.
+> Не добавляйте реальные пароли и JWT-секреты в Git.
 
 ---
 
-## 🚀 Локальный запуск проекта
+## 🚀 Запуск
 
 ### Требования
 
-* JDK 17 или выше
+* JDK 17+
 * PostgreSQL
 * Maven
 
-### 1. Создание базы данных
-
-Подключитесь к PostgreSQL и выполните:
+Создайте базу данных:
 
 ```sql
 CREATE DATABASE placeinru_db;
 ```
 
-### 2. Переход в директорию проекта
-
-```bash
-cd backend-java
-```
-
-### 3. Настройка переменных окружения
-
-#### PowerShell (Windows)
-
-```powershell
-$env:DB_URL="jdbc:postgresql://localhost:5432/placeinru_db"
-$env:DB_USERNAME="postgres"
-$env:DB_PASSWORD="your_postgres_password"
-$env:JWT_SECRET="your_long_secret_string_here"
-$env:JWT_EXPIRATION="86400000"
-$env:JWT_REFRESH_EXPIRATION="604800000"
-```
-
-#### CMD (Windows)
-
-```cmd
-set DB_URL=jdbc:postgresql://localhost:5432/placeinru_db
-set DB_USERNAME=postgres
-set DB_PASSWORD=your_postgres_password
-set JWT_SECRET=your_long_secret_string_here
-set JWT_EXPIRATION=86400000
-set JWT_REFRESH_EXPIRATION=604800000
-```
-
-### 4. Запуск приложения
+Запустите приложение:
 
 ```bash
 mvn spring-boot:run
 ```
 
-После успешного запуска сервер будет доступен по адресу:
+После запуска:
 
+```text
 http://localhost:8080
-
----
-
-## 📖 Документация API
-
-После запуска приложения документация OpenAPI доступна по следующим адресам:
-
-* **Swagger UI:** http://localhost:8080/swagger-ui.html
-* **OpenAPI Schema (JSON):** http://localhost:8080/v3/api-docs
-
----
-
-## 🔑 API Authentication
-
-Для защищённых эндпоинтов используется JWT-аутентификация.
-
-После авторизации необходимо передавать access token в HTTP-заголовке:
-
-```http
-Authorization: Bearer <access_token>
-```
-
----
-
-## 🗄️ База данных
-
-Проект использует **PostgreSQL** в качестве основной базы данных.
-
-Параметры подключения задаются через переменные окружения:
-
-```text
-DB_URL
-DB_USERNAME
-DB_PASSWORD
-```
-
----
-
-## 🏗️ Сборка проекта
-
-Для сборки проекта без запуска приложения:
-
-```bash
-mvn clean package
-```
-
-После успешной сборки JAR-файл будет создан в директории:
-
-```text
-target/
-```
-
-Запуск собранного приложения:
-
-```bash
-java -jar target/<application-name>.jar
 ```
 
 ---
 
 ## 🧪 Тестирование
 
-Для запуска тестов используйте:
-
 ```bash
 mvn test
 ```
 
+Критическая бизнес-логика тестируется отдельно, в первую очередь валидация маршрута и расчёт бюджета.
+
 ---
+
+## 📖 Swagger / OpenAPI
+
+Swagger UI:
+
+```text
+http://localhost:8080/swagger-ui.html
+```
+
+OpenAPI:
+
+```text
+http://localhost:8080/v3/api-docs
+```
