@@ -1,0 +1,13 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "timezone": {
+      "default": "Europe/Moscow",
+      "title": "Timezone",
+      "type": "string"
+    }
+  },
+  "title": "SessionCreate",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

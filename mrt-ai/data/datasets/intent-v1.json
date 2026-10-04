@@ -1,0 +1,1667 @@
+{
+  "dataset_version": "intent-synthetic-v1",
+  "annotation_version": "intent-taxonomy-v1",
+  "data_mode": "fixture",
+  "description": "Synthetic manually annotated pipeline smoke set. It is not a real-user benchmark and must not be used to claim production classifier quality.",
+  "labels": [
+    "CREATE_TRIP",
+    "CHANGE_DATE",
+    "CHANGE_BUDGET",
+    "CHANGE_TRANSPORT",
+    "ADD_GUIDE",
+    "REMOVE_GUIDE",
+    "ANSWER_QUESTION",
+    "CHANGE_TRIP",
+    "UNKNOWN"
+  ],
+  "split_policy": "grouped by family_id; train/validation/test wording families are disjoint",
+  "examples": [
+    {
+      "id": "change_date-1-1",
+      "family_id": "change_date-family-1",
+      "split": "train",
+      "text": "Перенеси поездку на 10.07.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-1-2",
+      "family_id": "change_date-family-1",
+      "split": "train",
+      "text": "Измени даты поездки на 10.07.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-1-3",
+      "family_id": "change_date-family-1",
+      "split": "train",
+      "text": "Давай поедем с 10.07.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-2-1",
+      "family_id": "change_date-family-2",
+      "split": "train",
+      "text": "Поездка будет с 01.08.2027 по 03.08.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-2-2",
+      "family_id": "change_date-family-2",
+      "split": "train",
+      "text": "Поставь даты с 01.08.2027 по 03.08.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-2-3",
+      "family_id": "change_date-family-2",
+      "split": "train",
+      "text": "Запланируй поездку на 01.08.2027—03.08.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-3-1",
+      "family_id": "change_date-family-3",
+      "split": "train",
+      "text": "Хочу уехать на неделю с 10.09.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-3-2",
+      "family_id": "change_date-family-3",
+      "split": "train",
+      "text": "Перенеси начало поездки на 10.09.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-3-3",
+      "family_id": "change_date-family-3",
+      "split": "train",
+      "text": "Даты отдыха: 10.09.2027 и 16.09.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-4-1",
+      "family_id": "change_date-family-4",
+      "split": "validation",
+      "text": "Поедем через 2 дня",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-4-2",
+      "family_id": "change_date-family-4",
+      "split": "validation",
+      "text": "Начало поездки — 10.10.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-4-3",
+      "family_id": "change_date-family-4",
+      "split": "validation",
+      "text": "Сделай поездку на пять дней",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-5-1",
+      "family_id": "change_date-family-5",
+      "split": "test",
+      "text": "Давай с 15.06.2027 по 17.06.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-5-2",
+      "family_id": "change_date-family-5",
+      "split": "test",
+      "text": "Замени даты отдыха на 15.06.2027—17.06.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_date-5-3",
+      "family_id": "change_date-family-5",
+      "split": "test",
+      "text": "Планируем поездку с 15.06.2027",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_DATE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-1-1",
+      "family_id": "change_budget-family-1",
+      "split": "train",
+      "text": "Бюджет 50 тысяч на всю поездку",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-1-2",
+      "family_id": "change_budget-family-1",
+      "split": "train",
+      "text": "Установи общий бюджет 50 тысяч рублей",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-1-3",
+      "family_id": "change_budget-family-1",
+      "split": "train",
+      "text": "На поездку готовы потратить 50 тысяч на всех",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-2-1",
+      "family_id": "change_budget-family-2",
+      "split": "train",
+      "text": "Бюджет 30 тысяч рублей на человека",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-2-2",
+      "family_id": "change_budget-family-2",
+      "split": "train",
+      "text": "Поставь лимит 30 тысяч на одного",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-2-3",
+      "family_id": "change_budget-family-2",
+      "split": "train",
+      "text": "На каждого бюджет 30 000 рублей",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-3-1",
+      "family_id": "change_budget-family-3",
+      "split": "train",
+      "text": "Увеличь бюджет до 80 тысяч рублей",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-3-2",
+      "family_id": "change_budget-family-3",
+      "split": "train",
+      "text": "Пусть поездка стоит не больше 80 тыс.",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-3-3",
+      "family_id": "change_budget-family-3",
+      "split": "train",
+      "text": "Снизь общий бюджет до 45 тысяч",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-4-1",
+      "family_id": "change_budget-family-4",
+      "split": "validation",
+      "text": "Можем потратить 12 тысяч рублей в день",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-4-2",
+      "family_id": "change_budget-family-4",
+      "split": "validation",
+      "text": "Бюджет на сутки — 12 тысяч",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-4-3",
+      "family_id": "change_budget-family-4",
+      "split": "validation",
+      "text": "Рассчитывай по 10 000 рублей в день",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-5-1",
+      "family_id": "change_budget-family-5",
+      "split": "test",
+      "text": "У нас общий бюджет 100000 рублей",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-5-2",
+      "family_id": "change_budget-family-5",
+      "split": "test",
+      "text": "На всех выделено 70 тысяч",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_budget-5-3",
+      "family_id": "change_budget-family-5",
+      "split": "test",
+      "text": "Ограничь расходы на поездку суммой 25 тыс. рублей",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_BUDGET"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-1-1",
+      "family_id": "change_transport-family-1",
+      "split": "train",
+      "text": "Поедем на поезде",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-1-2",
+      "family_id": "change_transport-family-1",
+      "split": "train",
+      "text": "Выбери поезд как транспорт",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-1-3",
+      "family_id": "change_transport-family-1",
+      "split": "train",
+      "text": "Предпочитаем добираться поездом",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-2-1",
+      "family_id": "change_transport-family-2",
+      "split": "train",
+      "text": "Хочу ехать на машине",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-2-2",
+      "family_id": "change_transport-family-2",
+      "split": "train",
+      "text": "Разреши поездку на автомобиле",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-2-3",
+      "family_id": "change_transport-family-2",
+      "split": "train",
+      "text": "Лучше поедем на машине",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-3-1",
+      "family_id": "change_transport-family-3",
+      "split": "train",
+      "text": "Рассматриваем самолёт",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-3-2",
+      "family_id": "change_transport-family-3",
+      "split": "train",
+      "text": "Добавь перелёт в варианты транспорта",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-3-3",
+      "family_id": "change_transport-family-3",
+      "split": "train",
+      "text": "Можно лететь самолётом",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-4-1",
+      "family_id": "change_transport-family-4",
+      "split": "validation",
+      "text": "На автобусе ехать не хочу",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-4-2",
+      "family_id": "change_transport-family-4",
+      "split": "validation",
+      "text": "Исключи автобус",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-4-3",
+      "family_id": "change_transport-family-4",
+      "split": "validation",
+      "text": "Убери автобус из допустимого транспорта",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-5-1",
+      "family_id": "change_transport-family-5",
+      "split": "test",
+      "text": "Подойдут поезд и самолёт",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-5-2",
+      "family_id": "change_transport-family-5",
+      "split": "test",
+      "text": "Разреши поезд или автомобиль",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_transport-5-3",
+      "family_id": "change_transport-family-5",
+      "split": "test",
+      "text": "Для поездки рассматриваем автобус",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRANSPORT"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-1-1",
+      "family_id": "add_guide-family-1",
+      "split": "train",
+      "text": "Добавь гида в поездку",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-1-2",
+      "family_id": "add_guide-family-1",
+      "split": "train",
+      "text": "Нужен гид",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-1-3",
+      "family_id": "add_guide-family-1",
+      "split": "train",
+      "text": "Хочу путешествовать с гидом",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-2-1",
+      "family_id": "add_guide-family-2",
+      "split": "train",
+      "text": "Подбери экскурсию с гидом",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-2-2",
+      "family_id": "add_guide-family-2",
+      "split": "train",
+      "text": "Включи услуги гида",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-2-3",
+      "family_id": "add_guide-family-2",
+      "split": "train",
+      "text": "Добавь сопровождение гида",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-3-1",
+      "family_id": "add_guide-family-3",
+      "split": "train",
+      "text": "Пусть нас сопровождает гид",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-3-2",
+      "family_id": "add_guide-family-3",
+      "split": "train",
+      "text": "Нам нужен местный гид",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-3-3",
+      "family_id": "add_guide-family-3",
+      "split": "train",
+      "text": "Закажи в план гида",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-4-1",
+      "family_id": "add_guide-family-4",
+      "split": "validation",
+      "text": "Можно добавить гида к маршруту",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-4-2",
+      "family_id": "add_guide-family-4",
+      "split": "validation",
+      "text": "Хочу экскурсовода",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-4-3",
+      "family_id": "add_guide-family-4",
+      "split": "validation",
+      "text": "Предусмотри гида на поездку",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-5-1",
+      "family_id": "add_guide-family-5",
+      "split": "test",
+      "text": "Сделай вариант с гидом",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-5-2",
+      "family_id": "add_guide-family-5",
+      "split": "test",
+      "text": "Добавь экскурсовода",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "add_guide-5-3",
+      "family_id": "add_guide-family-5",
+      "split": "test",
+      "text": "Гид обязателен",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "ADD_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-1-1",
+      "family_id": "remove_guide-family-1",
+      "split": "train",
+      "text": "Убери гида из поездки",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-1-2",
+      "family_id": "remove_guide-family-1",
+      "split": "train",
+      "text": "Гид не нужен",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-1-3",
+      "family_id": "remove_guide-family-1",
+      "split": "train",
+      "text": "Исключи услуги гида",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-2-1",
+      "family_id": "remove_guide-family-2",
+      "split": "train",
+      "text": "Не хочу экскурсию с гидом",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-2-2",
+      "family_id": "remove_guide-family-2",
+      "split": "train",
+      "text": "Сделай поездку без гида",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-2-3",
+      "family_id": "remove_guide-family-2",
+      "split": "train",
+      "text": "Удали гида из плана",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-3-1",
+      "family_id": "remove_guide-family-3",
+      "split": "train",
+      "text": "Убери экскурсовода",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-3-2",
+      "family_id": "remove_guide-family-3",
+      "split": "train",
+      "text": "Мы поедем самостоятельно без гида",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-3-3",
+      "family_id": "remove_guide-family-3",
+      "split": "train",
+      "text": "Не добавляй услуги гида",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-4-1",
+      "family_id": "remove_guide-family-4",
+      "split": "validation",
+      "text": "Отмени гида",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-4-2",
+      "family_id": "remove_guide-family-4",
+      "split": "validation",
+      "text": "Можно без экскурсовода",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-4-3",
+      "family_id": "remove_guide-family-4",
+      "split": "validation",
+      "text": "Гид нам не требуется",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-5-1",
+      "family_id": "remove_guide-family-5",
+      "split": "test",
+      "text": "Исключи сопровождение гида",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-5-2",
+      "family_id": "remove_guide-family-5",
+      "split": "test",
+      "text": "Передумали насчёт гида",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "remove_guide-5-3",
+      "family_id": "remove_guide-family-5",
+      "split": "test",
+      "text": "Оставь маршрут без гида",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "REMOVE_GUIDE"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-1-1",
+      "family_id": "answer_question-family-1",
+      "split": "train",
+      "text": "Казань",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-1-2",
+      "family_id": "answer_question-family-1",
+      "split": "train",
+      "text": "Москва",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-1-3",
+      "family_id": "answer_question-family-1",
+      "split": "train",
+      "text": "Санкт-Петербург",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-2-1",
+      "family_id": "answer_question-family-2",
+      "split": "train",
+      "text": "Казань",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-2-2",
+      "family_id": "answer_question-family-2",
+      "split": "train",
+      "text": "Москва",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-2-3",
+      "family_id": "answer_question-family-2",
+      "split": "train",
+      "text": "Сочи",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-3-1",
+      "family_id": "answer_question-family-3",
+      "split": "train",
+      "text": "Екатеринбург",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-3-2",
+      "family_id": "answer_question-family-3",
+      "split": "train",
+      "text": "Карелия",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-3-3",
+      "family_id": "answer_question-family-3",
+      "split": "train",
+      "text": "Алтай",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-4-1",
+      "family_id": "answer_question-family-4",
+      "split": "validation",
+      "text": "Санкт-Петербург",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-4-2",
+      "family_id": "answer_question-family-4",
+      "split": "validation",
+      "text": "Казань",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-4-3",
+      "family_id": "answer_question-family-4",
+      "split": "validation",
+      "text": "Москва",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-5-1",
+      "family_id": "answer_question-family-5",
+      "split": "test",
+      "text": "Алтай",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-5-2",
+      "family_id": "answer_question-family-5",
+      "split": "test",
+      "text": "Сочи",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "answer_question-5-3",
+      "family_id": "answer_question-family-5",
+      "split": "test",
+      "text": "Екатеринбург",
+      "pending_question": "origin",
+      "previous_trip": "partial",
+      "labels": [
+        "ANSWER_QUESTION"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-1-1",
+      "family_id": "change_trip-family-1",
+      "split": "train",
+      "text": "Хочу больше природы в поездке",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-1-2",
+      "family_id": "change_trip-family-1",
+      "split": "train",
+      "text": "Добавь интерес к музеям",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-1-3",
+      "family_id": "change_trip-family-1",
+      "split": "train",
+      "text": "Исключи гастрономию",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-2-1",
+      "family_id": "change_trip-family-2",
+      "split": "train",
+      "text": "Пусть отдых будет активным",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-2-2",
+      "family_id": "change_trip-family-2",
+      "split": "train",
+      "text": "Сделай темп поспокойнее",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-2-3",
+      "family_id": "change_trip-family-2",
+      "split": "train",
+      "text": "Предпочитаю сбалансированную поездку",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-3-1",
+      "family_id": "change_trip-family-3",
+      "split": "train",
+      "text": "Нас будет четверо",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-3-2",
+      "family_id": "change_trip-family-3",
+      "split": "train",
+      "text": "Едем вдвоём без детей",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-3-3",
+      "family_id": "change_trip-family-3",
+      "split": "train",
+      "text": "Добавь одного ребёнка",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-4-1",
+      "family_id": "change_trip-family-4",
+      "split": "validation",
+      "text": "Подбери направление для отдыха",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-4-2",
+      "family_id": "change_trip-family-4",
+      "split": "validation",
+      "text": "Давай спланируем путешествие",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-4-3",
+      "family_id": "change_trip-family-4",
+      "split": "validation",
+      "text": "Хочу поездку на природу",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-5-1",
+      "family_id": "change_trip-family-5",
+      "split": "test",
+      "text": "Не включай ночные переезды",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-5-2",
+      "family_id": "change_trip-family-5",
+      "split": "test",
+      "text": "Добавь интерес к культуре",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "change_trip-5-3",
+      "family_id": "change_trip-family-5",
+      "split": "test",
+      "text": "Хочу спокойный семейный отдых",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "CHANGE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-1-1",
+      "family_id": "unknown-family-1",
+      "split": "train",
+      "text": "Какая сегодня погода?",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-1-2",
+      "family_id": "unknown-family-1",
+      "split": "train",
+      "text": "Расскажи анекдот",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-1-3",
+      "family_id": "unknown-family-1",
+      "split": "train",
+      "text": "Спасибо за помощь",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-2-1",
+      "family_id": "unknown-family-2",
+      "split": "train",
+      "text": "Привет!",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-2-2",
+      "family_id": "unknown-family-2",
+      "split": "train",
+      "text": "Который сейчас час?",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-2-3",
+      "family_id": "unknown-family-2",
+      "split": "train",
+      "text": "Что нового?",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-3-1",
+      "family_id": "unknown-family-3",
+      "split": "train",
+      "text": "Как дела?",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-3-2",
+      "family_id": "unknown-family-3",
+      "split": "train",
+      "text": "Расскажи про историю кино",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-3-3",
+      "family_id": "unknown-family-3",
+      "split": "train",
+      "text": "Назови случайное число",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-4-1",
+      "family_id": "unknown-family-4",
+      "split": "validation",
+      "text": "Ладно",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-4-2",
+      "family_id": "unknown-family-4",
+      "split": "validation",
+      "text": "Понятно",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-4-3",
+      "family_id": "unknown-family-4",
+      "split": "validation",
+      "text": "Хорошо",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-5-1",
+      "family_id": "unknown-family-5",
+      "split": "test",
+      "text": "Можешь посоветовать книгу?",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-5-2",
+      "family_id": "unknown-family-5",
+      "split": "test",
+      "text": "Кто выиграл матч?",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "unknown-5-3",
+      "family_id": "unknown-family-5",
+      "split": "test",
+      "text": "Расскажи интересный факт",
+      "pending_question": null,
+      "previous_trip": "partial",
+      "labels": [
+        "UNKNOWN"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-1-1",
+      "family_id": "create-trip-family-1",
+      "split": "train",
+      "text": "Составь поездку с 10.07.2027 на пять дней",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_DATE",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-1-2",
+      "family_id": "create-trip-family-1",
+      "split": "train",
+      "text": "Хочу спланировать отдых с 10.07.2027 на неделю",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_DATE",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-1-3",
+      "family_id": "create-trip-family-1",
+      "split": "train",
+      "text": "Давай начнём новую поездку с 10.07.2027",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_DATE",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-2-1",
+      "family_id": "create-trip-family-2",
+      "split": "train",
+      "text": "Запланируй путешествие на 01.08.2027, бюджет 50 тысяч рублей",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_BUDGET",
+        "CHANGE_DATE",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-2-2",
+      "family_id": "create-trip-family-2",
+      "split": "train",
+      "text": "Создай поездку с 01.08.2027 и бюджетом 50 тыс.",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_BUDGET",
+        "CHANGE_DATE",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-2-3",
+      "family_id": "create-trip-family-2",
+      "split": "train",
+      "text": "Хочу начать план поездки на 01.08.2027, потратить можно 50 тысяч",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_BUDGET",
+        "CHANGE_DATE",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-3-1",
+      "family_id": "create-trip-family-3",
+      "split": "train",
+      "text": "Подбери направление на неделю с 10.09.2027, люблю природу",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_DATE",
+        "CHANGE_TRIP",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-3-2",
+      "family_id": "create-trip-family-3",
+      "split": "train",
+      "text": "Начнём планировать поездку на 10.09.2027 для отдыха на природе",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_DATE",
+        "CHANGE_TRIP",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-3-3",
+      "family_id": "create-trip-family-3",
+      "split": "train",
+      "text": "Хочу новую поездку с 10.09.2027 и интересуюсь музеями",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_DATE",
+        "CHANGE_TRIP",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-4-1",
+      "family_id": "create-trip-family-4",
+      "split": "validation",
+      "text": "Создай план поездки с 15.06.2027, поедем на поезде",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_DATE",
+        "CHANGE_TRANSPORT",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-4-2",
+      "family_id": "create-trip-family-4",
+      "split": "validation",
+      "text": "Спланируй путешествие с 15.06.2027 на поезде",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_DATE",
+        "CHANGE_TRANSPORT",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-4-3",
+      "family_id": "create-trip-family-4",
+      "split": "validation",
+      "text": "Давай составим поездку на 15.06.2027, добираться будем поездом",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_DATE",
+        "CHANGE_TRANSPORT",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-5-1",
+      "family_id": "create-trip-family-5",
+      "split": "test",
+      "text": "Хочу новую поездку на 10.10.2027, нас двое, без детей",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_DATE",
+        "CHANGE_TRIP",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-5-2",
+      "family_id": "create-trip-family-5",
+      "split": "test",
+      "text": "Помоги спланировать путешествие с 10.10.2027 для семьи с детьми",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "CHANGE_DATE",
+        "CHANGE_TRIP",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "create-trip-5-3",
+      "family_id": "create-trip-family-5",
+      "split": "test",
+      "text": "Давай начнём поездку с 10.10.2027 и добавим гида",
+      "pending_question": null,
+      "previous_trip": "empty",
+      "labels": [
+        "ADD_GUIDE",
+        "CHANGE_DATE",
+        "CREATE_TRIP"
+      ],
+      "provenance": "synthetic_manual"
+    }
+  ]
+}

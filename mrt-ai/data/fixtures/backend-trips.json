@@ -1,0 +1,47 @@
+{
+  "data_mode": "fixture",
+  "description": "Синтетический ответ Java TripResponse для тестирования read-only Backend adapter. Не является реальной поездкой или пользовательскими данными.",
+  "trips": [
+    {
+      "id": 27,
+      "userId": 3,
+      "title": "ДЕМО · Летняя поездка",
+      "status": "draft",
+      "origin": "Казань",
+      "destination": "Москва",
+      "startDate": "2027-07-10",
+      "endDate": "2027-07-12",
+      "budget": 80000.0,
+      "currency": "RUB",
+      "adults": 2,
+      "children": 0,
+      "tourismType": "природа",
+      "transportType": "TRAIN",
+      "guideRequired": false,
+      "guideId": null,
+      "createdAt": "2026-10-01T10:00:00",
+      "updatedAt": "2026-10-01T10:00:00",
+      "days": [
+        {
+          "id": 100,
+          "date": "2027-07-10",
+          "dayNumber": 1,
+          "items": [
+            {
+              "id": 500,
+              "dayId": 100,
+              "type": "ATTRACTION",
+              "objectId": "fixture:place-123",
+              "startTime": "10:00:00",
+              "endTime": "11:00:00",
+              "durationMinutes": 60,
+              "order": 1,
+              "estimatedCost": 1200.0,
+              "notes": "Синтетическая тестовая точка"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

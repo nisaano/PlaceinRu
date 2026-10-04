@@ -1,0 +1,190 @@
+{
+  "$defs": {
+    "Price": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_minor": {
+          "minimum": 0,
+          "title": "Amount Minor",
+          "type": "integer"
+        },
+        "currency": {
+          "const": "RUB",
+          "default": "RUB",
+          "title": "Currency",
+          "type": "string"
+        },
+        "basis": {
+          "enum": [
+            "person",
+            "group",
+            "room_night",
+            "stay",
+            "leg"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "quantity": {
+          "minimum": 1,
+          "title": "Quantity",
+          "type": "integer"
+        },
+        "taxes_included": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Taxes Included"
+        },
+        "fees_included": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fees Included"
+        },
+        "status": {
+          "enum": [
+            "quoted",
+            "estimated"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount_minor",
+        "basis",
+        "quantity",
+        "status"
+      ],
+      "title": "Price",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "offer_id": {
+      "title": "Offer Id",
+      "type": "string"
+    },
+    "object_id": {
+      "title": "Object Id",
+      "type": "string"
+    },
+    "query_fingerprint": {
+      "title": "Query Fingerprint",
+      "type": "string"
+    },
+    "data_mode": {
+      "enum": [
+        "manual",
+        "fixture",
+        "cached",
+        "live"
+      ],
+      "title": "Data Mode",
+      "type": "string"
+    },
+    "availability": {
+      "default": "unknown",
+      "enum": [
+        "available",
+        "unavailable",
+        "unknown",
+        "on_request"
+      ],
+      "title": "Availability",
+      "type": "string"
+    },
+    "price": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Price"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "booking_url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Booking Url"
+    },
+    "booking_link_type": {
+      "anyOf": [
+        {
+          "enum": [
+            "offer",
+            "search",
+            "inquiry"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Booking Link Type"
+    },
+    "checked_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Checked At"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expires At"
+    }
+  },
+  "required": [
+    "offer_id",
+    "object_id",
+    "query_fingerprint",
+    "data_mode"
+  ],
+  "title": "Offer",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

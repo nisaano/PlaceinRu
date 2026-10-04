@@ -1,0 +1,423 @@
+{
+  "schema_version": "1.0",
+  "normalizer_version": "cards-v1",
+  "snapshot_id": "81ca85e3237f91116d3314bc24f14b5aa167c9bba0be62d25cf07be9c83fc2a6",
+  "regions": [
+    {
+      "region_id": "ru:region:50",
+      "code": "50",
+      "slug": "moscow-oblast",
+      "name": "Московская область",
+      "aliases": [
+        "Московская область",
+        "moscow-oblast",
+        "Подмосковье"
+      ],
+      "description": "Подмосковье — крупный и разнообразный регион вокруг столицы, где высокая плотность городской инфраструктуры сочетается с лесами, реками, озёрами, водохранилищами и сельскими ландшафтами средней полосы. Регион особенно удобен для коротких поездок и отдыха выходного дня: здесь развиты загородное размещение, семейный, природный, оздоровительный и активный отдых. Близость Москвы и густая транспортная сеть делают Московскую область одним из наиболее доступных туристических регионов Центральной России.",
+      "tags": [
+        "suburban",
+        "recreation",
+        "nature",
+        "family",
+        "couple",
+        "solo",
+        "weekend",
+        "day_trip",
+        "short_trip",
+        "country_hotel",
+        "wellness",
+        "active",
+        "forest",
+        "lake",
+        "river",
+        "reservoir",
+        "fishing",
+        "winter",
+        "summer",
+        "year_round",
+        "car_preferred",
+        "public_transport",
+        "medium_budget",
+        "high_accessibility"
+      ],
+      "scores": {
+        "tourism_score_city": 3,
+        "tourism_score_culture": 4,
+        "tourism_score_family": 5,
+        "tourism_score_food": 3,
+        "tourism_score_events": 3,
+        "tourism_score_business": 3,
+        "tourism_score_nature": 5,
+        "tourism_score_active": 4,
+        "tourism_score_beach": 2,
+        "tourism_score_winter": 4,
+        "accessibility_score": 5,
+        "public_transport_score": 4,
+        "infrastructure_score": 4,
+        "seasonality_score": 5
+      },
+      "month_scores": {
+        "1": 4,
+        "2": 4,
+        "3": 2,
+        "4": 2,
+        "5": 5,
+        "6": 5,
+        "7": 5,
+        "8": 5,
+        "9": 5,
+        "10": 3,
+        "11": 2,
+        "12": 4
+      },
+      "trip_days_min": 1,
+      "trip_days_max": 4,
+      "car_required": "preferred",
+      "budget_level": 3,
+      "year_round": true,
+      "has_sea": false,
+      "source": {
+        "provider": "user-region-cards",
+        "source_file": "карточка_региона_Московская_область_ML_backend.csv",
+        "source_url": null,
+        "source_sha256": "2e527ff7c9e8df59661b7562d0d9fb9b37831066aadd7a1235fc9fa6980f9130",
+        "source_lines": {
+          "name": [
+            2
+          ],
+          "has_sea": [
+            11
+          ],
+          "description": [
+            13
+          ],
+          "month_scores.1": [
+            59
+          ],
+          "month_scores.2": [
+            60
+          ],
+          "month_scores.3": [
+            61
+          ],
+          "month_scores.4": [
+            62
+          ],
+          "month_scores.5": [
+            63
+          ],
+          "month_scores.6": [
+            64
+          ],
+          "month_scores.7": [
+            65
+          ],
+          "month_scores.8": [
+            66
+          ],
+          "month_scores.9": [
+            67
+          ],
+          "month_scores.10": [
+            68
+          ],
+          "month_scores.11": [
+            69
+          ],
+          "month_scores.12": [
+            70
+          ],
+          "technical.region_id": [
+            88
+          ],
+          "technical.region_slug": [
+            89
+          ],
+          "technical.federal_district_code": [
+            90
+          ],
+          "technical.economic_region_code": [
+            91
+          ],
+          "technical.is_city_region": [
+            92
+          ],
+          "technical.is_capital": [
+            93
+          ],
+          "technical.car_required": [
+            94
+          ],
+          "technical.year_round": [
+            95
+          ],
+          "technical.recommended_trip_days_min": [
+            96
+          ],
+          "technical.recommended_trip_days_max": [
+            97
+          ],
+          "technical.tourism_score_city": [
+            98
+          ],
+          "technical.tourism_score_culture": [
+            99
+          ],
+          "technical.tourism_score_family": [
+            100
+          ],
+          "technical.tourism_score_food": [
+            101
+          ],
+          "technical.tourism_score_events": [
+            102
+          ],
+          "technical.tourism_score_business": [
+            103
+          ],
+          "technical.tourism_score_nature": [
+            104
+          ],
+          "technical.tourism_score_active": [
+            105
+          ],
+          "technical.tourism_score_beach": [
+            106
+          ],
+          "technical.tourism_score_winter": [
+            107
+          ],
+          "technical.accessibility_score": [
+            108
+          ],
+          "technical.public_transport_score": [
+            109
+          ],
+          "technical.infrastructure_score": [
+            110
+          ],
+          "technical.budget_level": [
+            111
+          ],
+          "technical.seasonality_score": [
+            112
+          ],
+          "tags": [
+            114
+          ]
+        },
+        "data_mode": "manual",
+        "verification": "user_supplied_unverified",
+        "license_reference": null,
+        "attribution": "Карточка региона, предоставленная пользователем; внешняя актуальность не проверена",
+        "checked_at": null
+      }
+    },
+    {
+      "region_id": "ru:region:77",
+      "code": "77",
+      "slug": "moscow",
+      "name": "Москва",
+      "aliases": [
+        "Москва",
+        "moscow"
+      ],
+      "description": "Главный мегаполис России — город, где многовековая история соседствует с крупнейшим деловым, научным, культурным и транспортным центром страны. Москва сочетает историческую городскую среду, масштабные парки и набережные Москвы-реки с современной архитектурой, насыщенной культурной жизнью и развитой инфраструктурой. Это самостоятельный субъект Российской Федерации и один из крупнейших городов Европы.",
+      "tags": [
+        "city",
+        "capital",
+        "urban",
+        "culture",
+        "history",
+        "events",
+        "business",
+        "food",
+        "family",
+        "solo",
+        "couple",
+        "weekend",
+        "short_trip",
+        "year_round",
+        "no_car_needed",
+        "high_accessibility",
+        "high_infrastructure",
+        "medium_high_budget",
+        "public_transport",
+        "winter_city",
+        "summer_city"
+      ],
+      "scores": {
+        "tourism_score_city": 5,
+        "tourism_score_culture": 5,
+        "tourism_score_family": 5,
+        "tourism_score_food": 5,
+        "tourism_score_events": 5,
+        "tourism_score_business": 5,
+        "tourism_score_nature": 2,
+        "tourism_score_active": 3,
+        "tourism_score_beach": 0,
+        "tourism_score_winter": 3,
+        "accessibility_score": 5,
+        "public_transport_score": 5,
+        "infrastructure_score": 5,
+        "seasonality_score": 5
+      },
+      "month_scores": {
+        "1": 4,
+        "2": 3,
+        "3": 2,
+        "4": 3,
+        "5": 5,
+        "6": 5,
+        "7": 5,
+        "8": 5,
+        "9": 5,
+        "10": 3,
+        "11": 2,
+        "12": 5
+      },
+      "trip_days_min": 2,
+      "trip_days_max": 5,
+      "car_required": "not_required",
+      "budget_level": 4,
+      "year_round": true,
+      "has_sea": false,
+      "source": {
+        "provider": "user-region-cards",
+        "source_file": "карточка_региона_Москва_ML_backend.csv",
+        "source_url": null,
+        "source_sha256": "78a56bceec7061c008bf453d4136d60648aa07aca3e220d4e4038ce05a2d0fe4",
+        "source_lines": {
+          "name": [
+            2
+          ],
+          "has_sea": [
+            11
+          ],
+          "description": [
+            13
+          ],
+          "month_scores.1": [
+            58
+          ],
+          "month_scores.2": [
+            59
+          ],
+          "month_scores.3": [
+            60
+          ],
+          "month_scores.4": [
+            61
+          ],
+          "month_scores.5": [
+            62
+          ],
+          "month_scores.6": [
+            63
+          ],
+          "month_scores.7": [
+            64
+          ],
+          "month_scores.8": [
+            65
+          ],
+          "month_scores.9": [
+            66
+          ],
+          "month_scores.10": [
+            67
+          ],
+          "month_scores.11": [
+            68
+          ],
+          "month_scores.12": [
+            69
+          ],
+          "technical.region_id": [
+            88
+          ],
+          "technical.region_slug": [
+            89
+          ],
+          "technical.federal_district_code": [
+            90
+          ],
+          "technical.economic_region_code": [
+            91
+          ],
+          "technical.is_city_region": [
+            92
+          ],
+          "technical.is_capital": [
+            93
+          ],
+          "technical.car_required": [
+            94
+          ],
+          "technical.year_round": [
+            95
+          ],
+          "technical.recommended_trip_days_min": [
+            96
+          ],
+          "technical.recommended_trip_days_max": [
+            97
+          ],
+          "technical.tourism_score_city": [
+            98
+          ],
+          "technical.tourism_score_culture": [
+            99
+          ],
+          "technical.tourism_score_family": [
+            100
+          ],
+          "technical.tourism_score_food": [
+            101
+          ],
+          "technical.tourism_score_events": [
+            102
+          ],
+          "technical.tourism_score_business": [
+            103
+          ],
+          "technical.tourism_score_nature": [
+            104
+          ],
+          "technical.tourism_score_active": [
+            105
+          ],
+          "technical.tourism_score_beach": [
+            106
+          ],
+          "technical.tourism_score_winter": [
+            107
+          ],
+          "technical.accessibility_score": [
+            108
+          ],
+          "technical.public_transport_score": [
+            109
+          ],
+          "technical.infrastructure_score": [
+            110
+          ],
+          "technical.budget_level": [
+            111
+          ],
+          "technical.seasonality_score": [
+            112
+          ],
+          "tags": [
+            114
+          ]
+        },
+        "data_mode": "manual",
+        "verification": "user_supplied_unverified",
+        "license_reference": null,
+        "attribution": "Карточка региона, предоставленная пользователем; внешняя актуальность не проверена",
+        "checked_at": null
+      }
+    }
+  ]
+}

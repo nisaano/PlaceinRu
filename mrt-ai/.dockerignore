@@ -1,0 +1,13 @@
+**
+!requirements.txt
+!app/
+!app/**
+!dev-ui/
+!dev-ui/**
+**/__pycache__/
+!data/
+!data/*.csv
+!data/normalized/
+!data/normalized/**
+!data/fixtures/
+!data/fixtures/**

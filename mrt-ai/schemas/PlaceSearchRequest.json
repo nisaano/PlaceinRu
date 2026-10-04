@@ -1,0 +1,70 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "region_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Region Id",
+      "type": "string"
+    },
+    "query": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Query",
+      "type": "string"
+    },
+    "data_mode": {
+      "const": "fixture",
+      "title": "Data Mode",
+      "type": "string"
+    },
+    "ranking_method": {
+      "default": "bm25",
+      "enum": [
+        "bm25",
+        "embedding"
+      ],
+      "title": "Ranking Method",
+      "type": "string"
+    },
+    "top_k": {
+      "default": 5,
+      "maximum": 20,
+      "minimum": 1,
+      "title": "Top K",
+      "type": "integer"
+    },
+    "kinds": {
+      "items": {
+        "enum": [
+          "HOTEL",
+          "TRANSPORT",
+          "ATTRACTION",
+          "RESTAURANT",
+          "ACTIVITY",
+          "GUIDE"
+        ],
+        "type": "string"
+      },
+      "maxItems": 6,
+      "title": "Kinds",
+      "type": "array"
+    },
+    "excluded_tags": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Excluded Tags",
+      "type": "array"
+    }
+  },
+  "required": [
+    "region_id",
+    "query",
+    "data_mode"
+  ],
+  "title": "PlaceSearchRequest",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

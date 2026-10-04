@@ -1,0 +1,1293 @@
+{
+  "dataset_version": "trip-slots-synthetic-v2",
+  "data_mode": "fixture",
+  "reference_datetime": "2026-10-04T12:00:00+03:00",
+  "timezone": "Europe/Moscow",
+  "slot_paths": [
+    "origin",
+    "destination",
+    "dates.start_date",
+    "dates.end_date",
+    "dates.duration_days",
+    "party.total_count",
+    "party.has_children",
+    "interests"
+  ],
+  "examples": [
+    {
+      "id": "train-complete-route-1",
+      "family_id": "train-complete-route",
+      "split": "train",
+      "text": "Из Москвы в Московскую область с 10.07.2027 по 12.07.2027, нас двое, детей нет. Любим природу.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Московская область",
+        "dates.start_date": "2027-07-10",
+        "dates.end_date": "2027-07-12",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-complete-route-2",
+      "family_id": "train-complete-route",
+      "split": "train",
+      "text": "Нас двое без детей: отправляемся из Москвы в Подмосковье 10.07.2027, возвращаемся 12.07.2027. Интересует природа.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Московская область",
+        "dates.start_date": "2027-07-10",
+        "dates.end_date": "2027-07-12",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-complete-route-3",
+      "family_id": "train-complete-route",
+      "split": "train",
+      "text": "Хотим на природу в Московскую область из Москвы на 10.07.2027—12.07.2027, едем вдвоём, без детей.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Московская область",
+        "dates.start_date": "2027-07-10",
+        "dates.end_date": "2027-07-12",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-discover-active-1",
+      "family_id": "train-discover-active",
+      "split": "train",
+      "text": "Подбери направление из Казани на 5 дней с 03.08.2027, нас трое, есть дети. Хочется гор и активного отдыха.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Казань",
+        "destination": null,
+        "dates.start_date": "2027-08-03",
+        "dates.end_date": "2027-08-07",
+        "dates.duration_days": 5,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "активный",
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-discover-active-2",
+      "family_id": "train-discover-active",
+      "split": "train",
+      "text": "Стартуем из Казани 03.08.2027 на пять дней; едет 3 человека с детьми, интересуют горы и активный отдых. Куда поехать?",
+      "pending_question": null,
+      "expected": {
+        "origin": "Казань",
+        "destination": null,
+        "dates.start_date": "2027-08-03",
+        "dates.end_date": "2027-08-07",
+        "dates.duration_days": 5,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "активный",
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-discover-active-3",
+      "family_id": "train-discover-active",
+      "split": "train",
+      "text": "Не знаем, куда поехать: из Казани, начало 03.08.2027, отдых пять дней, трое с детьми, хочется активности и гор.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Казань",
+        "destination": null,
+        "dates.start_date": "2027-08-03",
+        "dates.end_date": "2027-08-07",
+        "dates.duration_days": 5,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "активный",
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-date-party-1",
+      "family_id": "train-date-party",
+      "split": "train",
+      "text": "Из Санкт-Петербурга в Сочи с 11.09.2027 по 14.09.2027 еду одна, без детей, хочу к морю.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": "Сочи",
+        "dates.start_date": "2027-09-11",
+        "dates.end_date": "2027-09-14",
+        "dates.duration_days": 4,
+        "party.total_count": 1,
+        "party.has_children": false,
+        "interests": [
+          "море"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-date-party-2",
+      "family_id": "train-date-party",
+      "split": "train",
+      "text": "Я одна еду из Питера в Сочи с 11.09.2027 до 14.09.2027, интересует море, детей нет.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": "Сочи",
+        "dates.start_date": "2027-09-11",
+        "dates.end_date": "2027-09-14",
+        "dates.duration_days": 4,
+        "party.total_count": 1,
+        "party.has_children": false,
+        "interests": [
+          "море"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-date-party-3",
+      "family_id": "train-date-party",
+      "split": "train",
+      "text": "Планирую поездку Санкт-Петербург — Сочи, даты 11.09.2027—14.09.2027; один взрослый, без детей, хочется моря.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": "Сочи",
+        "dates.start_date": "2027-09-11",
+        "dates.end_date": "2027-09-14",
+        "dates.duration_days": 4,
+        "party.total_count": 1,
+        "party.has_children": false,
+        "interests": [
+          "море"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-origin-nature-1",
+      "family_id": "train-origin-nature",
+      "split": "train",
+      "text": "Из Москвы на выходные с 02.10.2027 на два дня, нас четверо, детей нет. Любим природу и музеи, подбери направление.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": null,
+        "dates.start_date": "2027-10-02",
+        "dates.end_date": "2027-10-03",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": [
+          "природа",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-origin-nature-2",
+      "family_id": "train-origin-nature",
+      "split": "train",
+      "text": "Подбери место на 02.10.2027 на 2 дня: выезжаем из Москвы, четыре человека без детей, интересуют музеи и природа.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": null,
+        "dates.start_date": "2027-10-02",
+        "dates.end_date": "2027-10-03",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": [
+          "природа",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-origin-nature-3",
+      "family_id": "train-origin-nature",
+      "split": "train",
+      "text": "Куда съездить из Москвы? Четверо без детей, природа и музеи, старт 02.10.2027, всего два дня.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": null,
+        "dates.start_date": "2027-10-02",
+        "dates.end_date": "2027-10-03",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": [
+          "природа",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-destination-interest-1",
+      "family_id": "train-destination-interest",
+      "split": "train",
+      "text": "Из Екатеринбурга в Карелию с 05.11.2027 по 06.11.2027, нас трое: двое взрослых и ребёнок. Интересует культура.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Екатеринбург",
+        "destination": "Карелия",
+        "dates.start_date": "2027-11-05",
+        "dates.end_date": "2027-11-06",
+        "dates.duration_days": 2,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "культура"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-destination-interest-2",
+      "family_id": "train-destination-interest",
+      "split": "train",
+      "text": "Планируем Карелию из Екатеринбурга на 05.11.2027—06.11.2027: двое взрослых и один ребёнок, всего три человека, хочется культуры.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Екатеринбург",
+        "destination": "Карелия",
+        "dates.start_date": "2027-11-05",
+        "dates.end_date": "2027-11-06",
+        "dates.duration_days": 2,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "культура"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "train-destination-interest-3",
+      "family_id": "train-destination-interest",
+      "split": "train",
+      "text": "Три человека едут в Карелию из Екатеринбурга 05.11.2027 на два дня: двое взрослых и ребёнок, любим культурные места.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Екатеринбург",
+        "destination": "Карелия",
+        "dates.start_date": "2027-11-05",
+        "dates.end_date": "2027-11-06",
+        "dates.duration_days": 2,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "культура"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-discover-family-1",
+      "family_id": "validation-discover-family",
+      "split": "validation",
+      "text": "Подбери направление из Сочи на четыре дня с 01.12.2027, едем вдвоём с детьми, любим гастрономию.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Сочи",
+        "destination": null,
+        "dates.start_date": "2027-12-01",
+        "dates.end_date": "2027-12-04",
+        "dates.duration_days": 4,
+        "party.total_count": 2,
+        "party.has_children": true,
+        "interests": [
+          "гастрономия"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-discover-family-2",
+      "family_id": "validation-discover-family",
+      "split": "validation",
+      "text": "Хотим поездку из Сочи: начало 01.12.2027, четыре дня, два человека с детьми, интересна местная кухня.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Сочи",
+        "destination": null,
+        "dates.start_date": "2027-12-01",
+        "dates.end_date": "2027-12-04",
+        "dates.duration_days": 4,
+        "party.total_count": 2,
+        "party.has_children": true,
+        "interests": [
+          "гастрономия"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-discover-family-3",
+      "family_id": "validation-discover-family",
+      "split": "validation",
+      "text": "Куда поехать из Сочи на 4 дня начиная 01.12.2027? Нас двое, будут дети, хочется гастрономических впечатлений.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Сочи",
+        "destination": null,
+        "dates.start_date": "2027-12-01",
+        "dates.end_date": "2027-12-04",
+        "dates.duration_days": 4,
+        "party.total_count": 2,
+        "party.has_children": true,
+        "interests": [
+          "гастрономия"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-route-kazan-1",
+      "family_id": "validation-route-kazan",
+      "split": "validation",
+      "text": "Из Москвы в Казань с 10.01.2028 по 12.01.2028, нас трое без детей. Интересуют культура и гастрономия.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Казань",
+        "dates.start_date": "2028-01-10",
+        "dates.end_date": "2028-01-12",
+        "dates.duration_days": 3,
+        "party.total_count": 3,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "гастрономия"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-route-kazan-2",
+      "family_id": "validation-route-kazan",
+      "split": "validation",
+      "text": "Три человека без детей едут из Москвы в Казань 10.01.2028—12.01.2028, хотим культурную и гастрономическую поездку.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Казань",
+        "dates.start_date": "2028-01-10",
+        "dates.end_date": "2028-01-12",
+        "dates.duration_days": 3,
+        "party.total_count": 3,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "гастрономия"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-route-kazan-3",
+      "family_id": "validation-route-kazan",
+      "split": "validation",
+      "text": "Казань из Москвы: 10.01.2028 на три дня, едем втроём, детей нет, интересны еда и культура.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Казань",
+        "dates.start_date": "2028-01-10",
+        "dates.end_date": "2028-01-12",
+        "dates.duration_days": 3,
+        "party.total_count": 3,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "гастрономия"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-partial-party-1",
+      "family_id": "validation-partial-party",
+      "split": "validation",
+      "text": "На Алтай с 02.02.2028 на неделю, нас четверо, без детей. Любим природу и горы.",
+      "pending_question": null,
+      "expected": {
+        "origin": null,
+        "destination": "Алтай",
+        "dates.start_date": "2028-02-02",
+        "dates.end_date": "2028-02-08",
+        "dates.duration_days": 7,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": [
+          "природа",
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-partial-party-2",
+      "family_id": "validation-partial-party",
+      "split": "validation",
+      "text": "Хочу на Алтай 02.02.2028 на семь дней; четыре человека без детей, интересуют горы и природа.",
+      "pending_question": null,
+      "expected": {
+        "origin": null,
+        "destination": "Алтай",
+        "dates.start_date": "2028-02-02",
+        "dates.end_date": "2028-02-08",
+        "dates.duration_days": 7,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": [
+          "природа",
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-partial-party-3",
+      "family_id": "validation-partial-party",
+      "split": "validation",
+      "text": "Алтай, старт 02.02.2028, отдых на 7 дней, едем вчетвером без детей, хочется горной природы.",
+      "pending_question": null,
+      "expected": {
+        "origin": null,
+        "destination": "Алтай",
+        "dates.start_date": "2028-02-02",
+        "dates.end_date": "2028-02-08",
+        "dates.duration_days": 7,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": [
+          "природа",
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-single-unknown-destination-1",
+      "family_id": "validation-single-unknown-destination",
+      "split": "validation",
+      "text": "Подбери направление из Санкт-Петербурга с 09.03.2028 по 11.03.2028, еду один, интересует активный отдых.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": null,
+        "dates.start_date": "2028-03-09",
+        "dates.end_date": "2028-03-11",
+        "dates.duration_days": 3,
+        "party.total_count": 1,
+        "party.has_children": false,
+        "interests": [
+          "активный"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-single-unknown-destination-2",
+      "family_id": "validation-single-unknown-destination",
+      "split": "validation",
+      "text": "Куда съездить одному без детей? Старт из Питера 09.03.2028, вернусь 11.03.2028, люблю активный отдых.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": null,
+        "dates.start_date": "2028-03-09",
+        "dates.end_date": "2028-03-11",
+        "dates.duration_days": 3,
+        "party.total_count": 1,
+        "party.has_children": false,
+        "interests": [
+          "активный"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-single-unknown-destination-3",
+      "family_id": "validation-single-unknown-destination",
+      "split": "validation",
+      "text": "Из Санкт-Петербурга на три дня, 09.03.2028—11.03.2028; один путешественник, активный формат.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": null,
+        "dates.start_date": "2028-03-09",
+        "dates.end_date": "2028-03-11",
+        "dates.duration_days": 3,
+        "party.total_count": 1,
+        "party.has_children": false,
+        "interests": [
+          "активный"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-nature-children-1",
+      "family_id": "validation-nature-children",
+      "split": "validation",
+      "text": "Из Москвы на Байкал с 04.04.2028 по 05.04.2028, нас трое, один ребёнок. Интересуют озёра и природа.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Байкал",
+        "dates.start_date": "2028-04-04",
+        "dates.end_date": "2028-04-05",
+        "dates.duration_days": 2,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "озёра",
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-nature-children-2",
+      "family_id": "validation-nature-children",
+      "split": "validation",
+      "text": "Байкал из Москвы на 04.04.2028—05.04.2028: двое взрослых и ребёнок, хочется природы и озёр.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Байкал",
+        "dates.start_date": "2028-04-04",
+        "dates.end_date": "2028-04-05",
+        "dates.duration_days": 2,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "озёра",
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "validation-nature-children-3",
+      "family_id": "validation-nature-children",
+      "split": "validation",
+      "text": "Планируем Байкал с 04.04.2028 на два дня, отправляемся из Москвы втроём с ребёнком, любим природу и озёра.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Байкал",
+        "dates.start_date": "2028-04-04",
+        "dates.end_date": "2028-04-05",
+        "dates.duration_days": 2,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "озёра",
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-complete-culture-1",
+      "family_id": "test-complete-culture",
+      "split": "validation",
+      "text": "Из Казани в Москву с 15.05.2028 по 17.05.2028, путешествуем вдвоём без детей. Хотим музеи и культуру.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Казань",
+        "destination": "Москва",
+        "dates.start_date": "2028-05-15",
+        "dates.end_date": "2028-05-17",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-complete-culture-2",
+      "family_id": "test-complete-culture",
+      "split": "validation",
+      "text": "Нас двое взрослых без детей, едем из Казани в Москву 15.05.2028—17.05.2028; интересны музеи и культурные места.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Казань",
+        "destination": "Москва",
+        "dates.start_date": "2028-05-15",
+        "dates.end_date": "2028-05-17",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-complete-culture-3",
+      "family_id": "test-complete-culture",
+      "split": "validation",
+      "text": "Москва из Казани на 15.05.2028, назад 17.05.2028. Едем вдвоём, детей нет, любим культуру и музеи.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Казань",
+        "destination": "Москва",
+        "dates.start_date": "2028-05-15",
+        "dates.end_date": "2028-05-17",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-discover-two-1",
+      "family_id": "test-discover-two",
+      "split": "validation",
+      "text": "Подбери поездку из Екатеринбурга на 2 дня с 06.06.2028, нас двое, детей нет, хотим на природу.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Екатеринбург",
+        "destination": null,
+        "dates.start_date": "2028-06-06",
+        "dates.end_date": "2028-06-07",
+        "dates.duration_days": 2,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-discover-two-2",
+      "family_id": "test-discover-two",
+      "split": "validation",
+      "text": "Не знаем куда поехать: выезжаем из Екатеринбурга 06.06.2028 на два дня, вдвоём без детей, интересует природа.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Екатеринбург",
+        "destination": null,
+        "dates.start_date": "2028-06-06",
+        "dates.end_date": "2028-06-07",
+        "dates.duration_days": 2,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-discover-two-3",
+      "family_id": "test-discover-two",
+      "split": "validation",
+      "text": "Куда-нибудь на природу из Екатеринбурга, начало 06.06.2028, отдых два дня, два взрослых без детей.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Екатеринбург",
+        "destination": null,
+        "dates.start_date": "2028-06-06",
+        "dates.end_date": "2028-06-07",
+        "dates.duration_days": 2,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-short-duration-1",
+      "family_id": "test-short-duration",
+      "split": "validation",
+      "text": "Из Москвы в Подмосковье на 01.07.2028—02.07.2028: нас четверо, есть дети, любим природу и активный отдых.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Московская область",
+        "dates.start_date": "2028-07-01",
+        "dates.end_date": "2028-07-02",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": true,
+        "interests": [
+          "активный",
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-short-duration-2",
+      "family_id": "test-short-duration",
+      "split": "validation",
+      "text": "Московская область, выезжаем из Москвы 01.07.2028, вернёмся 02.07.2028. Четверо с детьми, хотим активно отдыхать на природе.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Московская область",
+        "dates.start_date": "2028-07-01",
+        "dates.end_date": "2028-07-02",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": true,
+        "interests": [
+          "активный",
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-short-duration-3",
+      "family_id": "test-short-duration",
+      "split": "validation",
+      "text": "На природу в Подмосковье из Москвы на 1 и 2 июля 2028 года, едем вчетвером с детьми, отдых активный.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Московская область",
+        "dates.start_date": "2028-07-01",
+        "dates.end_date": "2028-07-02",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": true,
+        "interests": [
+          "активный",
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-children-no-interests-1",
+      "family_id": "test-children-no-interests",
+      "split": "validation",
+      "text": "Едем из Санкт-Петербурга в Карелию на 5 дней с 20.08.2028, нас трое, будут дети.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": "Карелия",
+        "dates.start_date": "2028-08-20",
+        "dates.end_date": "2028-08-24",
+        "dates.duration_days": 5,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": []
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-children-no-interests-2",
+      "family_id": "test-children-no-interests",
+      "split": "validation",
+      "text": "Карелия из Питера: отправление 20.08.2028, на пять дней, три человека с детьми.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": "Карелия",
+        "dates.start_date": "2028-08-20",
+        "dates.end_date": "2028-08-24",
+        "dates.duration_days": 5,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": []
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-children-no-interests-3",
+      "family_id": "test-children-no-interests",
+      "split": "validation",
+      "text": "Планирую Карелию из Санкт-Петербурга 20.08.2028 на пять дней; нас трое, один ребёнок.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": "Карелия",
+        "dates.start_date": "2028-08-20",
+        "dates.end_date": "2028-08-24",
+        "dates.duration_days": 5,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": []
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-budget-irrelevant-1",
+      "family_id": "test-budget-irrelevant",
+      "split": "validation",
+      "text": "Подбери поездку из Москвы на три дня с 03.09.2028, нас двое без детей, интересует гастрономия.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": null,
+        "dates.start_date": "2028-09-03",
+        "dates.end_date": "2028-09-05",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "гастрономия"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-budget-irrelevant-2",
+      "family_id": "test-budget-irrelevant",
+      "split": "validation",
+      "text": "Из Москвы куда-нибудь на выходные: с 03.09.2028 на 3 дня, вдвоём, детей нет, хочется вкусной еды.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": null,
+        "dates.start_date": "2028-09-03",
+        "dates.end_date": "2028-09-05",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "гастрономия"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-budget-irrelevant-3",
+      "family_id": "test-budget-irrelevant",
+      "split": "validation",
+      "text": "Куда поехать из Москвы 03.09.2028 на три дня? Едем парой без детей, любим гастрономические места.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": null,
+        "dates.start_date": "2028-09-03",
+        "dates.end_date": "2028-09-05",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "гастрономия"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-multi-interest-1",
+      "family_id": "test-multi-interest",
+      "split": "validation",
+      "text": "Из Сочи в Москву с 10.10.2028 по 12.10.2028, едем вчетвером без детей, хотим музеи и культуру.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Сочи",
+        "destination": "Москва",
+        "dates.start_date": "2028-10-10",
+        "dates.end_date": "2028-10-12",
+        "dates.duration_days": 3,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-multi-interest-2",
+      "family_id": "test-multi-interest",
+      "split": "validation",
+      "text": "Нас четверо взрослых без детей, направляемся из Сочи в Москву 10.10.2028—12.10.2028; хотим музеи и культурные места.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Сочи",
+        "destination": "Москва",
+        "dates.start_date": "2028-10-10",
+        "dates.end_date": "2028-10-12",
+        "dates.duration_days": 3,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-multi-interest-3",
+      "family_id": "test-multi-interest",
+      "split": "validation",
+      "text": "Москва из Сочи на три дня с 10.10.2028: четыре человека, детей нет, хочется музеев и культуры.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Сочи",
+        "destination": "Москва",
+        "dates.start_date": "2028-10-10",
+        "dates.end_date": "2028-10-12",
+        "dates.duration_days": 3,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-destination-first-1",
+      "family_id": "test-destination-first",
+      "split": "test",
+      "text": "Москва из Казани: поездка с 14.11.2028 по 16.11.2028, вдвоём без детей, интересуют культура и музеи.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Казань",
+        "destination": "Москва",
+        "dates.start_date": "2028-11-14",
+        "dates.end_date": "2028-11-16",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-destination-first-2",
+      "family_id": "test-destination-first",
+      "split": "test",
+      "text": "Планирую Москву из Казани на 14.11.2028—16.11.2028. Едем парой без детей, хотим музеи и культуру.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Казань",
+        "destination": "Москва",
+        "dates.start_date": "2028-11-14",
+        "dates.end_date": "2028-11-16",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-destination-first-3",
+      "family_id": "test-destination-first",
+      "split": "test",
+      "text": "Едем в Москву из Казани с 14.11.2028 до 16.11.2028, два взрослых без детей, интересны культурные места и музеи.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Казань",
+        "destination": "Москва",
+        "dates.start_date": "2028-11-14",
+        "dates.end_date": "2028-11-16",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "культура",
+          "музеи"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-written-date-range-1",
+      "family_id": "test-written-date-range",
+      "split": "test",
+      "text": "В Подмосковье из Москвы: даты 1 и 2 июля 2028 года. Едем вчетвером с детьми, хочется природы.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Московская область",
+        "dates.start_date": "2028-07-01",
+        "dates.end_date": "2028-07-02",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": true,
+        "interests": [
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-written-date-range-2",
+      "family_id": "test-written-date-range",
+      "split": "test",
+      "text": "Планирую Московскую область из Москвы на 1 по 2 июля 2028 года, четыре человека с детьми, любим природу.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Московская область",
+        "dates.start_date": "2028-07-01",
+        "dates.end_date": "2028-07-02",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": true,
+        "interests": [
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-written-date-range-3",
+      "family_id": "test-written-date-range",
+      "split": "test",
+      "text": "На природу в Подмосковье из Москвы, с 1 по 2 июля 2028 года; нас четверо с детьми.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Москва",
+        "destination": "Московская область",
+        "dates.start_date": "2028-07-01",
+        "dates.end_date": "2028-07-02",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": true,
+        "interests": [
+          "природа"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-destination-without-preposition-1",
+      "family_id": "test-destination-without-preposition",
+      "split": "test",
+      "text": "Карелия из Санкт-Петербурга: выезд 05.12.2028, возвращение 07.12.2028, три человека с детьми, хочется гор.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": "Карелия",
+        "dates.start_date": "2028-12-05",
+        "dates.end_date": "2028-12-07",
+        "dates.duration_days": 3,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-destination-without-preposition-2",
+      "family_id": "test-destination-without-preposition",
+      "split": "test",
+      "text": "Планирую Карелию из Питера на 05.12.2028—07.12.2028, нас трое с детьми, любим горы.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": "Карелия",
+        "dates.start_date": "2028-12-05",
+        "dates.end_date": "2028-12-07",
+        "dates.duration_days": 3,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-destination-without-preposition-3",
+      "family_id": "test-destination-without-preposition",
+      "split": "test",
+      "text": "Едем в Карелию из Санкт-Петербурга с 05.12.2028 до 07.12.2028: два взрослых и ребёнок, интересуют горы.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Санкт-Петербург",
+        "destination": "Карелия",
+        "dates.start_date": "2028-12-05",
+        "dates.end_date": "2028-12-07",
+        "dates.duration_days": 3,
+        "party.total_count": 3,
+        "party.has_children": true,
+        "interests": [
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-party-size-forms-1",
+      "family_id": "test-party-size-forms",
+      "split": "test",
+      "text": "Алтай из Сочи с 10.01.2029 по 12.01.2029, едем парой без детей, любим горы.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Сочи",
+        "destination": "Алтай",
+        "dates.start_date": "2029-01-10",
+        "dates.end_date": "2029-01-12",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-party-size-forms-2",
+      "family_id": "test-party-size-forms",
+      "split": "test",
+      "text": "Планирую Алтай из Сочи на 10.01.2029—12.01.2029; нас двое взрослых, детей нет, интересуют горы.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Сочи",
+        "destination": "Алтай",
+        "dates.start_date": "2029-01-10",
+        "dates.end_date": "2029-01-12",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-party-size-forms-3",
+      "family_id": "test-party-size-forms",
+      "split": "test",
+      "text": "Из Сочи на Алтай с 10.01.2029 по 12.01.2029: два путешественника без детей, интересуют горы.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Сочи",
+        "destination": "Алтай",
+        "dates.start_date": "2029-01-10",
+        "dates.end_date": "2029-01-12",
+        "dates.duration_days": 3,
+        "party.total_count": 2,
+        "party.has_children": false,
+        "interests": [
+          "горы"
+        ]
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-numbered-adults-1",
+      "family_id": "test-numbered-adults",
+      "split": "test",
+      "text": "Байкал из Екатеринбурга с 15.02.2029 по 16.02.2029: четверо взрослых без детей.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Екатеринбург",
+        "destination": "Байкал",
+        "dates.start_date": "2029-02-15",
+        "dates.end_date": "2029-02-16",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": []
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-numbered-adults-2",
+      "family_id": "test-numbered-adults",
+      "split": "test",
+      "text": "Планируем поездку на Байкал из Екатеринбурга 15.02.2029—16.02.2029, едет четыре взрослых, детей нет.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Екатеринбург",
+        "destination": "Байкал",
+        "dates.start_date": "2029-02-15",
+        "dates.end_date": "2029-02-16",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": []
+      },
+      "provenance": "synthetic_manual"
+    },
+    {
+      "id": "test-numbered-adults-3",
+      "family_id": "test-numbered-adults",
+      "split": "test",
+      "text": "Едем из Екатеринбурга в Байкал с 15.02.2029 до 16.02.2029, четыре взрослых путешественника без детей.",
+      "pending_question": null,
+      "expected": {
+        "origin": "Екатеринбург",
+        "destination": "Байкал",
+        "dates.start_date": "2029-02-15",
+        "dates.end_date": "2029-02-16",
+        "dates.duration_days": 2,
+        "party.total_count": 4,
+        "party.has_children": false,
+        "interests": []
+      },
+      "provenance": "synthetic_manual"
+    }
+  ]
+}

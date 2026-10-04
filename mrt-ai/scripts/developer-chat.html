@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mrt-ai · тест intent-модели</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f6f8;color:#202533;font:16px system-ui,sans-serif}main{max-width:980px;margin:auto;height:100dvh;display:flex;flex-direction:column;padding:20px;gap:14px}header{display:flex;align-items:center;justify-content:space-between;gap:12px}h1{font-size:22px;margin:0}small{color:#677184}button{border:0;border-radius:10px;padding:12px 18px;cursor:pointer;background:#315def;color:white;font:inherit}button:disabled{opacity:.5;cursor:wait}#history{flex:1;overflow:auto;min-height:100px;display:flex;flex-direction:column;gap:14px;padding:12px 2px}.message{white-space:pre-wrap;overflow-wrap:anywhere;max-width:90%;padding:14px 18px;border-radius:16px;background:white;border:1px solid #e2e5ec;line-height:1.55}.user{align-self:flex-end;background:#e7edff}.assistant{align-self:flex-start}.label{display:block;font-size:12px;font-weight:600;color:#677184;margin-bottom:5px}.diagnostic{margin-top:12px;padding-top:10px;border-top:1px solid #e2e5ec;font-size:13px}.diagnostic strong{display:block;margin:8px 0 4px}.diagnostic-error{color:#a32525}.scores,.slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 12px}.slot-name{color:#677184}.score.selected{font-weight:700;color:#185b39}form{display:flex;gap:10px;align-items:flex-end}textarea{flex:1;min-width:0;resize:vertical;border:1px solid #cdd3df;border-radius:12px;padding:14px;font:inherit;min-height:60px;max-height:180px}#status{min-height:24px;font-size:14px;color:#555f70}#status.error{color:#a32525}details{font-size:13px}#trip-form{background:#fff;border:1px solid #e2e5ec;border-radius:14px;padding:12px 16px;max-height:38dvh;overflow:auto;flex-shrink:0}#trip-form>summary{font-weight:700}#trip-form form{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px;align-items:end}#trip-form label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600}#trip-form input,#trip-form select{width:100%;min-width:0;border:1px solid #cdd3df;border-radius:8px;padding:9px;font:inherit;font-size:14px;background:white}.interests{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px}.interests label{flex-direction:row!important;align-items:center;font-weight:400!important;background:#f5f6f8;padding:7px 10px;border-radius:20px}.interests input{width:auto!important}.form-actions{display:flex;align-items:center;gap:12px}.form-actions small{font-weight:400}.payload{font-size:12px}pre{max-height:160px;overflow:auto;background:white;padding:12px}summary{cursor:pointer}.diagnostic-error{color:#a32525}@media(max-width:650px){main{padding:12px}.message{max-width:98%}.scores,.slots{grid-template-columns:1fr}#trip-form{max-height:42dvh;padding:10px}#trip-form form{grid-template-columns:repeat(2,minmax(0,1fr))}.interests{grid-column:1/-1}button{padding:12px}small{font-size:11px}}
+</style>
+<main>
+<header><div><h1>Миша · тест локальной модели</h1><small>RuBERT intent classifier сравнивается с rules-v1. Ответы чата пока формирует rules-v1.</small></div><button id="new" type="button">Новый диалог</button></header>
+<details id="trip-form" open>
+<summary>Собрать маршрут по форме</summary>
+<form id="structured-form">
+<label>Когда поездка начинается?<input id="start-date" type="date" required></label>
+<label>На сколько дней?<input id="duration" type="number" min="1" max="90" placeholder="Например, 3"></label>
+<label>Откуда отправляетесь?<input id="origin" list="cities" maxlength="120" placeholder="Например, Москва" required></label>
+<label>Куда хотите поехать?<input id="destination" list="destinations" maxlength="120" placeholder="Можно оставить пустым для подбора"></label>
+<datalist id="cities"><option value="Москва"><option value="Санкт-Петербург"><option value="Казань"><option value="Сочи"><option value="Екатеринбург"></datalist>
+<datalist id="destinations"><option value="Москва"><option value="Московская область"><option value="Санкт-Петербург"><option value="Казань"><option value="Сочи"><option value="Алтай"><option value="Карелия"><option value="Байкал"></datalist>
+<label>Сколько человек едет?<select id="travellers" required><option value="">Выберите</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+<label>Есть ли дети?<select id="children" required><option value="">Выберите</option><option value="yes">Да</option><option value="no">Нет</option></select></label>
+<label>Бюджет, ₽<input id="budget" type="number" min="0" max="1000000000" step="1" placeholder="Необязательно"></label>
+<label>Как считать бюджет?<select id="budget-basis"><option value="">Сначала укажите бюджет</option><option value="group">На всю группу</option><option value="person">На человека</option></select></label>
+<label>Период бюджета<select id="budget-period"><option value="">Выберите период</option><option value="trip">На поездку</option><option value="day">В день</option></select></label>
+<label>Путешествие с гидом?<select id="guide"><option value="">Не решили</option><option value="yes">Да</option><option value="no">Нет</option></select></label>
+<div class="interests" aria-label="Интересы поездки">
+<label><input type="checkbox" name="interest" value="природа">Природа</label>
+<label><input type="checkbox" name="interest" value="горы">Горы</label>
+<label><input type="checkbox" name="interest" value="культура">Культура</label>
+<label><input type="checkbox" name="interest" value="активный">Активный отдых</label>
+<label><input type="checkbox" name="interest" value="музеи">Музеи</label>
+<label><input type="checkbox" name="interest" value="море">Море</label>
+<label><input type="checkbox" name="interest" value="гастрономия">Гастрономия</label>
+<label><input type="checkbox" name="interest" value="озёра">Озёра</label>
+<label><input type="checkbox" name="interest" value="экскурсии">Экскурсии</label>
+</div>
+<div class="form-actions"><button id="save-trip" type="submit">Собрать поездку по форме</button><small>Начальные требования задаются только здесь. Пустое направление означает «подобрать варианты».</small></div>
+</form>
+<details class="payload"><summary>Посмотреть структурированные данные</summary><pre id="form-payload">{}</pre></details>
+</details>
+<div id="history" role="log" aria-live="polite" aria-label="История диалога"></div>
+<div id="status" role="status"></div>
+<small id="edit-hint">Сначала задайте поездку формой выше. После этого здесь можно будет попросить изменить собранный результат.</small>
+<form id="form"><textarea id="input" aria-label="Правка поездки" placeholder="Сначала задайте параметры поездки в форме выше…" maxlength="3000" rows="2" disabled></textarea><button id="send" disabled>Изменить поездку</button></form>
+<small>Свободный текст используется только для правок после отправки формы: например, изменить даты или интересы. Enter — отправить · Shift+Enter — новая строка.</small>
+<details><summary>Состояние для отладки</summary><pre id="state"></pre></details>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+let state = null, busy = false, pending = null, formPending = null, formPendingSignature = null, formDirty = false, formSubmitted = false, lastIntentResult = null;
+const key = 'placeinru-developer-chat';
+const formKey = id => `mrt-ai-structured-trip:${id}`;
+function status(text, error=false){ $('status').textContent=text; $('status').className=error?'error':''; }
+function lock(value){ busy=value; $('send').disabled=value||!state||!formSubmitted; $('input').disabled=value||!state||!formSubmitted; $('new').disabled=value; $('save-trip').disabled=value||!state;document.querySelectorAll('#structured-form input,#structured-form select').forEach(input=>{input.disabled=value;});updateBudgetRequirements(); }
+function apiErrorMessage(error){
+ if(error instanceof TypeError)return 'Локальный API недоступен. Проверьте, что окно терминала с mrt-ai открыто; для перезапуска запустите .\\start.cmd и откройте адрес «Чат готов».';
+ return error.message;
+}
+async function api(path, body, method){
+ const response=await fetch(path,{method:method||(body?'POST':'GET'),headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(60000)});
+ const data=await response.json();
+ if(!response.ok){const error=new Error(data.detail?.message || `Ошибка API ${response.status}`);error.code=response.status;throw error;}
+ return data;
+}
+function render(){
+ $('history').replaceChildren();
+ const messages=state.messages.length?state.messages:[{role:'assistant',text:'Привет! Заполните форму поездки выше: выберите дату, города, состав группы и пожелания. После отправки формы можно будет вносить правки сообщениями.'}];
+ messages.forEach((m,index)=>{const box=document.createElement('div');box.className='message '+m.role;const label=document.createElement('span');label.className='label';label.textContent=m.role==='user'?'Вы':'Миша · rules-v1';box.append(label,document.createTextNode(m.text));if(m.role==='assistant'&&index===messages.length-1){box.append(renderSlots(state.trip));if(lastIntentResult)box.append(renderIntent(lastIntentResult));}$('history').append(box);});
+ $('history').scrollTop=$('history').scrollHeight;
+ $('state').textContent=JSON.stringify(state,null,2);
+ try{localStorage.setItem(key,state.session_id);}catch{}
+}
+function renderSlots(trip){
+ const panel=document.createElement('section');panel.className='diagnostic';
+ const heading=document.createElement('strong');heading.textContent='Параметры поездки, выделенные rules-v1';panel.append(heading);
+ const dateRange=trip.dates.start_date?[trip.dates.start_date,trip.dates.end_date].filter(Boolean).join(' — '):null;
+ const party=trip.party.total_count===null?'не указано':`${trip.party.total_count} чел.`;
+ const children=trip.party.has_children===null?'не указано':trip.party.has_children?'да':'нет';
+ const interests=trip.interests.length?trip.interests.join(', '):'не указаны';
+ const budget=trip.budget.amount_minor===null?'не задан':`${trip.budget.amount_minor/100} ₽ ${trip.budget.basis==='person'?'на человека':'на группу'} ${trip.budget.period==='day'?'в день':'на поездку'}`;
+ const guide=trip.guide.required===null?'не решили':trip.guide.required?'да':'нет';
+ const values=[
+  ['Откуда',trip.origin||'не указано'],
+  ['Куда',trip.destination||'не выбрано'],
+  ['Даты',dateRange||'не указаны'],
+  ['Длительность',trip.dates.duration_days?`${trip.dates.duration_days} дн.`:'не указана'],
+  ['Путешественники',party],
+  ['Дети',children],
+  ['Бюджет',budget],
+  ['Гид',guide],
+  ['Интересы',interests]
+ ];
+ const grid=document.createElement('div');grid.className='slots';
+ values.forEach(([name,value])=>{const item=document.createElement('div');const key=document.createElement('span');key.className='slot-name';key.textContent=`${name}: `;item.append(key,document.createTextNode(value));grid.append(item);});
+ panel.append(grid);return panel;
+}
+function syncForm(){
+ if(!state||formDirty)return;
+ const trip=state.trip;
+ $('start-date').value=trip.dates.start_date||'';
+ $('duration').value=trip.dates.duration_days??'';
+ $('origin').value=trip.origin||'';
+ $('destination').value=trip.destination||'';
+ $('travellers').value=trip.party.total_count??'';
+ $('children').value=trip.party.has_children===null?'':trip.party.has_children?'yes':'no';
+ $('guide').value=trip.guide.required===null?'':trip.guide.required?'yes':'no';
+ $('budget').value=trip.budget.amount_minor===null?'':trip.budget.amount_minor/100;
+ $('budget-basis').value=trip.budget.basis||'';
+ $('budget-period').value=trip.budget.period||'';
+ document.querySelectorAll('input[name="interest"]').forEach(input=>{input.checked=trip.interests.includes(input.value);});
+ updateBudgetRequirements();
+}
+function updateBudgetRequirements(){
+ const hasBudget=$('budget').value!=='';
+ $('budget-basis').required=hasBudget;
+ $('budget-period').required=hasBudget;
+ $('budget-basis').disabled=busy||!state||!hasBudget;
+ $('budget-period').disabled=busy||!state||!hasBudget;
+}
+function tripFormData(){
+ const duration=$('duration').value;
+ const budget=$('budget').value;
+ const destination=$('destination').value.trim();
+ const childChoice=$('children').value;
+ const guideChoice=$('guide').value;
+ const interests=[...document.querySelectorAll('input[name="interest"]:checked')].map(input=>input.value);
+ const updates={
+  mode:destination?'PLAN':'DISCOVER',
+  origin:$('origin').value.trim(),
+  destination:destination||null,
+  'dates.start_date':$('start-date').value,
+  'dates.duration_days':duration?Number(duration):null,
+  'party.total_count':Number($('travellers').value),
+  'party.has_children':childChoice==='yes',
+  interests,
+  'guide.required':guideChoice===''?null:guideChoice==='yes',
+  'budget.amount_minor':budget===''?null:Math.round(Number(budget)*100),
+  'budget.basis':budget===''?null:$('budget-basis').value,
+  'budget.period':budget===''?null:$('budget-period').value
+ };
+ const description=[
+  `отправление из ${updates.origin}`,
+  destination?`направление ${destination}`:'подбор направления',
+  `дата ${updates['dates.start_date']}`,
+  duration?`${duration} дн.`:null,
+  `${updates['party.total_count']} чел.`,
+  updates['party.has_children']?'с детьми':'без детей',
+  interests.length?`интересы: ${interests.join(', ')}`:null,
+  budget?`бюджет ${budget} ₽ ${$('budget-basis').value==='group'?'на группу':'на человека'} ${$('budget-period').value==='trip'?'на поездку':'в день'}`:null,
+  guideChoice?guideChoice==='yes'?'с гидом':'без гида':null
+ ].filter(Boolean).join('; ');
+ return {updates,message:`Запрос из формы: ${description}.`};
+}
+document.querySelectorAll('#structured-form input,#structured-form select').forEach(input=>input.addEventListener('input',()=>{formDirty=true;updateBudgetRequirements();}));
+document.querySelectorAll('#structured-form input[type="checkbox"],#structured-form select').forEach(input=>input.addEventListener('change',()=>{formDirty=true;}));
+function renderIntent(result){
+ const panel=document.createElement('section');panel.className='diagnostic';
+ const heading=document.createElement('strong');heading.textContent='RuBERT · intent-классификатор mrt-ai';panel.append(heading);
+ if(result.error){const error=document.createElement('div');error.className='diagnostic-error';error.textContent=result.error;panel.append(error);return panel;}
+ const selected=result.classifier.filter(row=>row.selected).sort((a,b)=>b.score-a.score);
+ const chosen=document.createElement('div');chosen.textContent=selected.length?`Предсказание (порог ${Math.round(result.threshold*100)}%): ${selected.map(row=>`${row.intent} ${Math.round(row.score*100)}%`).join(', ')}`:`Модель не выбрала метки при пороге ${Math.round(result.threshold*100)}%.`;panel.append(chosen);
+ const rules=document.createElement('div');rules.textContent=`rules-v1: ${result.rules_v1.length?result.rules_v1.join(', '):'метки не определены'}`;panel.append(rules);
+ const details=document.createElement('details');const summary=document.createElement('summary');summary.textContent='Уверенность по всем классам';const scores=document.createElement('div');scores.className='scores';
+ [...result.classifier].sort((a,b)=>b.score-a.score).forEach(row=>{const score=document.createElement('div');score.className='score'+(row.selected?' selected':'');score.textContent=`${row.intent}: ${Math.round(row.score*100)}%`;scores.append(score);});
+ details.append(summary,scores);panel.append(details);return panel;
+}
+async function init(fresh=false){
+ lock(true);status('Подключение…');
+ try{
+  let id=null;try{id=localStorage.getItem(key);}catch{}
+  if(id&&!fresh){try{state=await api('/v1/sessions/'+encodeURIComponent(id));}catch(e){if(e.code!==404)throw e;state=null;}}
+  else state=null;
+  if(!state)state=await api('/v1/sessions',{timezone:'Europe/Moscow'});
+  pending=null;formPending=null;formDirty=false;lastIntentResult=null;
+  try{formSubmitted=localStorage.getItem(formKey(state.session_id))==='true';}catch{formSubmitted=false;}
+  syncForm();render();
+  status(formSubmitted?'Поездка загружена. Можно вносить текстовые правки.':'Сначала задайте требования к поездке формой.');
+  $('edit-hint').textContent=formSubmitted?'Поездка задана формой. Напишите, что изменить в собранном результате.':'Свободный ввод включится после отправки формы.';
+ }catch(e){status('Не удалось подключиться. '+apiErrorMessage(e),true);}
+ finally{lock(false);$('input').focus();}
+}
+$('new').onclick=()=>{if(!busy){$('input').value='';init(true);}};
+$('structured-form').onsubmit=async event=>{
+ event.preventDefault();if(busy||!state)return;
+ const formData=tripFormData();
+ const signature=JSON.stringify(formData);
+ if(!formPending||formPendingSignature!==signature){
+  formPendingSignature=signature;
+  formPending={request_id:crypto.randomUUID(),expected_state_version:state.state_version,...formData};
+ }
+ lock(true);status('Сохраняю структурированные параметры поездки…');
+ $('form-payload').textContent=JSON.stringify({request_id:formPending.request_id,expected_state_version:formPending.expected_state_version,updates:formPending.updates},null,2);
+ try{
+  const result=await api(`/v1/sessions/${state.session_id}/trip`,formPending,'PATCH');
+  state=result.state;formPending=null;formPendingSignature=null;pending=null;formDirty=false;lastIntentResult=null;formSubmitted=true;
+  try{localStorage.setItem(formKey(state.session_id),'true');}catch{}
+  syncForm();
+  $('input').value='';
+  $('edit-hint').textContent='Поездка задана формой. Свободный текст теперь используется только для правок результата.';
+  render();status('Параметры сохранены. Можно отправить правку.');
+ }catch(error){
+  if(error.code===409){try{state=await api(`/v1/sessions/${state.session_id}`);if(!formDirty)syncForm();render();formPending=null;formPendingSignature=null;}catch{}}
+  status(error.code===409?'Состояние диалога изменилось. Проверьте поля и повторите отправку.':`Не удалось сохранить параметры. ${apiErrorMessage(error)}`,true);
+ }finally{lock(false);}
+};
+$('form').onsubmit=async event=>{
+ event.preventDefault();const message=$('input').value.trim();if(busy||!state||!formSubmitted||!message)return;
+ lock(true);status('Миша и intent-модель анализируют сообщение…');
+ // Reuse the exact request on retry after an ambiguous connection failure.
+ if(!pending||pending.message!==message)pending={request_id:crypto.randomUUID(),expected_state_version:state.state_version,message};
+ try{
+  const probe={message,state:state.trip,pending_question:state.pending_question};
+  const [turnResult,intentResult]=await Promise.allSettled([
+   api(`/v1/sessions/${state.session_id}/turns`,pending),
+   api('/v1/dev/intent',probe)
+  ]);
+  if(turnResult.status==='rejected')throw turnResult.reason;
+  state=turnResult.value.state;pending=null;if(!formDirty)syncForm();
+  lastIntentResult=intentResult.status==='fulfilled'?intentResult.value:{error:intentResult.reason.message};
+  render();$('input').value='';status(intentResult.status==='fulfilled'?'Готов к тестированию RuBERT':'Сообщение обработано; intent-модель недоступна');
+ }
+ catch(e){
+  if(e.code===409){try{state=await api(`/v1/sessions/${state.session_id}`);render();pending=null;}catch{} }
+  status(e.code===409?'Диалог обновился. Проверьте историю и отправьте сообщение повторно.':'Не удалось получить ответ. Сообщение сохранено в поле ввода; можно повторить отправку. '+apiErrorMessage(e),true);
+ }finally{lock(false);if(formSubmitted)$('input').focus();else $('start-date').focus();}
+};
+$('input').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('form').requestSubmit();}};
+init();
+</script>
+</html>

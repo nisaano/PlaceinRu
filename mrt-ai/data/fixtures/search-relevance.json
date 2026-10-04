@@ -1,0 +1,84 @@
+{
+  "dataset_version": "fixture-relevance-v1",
+  "data_mode": "fixture",
+  "split": "smoke-only",
+  "description": "Ручные синтетические запросы с релевантными synthetic object IDs. Предназначены только для регрессии BM25 baseline; не train data, не реальные пользовательские оценки и не holdout для заявления качества.",
+  "queries": [
+    {
+      "id": "culture-and-history",
+      "region_id": "ru:region:77",
+      "query": "Хочу музейную прогулку про историю и культуру города",
+      "relevant": {
+        "fixture:77:attraction:culture-hall": 3,
+        "fixture:77:attraction:art-gallery": 2,
+        "fixture:77:guide:city-culture": 2
+      }
+    },
+    {
+      "id": "forest-and-quiet-walk",
+      "region_id": "ru:region:50",
+      "query": "Ищем спокойную пешую прогулку на природе среди леса",
+      "relevant": {
+        "fixture:50:activity:forest-trail": 3,
+        "fixture:50:activity:lake-bike": 1
+      }
+    },
+    {
+      "id": "active-lake",
+      "region_id": "ru:region:50",
+      "query": "Активно покататься на велосипеде и побывать у озера",
+      "relevant": {
+        "fixture:50:activity:lake-bike": 3,
+        "fixture:50:activity:family-quest": 1
+      }
+    },
+    {
+      "id": "regional-food",
+      "region_id": "ru:region:50",
+      "query": "Попробовать местную кухню и гастрономические блюда",
+      "relevant": {
+        "fixture:50:restaurant:local-table": 3,
+        "fixture:50:activity:food-walk": 2
+      }
+    },
+    {
+      "id": "family-science",
+      "region_id": "ru:region:50",
+      "query": "Куда сходить с детьми, чтобы было интерактивно и познавательно",
+      "relevant": {
+        "fixture:50:attraction:science-space": 3,
+        "fixture:50:activity:family-quest": 2,
+        "fixture:50:attraction:craft-center": 1
+      }
+    },
+    {
+      "id": "museum-with-children",
+      "region_id": "ru:region:77",
+      "query": "Ищем музей или выставку, куда интересно сходить всей семьей",
+      "relevant": {
+        "fixture:77:attraction:culture-hall": 2,
+        "fixture:77:attraction:art-gallery": 2,
+        "fixture:77:restaurant:family-cafe": 1
+      }
+    },
+    {
+      "id": "active-city-nature",
+      "region_id": "ru:region:77",
+      "query": "Хочется пройтись пешком и провести время в парке",
+      "relevant": {
+        "fixture:77:activity:park-walk": 3,
+        "fixture:77:activity:food-walk": 1
+      }
+    },
+    {
+      "id": "quiet-cultural-guide",
+      "region_id": "ru:region:50",
+      "query": "Нужна спокойная экскурсия про местную историю с гидом",
+      "relevant": {
+        "fixture:50:guide:nature-culture": 3,
+        "fixture:50:attraction:craft-center": 2,
+        "fixture:50:activity:forest-trail": 1
+      }
+    }
+  ]
+}

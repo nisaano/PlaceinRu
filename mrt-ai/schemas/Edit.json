@@ -1,0 +1,51 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "request_id": {
+      "maxLength": 100,
+      "minLength": 8,
+      "title": "Request Id",
+      "type": "string"
+    },
+    "expected_state_version": {
+      "minimum": 0,
+      "title": "Expected State Version",
+      "type": "integer"
+    },
+    "updates": {
+      "additionalProperties": true,
+      "maxProperties": 30,
+      "minProperties": 1,
+      "title": "Updates",
+      "type": "object"
+    },
+    "message": {
+      "anyOf": [
+        {
+          "maxLength": 3000,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Message"
+    }
+  },
+  "required": [
+    "request_id",
+    "expected_state_version",
+    "updates"
+  ],
+  "title": "Edit",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

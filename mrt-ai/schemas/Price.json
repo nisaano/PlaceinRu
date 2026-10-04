@@ -1,0 +1,73 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "amount_minor": {
+      "minimum": 0,
+      "title": "Amount Minor",
+      "type": "integer"
+    },
+    "currency": {
+      "const": "RUB",
+      "default": "RUB",
+      "title": "Currency",
+      "type": "string"
+    },
+    "basis": {
+      "enum": [
+        "person",
+        "group",
+        "room_night",
+        "stay",
+        "leg"
+      ],
+      "title": "Basis",
+      "type": "string"
+    },
+    "quantity": {
+      "minimum": 1,
+      "title": "Quantity",
+      "type": "integer"
+    },
+    "taxes_included": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Taxes Included"
+    },
+    "fees_included": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fees Included"
+    },
+    "status": {
+      "enum": [
+        "quoted",
+        "estimated"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "amount_minor",
+    "basis",
+    "quantity",
+    "status"
+  ],
+  "title": "Price",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

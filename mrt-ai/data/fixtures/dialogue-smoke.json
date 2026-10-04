@@ -1,0 +1,107 @@
+{
+  "dataset_version": "dialogue-smoke-v1",
+  "data_mode": "fixture",
+  "reference_datetime": "2026-10-04T12:00:00+03:00",
+  "timezone": "Europe/Moscow",
+  "description": "Синтетический smoke-набор для проверки извлечения параметров поездки и ранжирования двух импортированных регионов. Не является обучающей или реальной пользовательской выборкой.",
+  "scenarios": [
+    {
+      "id": "discover-single-person-culture",
+      "turns": [
+        "Подбери направление из Москвы на 2 дня с 10.09.2027, еду одна, детей нет, интересует культура."
+      ],
+      "expected": {
+        "status": "ready_for_search",
+        "mode": "DISCOVER",
+        "origin": "Москва",
+        "destination": null,
+        "start_date": "2027-09-10",
+        "duration_days": 2,
+        "total_count": 1,
+        "has_children": false,
+        "children_count": 0,
+        "interests": ["культура"],
+        "recommended_region_ids": ["ru:region:77"]
+      }
+    },
+    {
+      "id": "plan-two-adults-nature",
+      "turns": [
+        "Из Казани в Москву с 01.08.2027 по 03.08.2027, нас двое, без детей. Хотим природу."
+      ],
+      "expected": {
+        "status": "ready_for_search",
+        "mode": "PLAN",
+        "origin": "Казань",
+        "destination": "Москва",
+        "start_date": "2027-08-01",
+        "duration_days": 3,
+        "total_count": 2,
+        "has_children": false,
+        "children_count": 0,
+        "interests": ["природа"],
+        "recommended_region_ids": ["ru:region:77"]
+      }
+    },
+    {
+      "id": "plan-three-with-children-active-food",
+      "turns": [
+        "Из Санкт-Петербурга в Подмосковье с 15.06.2027 по 17.06.2027. Нас трое, есть дети. Нравятся активный отдых и гастрономия."
+      ],
+      "expected": {
+        "status": "ready_for_search",
+        "mode": "PLAN",
+        "origin": "Санкт-Петербург",
+        "destination": "Московская область",
+        "start_date": "2027-06-15",
+        "duration_days": 3,
+        "total_count": 3,
+        "has_children": true,
+        "children_count": null,
+        "interests": ["активный", "гастрономия"],
+        "recommended_region_ids": ["ru:region:50"]
+      }
+    },
+    {
+      "id": "plan-four-no-children-nature-culture",
+      "turns": [
+        "Из Москвы в Московскую область с 10.07.2027 по 12.07.2027, нас четверо, детей нет. Любим природу и музеи."
+      ],
+      "expected": {
+        "status": "ready_for_search",
+        "mode": "PLAN",
+        "origin": "Москва",
+        "destination": "Московская область",
+        "start_date": "2027-07-10",
+        "duration_days": 3,
+        "total_count": 4,
+        "has_children": false,
+        "children_count": 0,
+        "interests": ["музеи", "природа"],
+        "recommended_region_ids": ["ru:region:50"]
+      }
+    },
+    {
+      "id": "discover-clarification-turns",
+      "turns": [
+        "Подбери направление на 5 дней с 10.08.2027, интересует природа и активный отдых.",
+        "Казань",
+        "Нас двое, детей нет."
+      ],
+      "expected_pending_questions": ["origin", "party.total_count", null],
+      "expected": {
+        "status": "ready_for_search",
+        "mode": "DISCOVER",
+        "origin": "Казань",
+        "destination": null,
+        "start_date": "2027-08-10",
+        "duration_days": 5,
+        "total_count": 2,
+        "has_children": false,
+        "children_count": 0,
+        "interests": ["активный", "природа"],
+        "recommended_region_ids": ["ru:region:50"]
+      }
+    }
+  ]
+}

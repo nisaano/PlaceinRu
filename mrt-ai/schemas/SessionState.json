@@ -1,0 +1,731 @@
+{
+  "$defs": {
+    "Budget": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_minor": {
+          "anyOf": [
+            {
+              "maximum": 100000000000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Minor"
+        },
+        "currency": {
+          "const": "RUB",
+          "default": "RUB",
+          "title": "Currency",
+          "type": "string"
+        },
+        "basis": {
+          "anyOf": [
+            {
+              "enum": [
+                "group",
+                "person"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Basis"
+        },
+        "period": {
+          "anyOf": [
+            {
+              "enum": [
+                "trip",
+                "day"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period"
+        },
+        "hard_limit": {
+          "default": true,
+          "title": "Hard Limit",
+          "type": "boolean"
+        }
+      },
+      "title": "Budget",
+      "type": "object"
+    },
+    "Dates": {
+      "additionalProperties": false,
+      "properties": {
+        "start_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Date"
+        },
+        "end_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Date"
+        },
+        "duration_days": {
+          "anyOf": [
+            {
+              "maximum": 90,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration Days"
+        }
+      },
+      "title": "Dates",
+      "type": "object"
+    },
+    "Format": {
+      "additionalProperties": false,
+      "properties": {
+        "pace": {
+          "anyOf": [
+            {
+              "enum": [
+                "relaxed",
+                "balanced",
+                "active"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pace"
+        }
+      },
+      "title": "Format",
+      "type": "object"
+    },
+    "Guide": {
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Required"
+        }
+      },
+      "title": "Guide",
+      "type": "object"
+    },
+    "Message": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "user",
+            "assistant"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "text"
+      ],
+      "title": "Message",
+      "type": "object"
+    },
+    "Party": {
+      "additionalProperties": false,
+      "properties": {
+        "total_count": {
+          "anyOf": [
+            {
+              "maximum": 50,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total Count"
+        },
+        "has_children": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Has Children"
+        },
+        "adults": {
+          "anyOf": [
+            {
+              "maximum": 30,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Adults"
+        },
+        "children_count": {
+          "anyOf": [
+            {
+              "maximum": 20,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Children Count"
+        },
+        "children_ages": {
+          "anyOf": [
+            {
+              "items": {
+                "maximum": 17,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Children Ages"
+        }
+      },
+      "title": "Party",
+      "type": "object"
+    },
+    "RegionOption": {
+      "additionalProperties": false,
+      "properties": {
+        "region_id": {
+          "title": "Region Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "score": {
+          "title": "Score",
+          "type": "number"
+        },
+        "score_components": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Score Components",
+          "type": "object"
+        },
+        "matched_interests": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Matched Interests",
+          "type": "array"
+        },
+        "unmatched_interests": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unmatched Interests",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        },
+        "source": {
+          "$ref": "#/$defs/Source"
+        },
+        "budget_status": {
+          "const": "unknown",
+          "default": "unknown",
+          "title": "Budget Status",
+          "type": "string"
+        },
+        "total_price_minor": {
+          "default": null,
+          "title": "Total Price Minor",
+          "type": "null"
+        }
+      },
+      "required": [
+        "region_id",
+        "name",
+        "description",
+        "score",
+        "score_components",
+        "matched_interests",
+        "unmatched_interests",
+        "reasons",
+        "warnings",
+        "source"
+      ],
+      "title": "RegionOption",
+      "type": "object"
+    },
+    "RegionRecommendations": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "needs_parameters",
+            "partial",
+            "no_matches",
+            "outside_coverage",
+            "unavailable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "catalog_snapshot_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Catalog Snapshot Id"
+        },
+        "based_on_state_version": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Based On State Version"
+        },
+        "ranking_version": {
+          "default": "region-rules-v1",
+          "title": "Ranking Version",
+          "type": "string"
+        },
+        "options": {
+          "items": {
+            "$ref": "#/$defs/RegionOption"
+          },
+          "title": "Options",
+          "type": "array"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        },
+        "missing_parameters": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Parameters",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "RegionRecommendations",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        },
+        "source_file": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source File"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "maxLength": 2083,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "source_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Sha256"
+        },
+        "source_lines": {
+          "additionalProperties": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "title": "Source Lines",
+          "type": "object"
+        },
+        "data_mode": {
+          "enum": [
+            "manual",
+            "fixture",
+            "cached",
+            "live"
+          ],
+          "title": "Data Mode",
+          "type": "string"
+        },
+        "verification": {
+          "enum": [
+            "user_supplied_unverified",
+            "synthetic",
+            "provider_reported"
+          ],
+          "title": "Verification",
+          "type": "string"
+        },
+        "license_reference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "License Reference"
+        },
+        "attribution": {
+          "title": "Attribution",
+          "type": "string"
+        },
+        "checked_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Checked At"
+        }
+      },
+      "required": [
+        "provider",
+        "data_mode",
+        "verification",
+        "attribution"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "Transport": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_modes": {
+          "items": {
+            "enum": [
+              "TRAIN",
+              "FLIGHT",
+              "CAR",
+              "BUS"
+            ],
+            "type": "string"
+          },
+          "title": "Allowed Modes",
+          "type": "array"
+        }
+      },
+      "title": "Transport",
+      "type": "object"
+    },
+    "TripRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "default": "DISCOVER",
+          "enum": [
+            "DISCOVER",
+            "PLAN"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "origin": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Origin"
+        },
+        "destination": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Destination"
+        },
+        "destination_region_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Destination Region Id"
+        },
+        "dates": {
+          "$ref": "#/$defs/Dates"
+        },
+        "budget": {
+          "$ref": "#/$defs/Budget"
+        },
+        "party": {
+          "$ref": "#/$defs/Party"
+        },
+        "interests": {
+          "items": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Interests",
+          "type": "array"
+        },
+        "excluded_interests": {
+          "items": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Excluded Interests",
+          "type": "array"
+        },
+        "format": {
+          "$ref": "#/$defs/Format"
+        },
+        "transport": {
+          "$ref": "#/$defs/Transport"
+        },
+        "guide": {
+          "$ref": "#/$defs/Guide"
+        }
+      },
+      "title": "TripRequest",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "state_version": {
+      "default": 0,
+      "title": "State Version",
+      "type": "integer"
+    },
+    "timezone": {
+      "default": "Europe/Moscow",
+      "title": "Timezone",
+      "type": "string"
+    },
+    "trip": {
+      "$ref": "#/$defs/TripRequest"
+    },
+    "messages": {
+      "items": {
+        "$ref": "#/$defs/Message"
+      },
+      "title": "Messages",
+      "type": "array"
+    },
+    "pending_question": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pending Question"
+    },
+    "missing_parameters": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Parameters",
+      "type": "array"
+    },
+    "slot_metadata": {
+      "additionalProperties": true,
+      "title": "Slot Metadata",
+      "type": "object"
+    },
+    "status": {
+      "default": "needs_clarification",
+      "enum": [
+        "needs_clarification",
+        "ready_for_search"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "recommendations": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RegionRecommendations"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "session_id"
+  ],
+  "title": "SessionState",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

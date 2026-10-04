@@ -1,0 +1,106 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "region_id": {
+      "title": "Region Id",
+      "type": "string"
+    },
+    "data_mode": {
+      "default": "manual",
+      "enum": [
+        "manual",
+        "fixture"
+      ],
+      "title": "Data Mode",
+      "type": "string"
+    },
+    "kinds": {
+      "items": {
+        "enum": [
+          "REGION",
+          "HOTEL",
+          "TRANSPORT",
+          "ATTRACTION",
+          "RESTAURANT",
+          "ACTIVITY",
+          "GUIDE"
+        ],
+        "type": "string"
+      },
+      "maxItems": 7,
+      "title": "Kinds",
+      "type": "array"
+    },
+    "excluded_tags": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Excluded Tags",
+      "type": "array"
+    },
+    "start_date": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Start Date"
+    },
+    "end_date": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "End Date"
+    },
+    "adults": {
+      "anyOf": [
+        {
+          "maximum": 30,
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Adults"
+    },
+    "children_ages": {
+      "anyOf": [
+        {
+          "items": {
+            "maximum": 17,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Children Ages"
+    }
+  },
+  "required": [
+    "region_id"
+  ],
+  "title": "CandidateQuery",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
