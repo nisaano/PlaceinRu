@@ -6,6 +6,7 @@ import { readableError } from '../../api/client'
 import { Icon } from '../../components/common/Icon'
 import { ErrorNotice, LoadingState } from '../../components/common/Feedback'
 import { Link, RouterProvider } from '../../router/Router'
+import mishaLandscape from '../../assets/figma/assistant-background.png'
 import './DashboardPage.css'
 
 const money = (amount, currency = 'RUB') =>
@@ -29,7 +30,8 @@ export function DashboardPage() {
   const load = useCallback(async () => {
     const [tripResult, regionResult] = await Promise.allSettled([tripsApi.list(), mrtApi.catalog()])
     if (tripResult.status === 'fulfilled') setTrips(tripResult.value || [])
-    else setError(readableError(tripResult.reason))
+    else
+      setError('Не удалось загрузить путешествия. Попробуйте обновить страницу или создайте новое.')
     if (regionResult.status === 'fulfilled') setRegions(regionResult.value?.regions || [])
     else setRegionError(readableError(regionResult.reason))
     setBusy(false)
@@ -47,37 +49,46 @@ export function DashboardPage() {
 
   return (
     <section className="dashboard-page">
-      <div className="page-header">
-        <div>
-          <span className="eyebrow">Ваше пространство</span>
-          <h1>Привет, {user?.name || 'путешественник'}!</h1>
-          <p>Куда отправимся сегодня?</p>
+      <section className="dashboard-hero" aria-labelledby="dashboard-heading">
+        <div className="dashboard-hero__content">
+          <div className="page-header">
+            <div>
+              <span className="eyebrow">Привет, {user?.name || 'путешественник'}!</span>
+              <h1 id="dashboard-heading">Куда отправимся сегодня?</h1>
+              <p>Миша поможет найти направление и собрать планы поездки.</p>
+            </div>
+            <Link to="/app/misha" className="button button--primary">
+              <Icon name="plus" /> Новое путешествие
+            </Link>
+          </div>
+          <form
+            className="dashboard-prompt"
+            onSubmit={(event) => {
+              event.preventDefault()
+              sessionStorage.setItem(
+                'placeinru.mishaPrompt',
+                new FormData(event.currentTarget).get('prompt')?.toString() || '',
+              )
+              navigate('/app/misha')
+            }}
+          >
+            <Icon name="sparkle" size={23} />
+            <input
+              name="prompt"
+              aria-label="Куда хотите поехать"
+              placeholder="Напишите, куда хотите поехать…"
+            />
+            <button aria-label="Начать с Мишей">
+              <Icon name="send" size={19} />
+            </button>
+          </form>
         </div>
-        <Link to="/app/misha" className="button button--primary">
-          <Icon name="plus" /> Новое путешествие
-        </Link>
-      </div>
-      <form
-        className="dashboard-prompt"
-        onSubmit={(event) => {
-          event.preventDefault()
-          sessionStorage.setItem(
-            'placeinru.mishaPrompt',
-            new FormData(event.currentTarget).get('prompt')?.toString() || '',
-          )
-          navigate('/app/misha')
-        }}
-      >
-        <Icon name="sun" size={23} />
-        <input
-          name="prompt"
-          aria-label="Куда хотите поехать"
-          placeholder="Напишите, куда хотите поехать…"
+        <img
+          className="dashboard-hero__art"
+          src={mishaLandscape}
+          alt="Миша путешествует по России"
         />
-        <button aria-label="Начать с Мишей">
-          <Icon name="send" size={19} />
-        </button>
-      </form>
+      </section>
       <div className="dashboard-section-title">
         <div>
           <h2>Мои путешествия</h2>
@@ -121,8 +132,8 @@ export function DashboardPage() {
             <span className="dashboard-empty__icon">
               <Icon name="trip" size={24} />
             </span>
-            <h3>Пока нет сохранённых путешествий</h3>
-            <p>Начните с Мишей — он поможет выбрать направление и сохранить поездку в аккаунт.</p>
+            <h3>Твоё первое путешествие начинается здесь</h3>
+            <p>Расскажите Мише, куда хочется отправиться — и начните собирать свой маршрут.</p>
           </div>
           <Link className="button button--outline button--small" to="/app/misha">
             Собрать маршрут <Icon name="arrow" size={15} />

@@ -100,9 +100,7 @@
   border-radius: 4px;
   background: #8ac6ed;
   color: #fff;
-  font:
-    400 20px/1 'Madimi One',
-    sans-serif;
+  font: 700 20px/1 var(--sans);
   transform: rotate(7deg);
 }
 .about__mountains {
@@ -131,9 +129,7 @@
   width: 356px;
   margin: 0;
   text-align: center;
-  font:
-    400 44px/1.05 'Madimi One',
-    sans-serif;
+  font: 700 44px/1.05 var(--sans);
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.45);
 }
 .about__social {

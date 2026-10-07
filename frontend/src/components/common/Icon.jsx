@@ -111,6 +111,65 @@ const paths = {
       <path d="m14.5 6.5 3 3" />
     </>
   ),
+  plane: <path d="m3 11 18-8-8 18-2.2-7.8L3 11Zm7.8 2.2L21 3" />,
+  suitcase: (
+    <>
+      <rect x="3" y="7" width="18" height="14" rx="2.5" />
+      <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M9 12v2m6-2v2" />
+    </>
+  ),
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </>
+  ),
+  settings: (
+    <>
+      <path d="M4 7h16M4 17h16" />
+      <circle cx="9" cy="7" r="2" fill="currentColor" />
+      <circle cx="15" cy="17" r="2" fill="currentColor" />
+    </>
+  ),
+  sparkle: (
+    <>
+      <path d="m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2L12 3Z" />
+      <path d="m19 14 1.1 2.9L23 18l-2.9 1.1L19 22l-1.1-2.9L15 18l2.9-1.1L19 14Z" />
+    </>
+  ),
+  shield: (
+    <>
+      <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" />
+      <path d="m9 12 2 2 4-4" />
+    </>
+  ),
+  compass: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2Z" />
+    </>
+  ),
+  mountain: (
+    <>
+      <path d="m3 19 7-12 4 7 2-3 5 8H3Z" />
+      <path d="m8.5 10 1.5 2 1.5-1M15 13l1-1 1 1" />
+    </>
+  ),
+  map: (
+    <>
+      <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" />
+      <path d="M9 3v15m6-12v15" />
+      <circle cx="12" cy="10" r="1.5" />
+    </>
+  ),
+  support: (
+    <>
+      <path d="M4 13v-2a8 8 0 0 1 16 0v2" />
+      <rect x="3" y="12" width="4" height="7" rx="2" />
+      <rect x="17" y="12" width="4" height="7" rx="2" />
+      <path d="M17 20a5 5 0 0 1-5 2h-1" />
+    </>
+  ),
 }
 
 export function Icon({ name, size = 20, ...props }) {

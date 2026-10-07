@@ -1,13 +1,21 @@
 .misha-page__header {
   align-items: center;
 }
+.misha-page .card,
+.misha-thread,
+.misha-workspace > section {
+  border-color: var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
 .trip-context {
   padding: 9px 13px;
   border: 1px solid #e8dfcc;
   border-radius: 12px;
   color: #668071;
   background: #fff;
-  font-size: 11px;
+  font-size: 13px;
 }
 .misha-trip-warning {
   margin: 0 0 14px;
@@ -86,7 +94,7 @@
   border-radius: 16px 16px 16px 4px;
   color: #52685c;
   background: #fff;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.6;
   box-shadow: 0 3px 8px rgba(72, 67, 49, 0.035);
 }
@@ -99,7 +107,7 @@
 }
 .message b {
   color: #315b43;
-  font-size: 10px;
+  font-size: 12px;
 }
 .message p {
   margin: 4px 0 0;
@@ -227,7 +235,7 @@
   display: grid;
   gap: 6px;
   color: #4e6558;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 800;
 }
 .misha-form input:not([type='checkbox']),

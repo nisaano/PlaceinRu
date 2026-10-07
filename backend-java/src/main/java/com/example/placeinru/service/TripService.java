@@ -82,6 +82,7 @@ public class TripService {
         return mapToResponse(savedTrip);
     }
 
+    @Transactional
     public List<TripResponse> getUserTrips(String token) {
         User user = getUserByToken(token);
         return tripRepository.findByUserIdOrderByIdDesc(user.getId()).stream()
@@ -89,6 +90,7 @@ public class TripService {
                 .toList();
     }
 
+    @Transactional
     public TripResponse getTripById(Long id, String token) {
         User user = getUserByToken(token);
         Trip trip = tripRepository.findByIdAndUserId(id, user.getId()).orElseThrow(() -> new ResourceNotFoundException("Поездка не найдена"));

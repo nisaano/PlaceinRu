@@ -1,30 +1,44 @@
 /* Токены бренда считываются из локальных design-reference изображений. */
 :root {
-  --color-orange: #ff8c25;
-  --color-orange-dark: #dc7723;
-  --color-cream: #fffaf0;
-  --color-cream-soft: #fffdf7;
-  --color-green: #31743c;
-  --color-green-dark: #173c34;
-  --color-text: #29483d;
-  --color-muted: #819087;
-  --color-border: #eee4d3;
-  --radius-sm: 10px;
-  --radius-md: 15px;
-  --radius-lg: 20px;
-  --radius-xl: 26px;
-  --shadow-card: 0 8px 22px rgba(70, 67, 47, 0.06);
+  --color-orange: #ff8a24;
+  --color-orange-dark: #d96f18;
+  --color-cream: #fff8ed;
+  --color-cream-soft: #fffdf8;
+  --color-cream-deep: #f5ebd9;
+  --color-green: #2f7d3d;
+  --color-green-dark: #214d42;
+  --color-text: #263f36;
+  --color-muted: #718078;
+  --color-border: #e9ddca;
+  --color-white: #fff;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --shadow-card: 0 8px 24px rgba(70, 67, 47, 0.055);
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 40px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 96px;
   --cream: var(--color-cream);
   --ink: var(--color-green-dark);
   --green: var(--color-green-dark);
   --lime: #5faf49;
   --muted: var(--color-muted);
-  --serif: 'Balsamiq Sans', Manrope, sans-serif;
-  --sans: Manrope, Inter, 'Segoe UI', Arial, sans-serif;
-  --mono: 'JetBrains Mono', 'IBM Plex Mono', Consolas, monospace;
+  --display: Inter, 'Segoe UI', Arial, sans-serif;
+  --serif: var(--display);
+  --sans: Inter, 'Segoe UI', Arial, sans-serif;
+  --mono: var(--sans);
   color: var(--color-text);
   background: var(--color-cream);
   font-family: var(--sans);
+  font-size: 15px;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -46,7 +60,16 @@ body {
   color: var(--color-text);
   background: var(--color-cream);
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--display);
+  font-weight: 700;
+  text-wrap: balance;
 }
 button,
 input,
@@ -73,6 +96,6 @@ a {
 }
 @media (max-width: 700px) {
   body {
-    font-size: 13px;
+    font-size: 14px;
   }
 }

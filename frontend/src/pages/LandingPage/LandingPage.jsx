@@ -1,9 +1,10 @@
 import mascotLandscape from '../../assets/figma/hero-background.png'
 import mishaForest from '../../assets/figma/assistant-background.png'
 import destinationKamchatka from '../../assets/figma/about-main.png'
-import destinationForest from '../../assets/figma/about-01.png'
-import destinationMoscow from '../../assets/figma/assistant-moscow.png'
-import destinationCommunity from '../../assets/figma/community-01.png'
+import destinationAltai from '../../assets/figma/about-03.png'
+import destinationBaikal from '../../assets/figma/community-03.png'
+import destinationKarelia from '../../assets/figma/about-01.png'
+import destinationGoldenRing from '../../assets/figma/community-02.png'
 import { Icon } from '../../components/common/Icon'
 import { Link } from '../../router/Router'
 import { useAuth } from '../../auth/AuthContext'
@@ -11,12 +12,12 @@ import { useState } from 'react'
 import './LandingPage.css'
 
 const benefits = [
-  ['✈', 'Умные рекомендации'],
-  ['▣', 'Билеты и отели'],
-  ['◷', 'Готовый маршрут'],
-  ['◎', 'Поддержка 24/7'],
-  ['♧', 'Гибкие настройки'],
-  ['♡', 'Вся Россия в одном месте'],
+  ['sparkle', 'Умные рекомендации'],
+  ['suitcase', 'Билеты и отели'],
+  ['map', 'Готовый маршрут'],
+  ['support', 'Поддержка 24/7'],
+  ['settings', 'Гибкие настройки'],
+  ['shield', 'Вся Россия в одном месте'],
 ]
 const steps = [
   ['Расскажите, куда хотите', 'Выберите направление или просто напишите Мише, что вам интересно.'],
@@ -26,16 +27,20 @@ const steps = [
 ]
 const destinations = [
   ['Камчатка', 'Вулканы, океан, дикая природа', destinationKamchatka],
-  ['Алтай', 'Горы, реки, чистый воздух', destinationForest],
-  ['Байкал', 'Уникальная природа и энергия', destinationCommunity],
-  ['Карелия', 'Тишина, леса, озёра', destinationMoscow],
-  ['Золотое кольцо', 'История и культура', destinationMoscow],
+  ['Алтай', 'Горы, реки, чистый воздух', destinationAltai],
+  ['Байкал', 'Уникальная природа и энергия', destinationBaikal],
+  ['Карелия', 'Тишина, леса, озёра', destinationKarelia],
+  ['Золотое кольцо', 'История и культура', destinationGoldenRing],
 ]
 const features = [
-  ['✧', 'Всё в одном месте', 'От идеи до бронирования — без лишних вкладок и сайтов.'],
-  ['☻', 'Удобный AI-помощник', 'Миша всегда рядом, чтобы помочь, подсказать и изменить маршрут.'],
-  ['⌘', 'Гибкость', 'Меняйте план в любой момент, даже во время поездки.'],
-  ['24/7', 'Поддержка 24/7', 'Миша рядом, когда вам это нужно.'],
+  ['suitcase', 'Всё в одном месте', 'От идеи до бронирования — без лишних вкладок и сайтов.'],
+  [
+    'sparkle',
+    'Удобный AI-помощник',
+    'Миша всегда рядом, чтобы помочь, подсказать и изменить маршрут.',
+  ],
+  ['settings', 'Гибкость', 'Меняйте план в любой момент, даже во время поездки.'],
+  ['support', 'Поддержка 24/7', 'Миша рядом, когда вам это нужно.'],
 ]
 
 export function LandingPage() {
@@ -76,15 +81,6 @@ export function LandingPage() {
             <Link className="button button--primary button--header" to={user ? '/app' : '/login'}>
               {user ? 'Кабинет' : 'Войти'}
             </Link>
-            <button
-              className="landing-menu"
-              type="button"
-              aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              <Icon name={menuOpen ? 'close' : 'menu'} />
-            </button>
           </div>
         </header>
 
@@ -117,7 +113,9 @@ export function LandingPage() {
         <div className="benefit-strip" aria-label="Возможности PlaceinRu">
           {benefits.map(([icon, label]) => (
             <div className="benefit-strip__item" key={label}>
-              <span>{icon}</span>
+              <span>
+                <Icon name={icon} size={21} />
+              </span>
               <b>{label}</b>
             </div>
           ))}
@@ -125,12 +123,16 @@ export function LandingPage() {
 
         <section className="landing-section how-section" id="how-it-works">
           <div className="section-heading">
-            <span className="section-doodle">⌁</span>
+            <span className="section-doodle">
+              <Icon name="mountain" size={24} />
+            </span>
             <div>
               <h2>Как это работает?</h2>
               <p>Всего несколько шагов — и путешествие почти готово</p>
             </div>
-            <span className="sun-doodle">☼</span>
+            <span className="sun-doodle">
+              <Icon name="sun" size={22} />
+            </span>
           </div>
           <div className="steps-grid">
             {steps.map(([title, text], index) => (
@@ -148,12 +150,16 @@ export function LandingPage() {
 
         <section className="landing-section destinations-section" id="destinations">
           <div className="section-heading">
-            <span className="section-doodle">⌃</span>
+            <span className="section-doodle">
+              <Icon name="mountain" size={24} />
+            </span>
             <div>
               <h2>Популярные направления</h2>
               <p>Вдохновляйся лучшими маршрутами по России</p>
             </div>
-            <span className="sun-doodle">☼</span>
+            <span className="sun-doodle">
+              <Icon name="sun" size={22} />
+            </span>
           </div>
           <div className="destination-grid">
             {destinations.map(([name, note, image]) => (
@@ -176,13 +182,17 @@ export function LandingPage() {
         <section className="landing-section feature-section" id="features">
           <div className="feature-copy">
             <div className="section-heading">
-              <span className="section-doodle">♡</span>
+              <span className="section-doodle">
+                <Icon name="heart" size={24} />
+              </span>
               <h2>Почему PlaceinRu?</h2>
             </div>
             <div className="feature-list">
               {features.map(([icon, title, text]) => (
                 <article key={title}>
-                  <span>{icon}</span>
+                  <span>
+                    <Icon name={icon} size={21} />
+                  </span>
                   <h3>{title}</h3>
                   <p>{text}</p>
                 </article>
