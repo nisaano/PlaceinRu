@@ -1,0 +1,222 @@
+.dashboard-prompt {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 64px;
+  margin-bottom: 30px;
+  padding: 9px 10px 9px 18px;
+  border: 1px solid #eee2cf;
+  border-radius: 18px;
+  color: #e28a34;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(77, 67, 48, 0.05);
+}
+.dashboard-prompt input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  color: #29483d;
+  background: transparent;
+  font-size: 13px;
+}
+.dashboard-prompt input::placeholder {
+  color: #9aa69e;
+}
+.dashboard-prompt button {
+  display: grid;
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
+  place-items: center;
+  border: 0;
+  border-radius: 14px;
+  color: #fff;
+  background: #347840;
+  cursor: pointer;
+}
+.dashboard-section-title {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 22px 0 14px;
+}
+.dashboard-section-title h2 {
+  margin: 0;
+  color: #24493d;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+.dashboard-section-title p {
+  margin: 4px 0 0;
+  color: #8a958d;
+  font-size: 11px;
+}
+.dashboard-section-title > a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #397346;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 800;
+}
+.dashboard-trip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+.dashboard-trip {
+  position: relative;
+  overflow: hidden;
+  padding: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+.dashboard-trip__landscape {
+  display: grid;
+  height: 134px;
+  place-items: center;
+  border-radius: 13px;
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(24, 66, 51, 0.08), rgba(24, 66, 51, 0.45)),
+    url('../../assets/figma/about-main.png') center/cover;
+}
+.dashboard-trip:nth-child(3n + 2) .dashboard-trip__landscape {
+  background-image:
+    linear-gradient(180deg, rgba(24, 66, 51, 0.08), rgba(24, 66, 51, 0.45)),
+    url('../../assets/figma/about-02.png');
+}
+.dashboard-trip:nth-child(3n) .dashboard-trip__landscape {
+  background-image:
+    linear-gradient(180deg, rgba(24, 66, 51, 0.08), rgba(24, 66, 51, 0.45)),
+    url('../../assets/figma/community-01.png');
+}
+.trip-chip {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  left: 20px;
+  padding: 6px 9px;
+  border-radius: 9px;
+  color: #356942;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 9px;
+  font-weight: 800;
+}
+.dashboard-trip h3 {
+  margin: 12px 2px 4px;
+  color: #25483d;
+  font-size: 15px;
+}
+.dashboard-trip > p {
+  margin: 0 2px;
+  color: #89958d;
+  font-size: 10px;
+}
+.dashboard-trip__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 12px 2px 2px;
+  padding-top: 10px;
+  border-top: 1px solid #f1e9de;
+  color: #708076;
+  font-size: 9px;
+}
+.dashboard-trip__meta b {
+  color: #2e5b3d;
+}
+.dashboard-empty {
+  display: flex;
+  min-height: 166px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px;
+}
+.dashboard-empty__icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 14px;
+  color: #d78130;
+  background: #fff0dc;
+}
+.dashboard-empty h3 {
+  margin: 10px 0 4px;
+  color: #294b40;
+  font-size: 15px;
+}
+.dashboard-empty p {
+  max-width: 530px;
+  margin: 0;
+  color: #819087;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.region-chips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.region-chips button {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #eee5d6;
+  border-radius: 15px;
+  color: #467848;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+.region-chips button > span {
+  min-width: 0;
+  flex: 1;
+}
+.region-chips b,
+.region-chips small {
+  display: block;
+}
+.region-chips b {
+  color: #2b4f41;
+  font-size: 12px;
+}
+.region-chips small {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: 4px;
+  color: #88958c;
+  font-size: 10px;
+  line-height: 1.4;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.muted-caption {
+  color: #87938b;
+  font-size: 12px;
+}
+@media (max-width: 900px) {
+  .dashboard-trip-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .dashboard-trip-grid,
+  .region-chips {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-empty {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .dashboard-empty .button {
+    width: 100%;
+  }
+}

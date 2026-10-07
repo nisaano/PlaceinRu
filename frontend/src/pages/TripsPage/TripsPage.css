@@ -1,0 +1,147 @@
+.trip-filters {
+  display: flex;
+  gap: 7px;
+  margin: 0 0 18px;
+  padding: 4px;
+  border-radius: 13px;
+  background: #f4efe4;
+}
+.trip-filters button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 10px;
+  color: #77867c;
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+}
+.trip-filters button.is-active {
+  color: #2b5b3e;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(63, 61, 46, 0.07);
+}
+.trip-filters span {
+  color: #849489;
+  font-size: 9px;
+}
+.trips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.trip-list-card {
+  display: grid;
+  grid-template-columns: 145px minmax(0, 1fr);
+  min-height: 225px;
+  overflow: hidden;
+}
+.trip-list-card__image {
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(19, 63, 50, 0.05), rgba(19, 63, 50, 0.55)),
+    url('../../assets/figma/about-main.png') center/cover;
+}
+.trip-list-card:nth-child(even) .trip-list-card__image {
+  background-image:
+    linear-gradient(180deg, rgba(19, 63, 50, 0.05), rgba(19, 63, 50, 0.55)),
+    url('../../assets/figma/about-03.png');
+}
+.trip-list-card__body {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 15px;
+}
+.trip-list-card__title {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.trip-list-card__title .eyebrow {
+  font-size: 8px;
+}
+.trip-list-card__title h2 {
+  margin: 4px 0;
+  color: #25493e;
+  font-size: 16px;
+}
+.icon-button {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  place-items: center;
+  border: 1px solid #e9e5db;
+  border-radius: 10px;
+  color: #7d8a82;
+  background: #fff;
+  cursor: pointer;
+}
+.icon-button--danger:hover {
+  color: #a34e39;
+  border-color: #e5c5b8;
+  background: #fff6f0;
+}
+.trip-list-card__route {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 5px 0;
+  color: #52705e;
+  font-size: 10px;
+}
+.trip-list-card__date {
+  margin: 2px 0 12px;
+  color: #87948b;
+  font-size: 10px;
+}
+.trip-list-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: auto;
+  padding: 10px 0;
+  border-top: 1px solid #f0e9df;
+  color: #829087;
+  font-size: 9px;
+}
+.trip-list-card__meta b {
+  color: #345a43;
+}
+.trip-list-card .button {
+  align-self: flex-start;
+  min-height: 32px;
+}
+@media (max-width: 1000px) {
+  .trips-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .trip-list-card {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+  .trip-list-card__body {
+    padding: 12px;
+  }
+  .trip-list-card__title h2 {
+    font-size: 14px;
+  }
+  .trip-list-card__route {
+    flex-wrap: wrap;
+  }
+  .trip-filters button {
+    flex: 1;
+    justify-content: center;
+    padding-inline: 6px;
+    font-size: 10px;
+  }
+}

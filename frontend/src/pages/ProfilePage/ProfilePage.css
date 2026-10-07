@@ -1,0 +1,48 @@
+.profile-card {
+  max-width: 760px;
+  padding: 22px;
+}
+.profile-card__avatar {
+  display: grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  border: 3px solid #c4d0a2;
+  border-radius: 50%;
+  color: #fff;
+  background: #398149;
+  font-size: 23px;
+  font-weight: 800;
+}
+.profile-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+  margin: 20px 0;
+}
+.profile-fields label {
+  display: grid;
+  gap: 6px;
+  color: #718176;
+  font-size: 10px;
+  font-weight: 800;
+}
+.profile-fields input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #eee5d9;
+  border-radius: 11px;
+  color: #315242;
+  background: #fffdf9;
+  font-size: 12px;
+}
+.profile-status {
+  color: #3d7d45;
+  font-size: 11px;
+}
+@media (max-width: 560px) {
+  .profile-fields {
+    grid-template-columns: 1fr;
+  }
+}
