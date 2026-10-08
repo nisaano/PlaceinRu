@@ -40,9 +40,7 @@
   border-radius: 22px;
   background: rgba(28, 52, 48, 0.74);
   box-shadow: 0 9px 13px rgba(13, 28, 25, 0.32);
-  font:
-    400 48px/1 'Madimi One',
-    sans-serif;
+  font: 700 48px/1 var(--sans);
   letter-spacing: -2px;
 }
 
@@ -53,9 +51,7 @@
   margin-left: 18px;
   padding-left: 18px;
   border-left: 2px solid rgba(255, 255, 255, 0.9);
-  font:
-    400 27px/1 'Madimi One',
-    sans-serif;
+  font: 700 27px/1 var(--sans);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.82);
 }
 

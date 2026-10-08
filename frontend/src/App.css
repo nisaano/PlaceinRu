@@ -1,46 +1,100 @@
-/* Глобальные дизайн-токены и базовые правила страницы. */
+/* Токены бренда считываются из локальных design-reference изображений. */
 :root {
-  --cream: #f7ecdf;
-  --ink: #334329;
-  --green: #334329;
+  --color-orange: #ff8a24;
+  --color-orange-dark: #d96f18;
+  --color-cream: #fff8ed;
+  --color-cream-soft: #fffdf8;
+  --color-cream-deep: #f5ebd9;
+  --color-green: #2f7d3d;
+  --color-green-dark: #214d42;
+  --color-text: #263f36;
+  --color-muted: #718078;
+  --color-border: #e9ddca;
+  --color-white: #fff;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --shadow-card: 0 8px 24px rgba(70, 67, 47, 0.055);
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 40px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 96px;
+  --cream: var(--color-cream);
+  --ink: var(--color-green-dark);
+  --green: var(--color-green-dark);
   --lime: #5faf49;
-  --muted: #6d776e;
-  --serif: 'Balsamiq Sans', Manrope, sans-serif;
-  --sans: Manrope, Inter, 'Segoe UI', Arial, sans-serif;
-  --mono: 'JetBrains Mono', 'IBM Plex Mono', Consolas, monospace;
+  --muted: var(--color-muted);
+  --display: Inter, 'Segoe UI', Arial, sans-serif;
+  --serif: var(--display);
+  --sans: Inter, 'Segoe UI', Arial, sans-serif;
+  --mono: var(--sans);
+  color: var(--color-text);
+  background: var(--color-cream);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
 * {
   box-sizing: border-box;
 }
 html {
+  min-width: 320px;
+  min-height: 100%;
   scroll-behavior: smooth;
-  background: #fff;
-  scroll-padding-top: 98px;
 }
 body {
+  min-width: 320px;
+  min-height: 100vh;
   margin: 0;
-  background: #fff;
-  color: var(--ink);
+  color: var(--color-text);
+  background: var(--color-cream);
   font-family: var(--sans);
-  font-size: 16px;
-  overflow-x: hidden;
+  font-size: 15px;
+  line-height: 1.55;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--display);
+  font-weight: 700;
+  text-wrap: balance;
 }
 button,
-a,
-input {
+input,
+select,
+textarea {
   font: inherit;
 }
+button {
+  color: inherit;
+}
 img {
-  max-width: 100%;
   display: block;
+  max-width: 100%;
+}
+a {
+  color: inherit;
 }
 #root {
-  width: 100%;
-  min-width: 320px;
-  background: #fff;
-  overflow: hidden;
+  min-height: 100vh;
 }
-@media (max-width: 720px) {
+::selection {
+  color: #174235;
+  background: #f8d9ae;
+}
+@media (max-width: 700px) {
   body {
     font-size: 14px;
   }

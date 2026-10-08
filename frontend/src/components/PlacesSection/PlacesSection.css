@@ -19,9 +19,7 @@
   transform: translateX(-50%);
   color: #162d65;
   text-align: center;
-  font:
-    400 64px/64px 'Madimi One',
-    sans-serif;
+  font: 700 64px/64px var(--sans);
   letter-spacing: 1px;
 }
 .community__viewport {
@@ -201,9 +199,7 @@
   border-radius: 9px;
   background: rgba(255, 255, 255, 0.76);
   text-decoration: none;
-  font:
-    700 30px/40px 'Balsamiq Sans',
-    sans-serif;
+  font: 700 30px/40px var(--sans);
   letter-spacing: 0.6px;
 }
 

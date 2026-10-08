@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "normalizer_version": "cards-v1",
-  "snapshot_id": "81ca85e3237f91116d3314bc24f14b5aa167c9bba0be62d25cf07be9c83fc2a6",
+  "snapshot_id": "55ce61d8870c5b07684bfe31218677234ef7dca8e1ed327251afa88e0db16d2e",
   "regions": [
     {
       "region_id": "ru:region:50",
@@ -80,7 +80,7 @@
         "provider": "user-region-cards",
         "source_file": "карточка_региона_Московская_область_ML_backend.csv",
         "source_url": null,
-        "source_sha256": "2e527ff7c9e8df59661b7562d0d9fb9b37831066aadd7a1235fc9fa6980f9130",
+        "source_sha256": "5390e72cdcf2969e475fc4a53dc93bb72ba39f8ae52ebf09302642ec9134aa25",
         "source_lines": {
           "name": [
             2
@@ -286,7 +286,7 @@
         "provider": "user-region-cards",
         "source_file": "карточка_региона_Москва_ML_backend.csv",
         "source_url": null,
-        "source_sha256": "78a56bceec7061c008bf453d4136d60648aa07aca3e220d4e4038ce05a2d0fe4",
+        "source_sha256": "f3290930fe78e03381416b0ff3b9175224bb0a254bb5d248a8ff537648785e1d",
         "source_lines": {
           "name": [
             2
