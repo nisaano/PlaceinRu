@@ -1,5 +1,69 @@
 {
   "$defs": {
+    "Budget": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_minor": {
+          "anyOf": [
+            {
+              "maximum": 100000000000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Minor"
+        },
+        "currency": {
+          "const": "RUB",
+          "default": "RUB",
+          "title": "Currency",
+          "type": "string"
+        },
+        "basis": {
+          "anyOf": [
+            {
+              "enum": [
+                "group",
+                "person"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Basis"
+        },
+        "period": {
+          "anyOf": [
+            {
+              "enum": [
+                "trip",
+                "day"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period"
+        },
+        "hard_limit": {
+          "default": true,
+          "title": "Hard Limit",
+          "type": "boolean"
+        }
+      },
+      "title": "Budget",
+      "type": "object"
+    },
     "Candidate": {
       "additionalProperties": false,
       "properties": {
@@ -111,6 +175,94 @@
       "title": "Candidate",
       "type": "object"
     },
+    "CandidateBatch": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        },
+        "data_mode": {
+          "enum": [
+            "manual",
+            "fixture",
+            "cached",
+            "live"
+          ],
+          "title": "Data Mode",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "partial",
+            "no_candidates",
+            "outside_coverage"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "snapshot_id": {
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "query_fingerprint": {
+          "title": "Query Fingerprint",
+          "type": "string"
+        },
+        "candidates": {
+          "items": {
+            "$ref": "#/$defs/Candidate"
+          },
+          "title": "Candidates",
+          "type": "array"
+        },
+        "offers": {
+          "items": {
+            "$ref": "#/$defs/Offer"
+          },
+          "title": "Offers",
+          "type": "array"
+        },
+        "unavailable_kinds": {
+          "items": {
+            "enum": [
+              "REGION",
+              "HOTEL",
+              "TRANSPORT",
+              "ATTRACTION",
+              "RESTAURANT",
+              "ACTIVITY",
+              "GUIDE"
+            ],
+            "type": "string"
+          },
+          "title": "Unavailable Kinds",
+          "type": "array"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "provider",
+        "data_mode",
+        "status",
+        "snapshot_id",
+        "query_fingerprint"
+      ],
+      "title": "CandidateBatch",
+      "type": "object"
+    },
     "Coordinates": {
       "additionalProperties": false,
       "properties": {
@@ -132,6 +284,96 @@
         "longitude"
       ],
       "title": "Coordinates",
+      "type": "object"
+    },
+    "Dates": {
+      "additionalProperties": false,
+      "properties": {
+        "start_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Date"
+        },
+        "end_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Date"
+        },
+        "duration_days": {
+          "anyOf": [
+            {
+              "maximum": 90,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration Days"
+        }
+      },
+      "title": "Dates",
+      "type": "object"
+    },
+    "Format": {
+      "additionalProperties": false,
+      "properties": {
+        "pace": {
+          "anyOf": [
+            {
+              "enum": [
+                "relaxed",
+                "balanced",
+                "active"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pace"
+        }
+      },
+      "title": "Format",
+      "type": "object"
+    },
+    "Guide": {
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Required"
+        }
+      },
+      "title": "Guide",
       "type": "object"
     },
     "Offer": {
@@ -247,6 +489,84 @@
         "data_mode"
       ],
       "title": "Offer",
+      "type": "object"
+    },
+    "Party": {
+      "additionalProperties": false,
+      "properties": {
+        "total_count": {
+          "anyOf": [
+            {
+              "maximum": 50,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total Count"
+        },
+        "has_children": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Has Children"
+        },
+        "adults": {
+          "anyOf": [
+            {
+              "maximum": 30,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Adults"
+        },
+        "children_count": {
+          "anyOf": [
+            {
+              "maximum": 20,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Children Count"
+        },
+        "children_ages": {
+          "anyOf": [
+            {
+              "items": {
+                "maximum": 17,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Children Ages"
+        }
+      },
+      "title": "Party",
       "type": "object"
     },
     "Price": {
@@ -434,93 +754,136 @@
       ],
       "title": "Source",
       "type": "object"
+    },
+    "Transport": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_modes": {
+          "items": {
+            "enum": [
+              "TRAIN",
+              "FLIGHT",
+              "CAR",
+              "BUS"
+            ],
+            "type": "string"
+          },
+          "title": "Allowed Modes",
+          "type": "array"
+        }
+      },
+      "title": "Transport",
+      "type": "object"
+    },
+    "TripRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "default": "DISCOVER",
+          "enum": [
+            "DISCOVER",
+            "PLAN"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "origin": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Origin"
+        },
+        "destination": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Destination"
+        },
+        "destination_region_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Destination Region Id"
+        },
+        "dates": {
+          "$ref": "#/$defs/Dates"
+        },
+        "budget": {
+          "$ref": "#/$defs/Budget"
+        },
+        "party": {
+          "$ref": "#/$defs/Party"
+        },
+        "interests": {
+          "items": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Interests",
+          "type": "array"
+        },
+        "excluded_interests": {
+          "items": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Excluded Interests",
+          "type": "array"
+        },
+        "format": {
+          "$ref": "#/$defs/Format"
+        },
+        "transport": {
+          "$ref": "#/$defs/Transport"
+        },
+        "guide": {
+          "$ref": "#/$defs/Guide"
+        }
+      },
+      "title": "TripRequest",
+      "type": "object"
     }
   },
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "const": "1.0",
-      "default": "1.0",
-      "title": "Schema Version",
-      "type": "string"
-    },
-    "provider": {
-      "title": "Provider",
-      "type": "string"
-    },
-    "data_mode": {
-      "enum": [
-        "manual",
-        "fixture",
-        "cached",
-        "live"
-      ],
-      "title": "Data Mode",
-      "type": "string"
-    },
-    "status": {
-      "enum": [
-        "partial",
-        "no_candidates",
-        "outside_coverage"
-      ],
-      "title": "Status",
-      "type": "string"
-    },
-    "snapshot_id": {
-      "title": "Snapshot Id",
-      "type": "string"
-    },
-    "query_fingerprint": {
-      "title": "Query Fingerprint",
-      "type": "string"
+    "trip": {
+      "$ref": "#/$defs/TripRequest"
     },
     "candidates": {
-      "items": {
-        "$ref": "#/$defs/Candidate"
-      },
-      "title": "Candidates",
-      "type": "array"
-    },
-    "offers": {
-      "items": {
-        "$ref": "#/$defs/Offer"
-      },
-      "title": "Offers",
-      "type": "array"
-    },
-    "unavailable_kinds": {
-      "items": {
-        "enum": [
-          "REGION",
-          "HOTEL",
-          "TRANSPORT",
-          "ATTRACTION",
-          "RESTAURANT",
-          "ACTIVITY",
-          "GUIDE"
-        ],
-        "type": "string"
-      },
-      "title": "Unavailable Kinds",
-      "type": "array"
-    },
-    "warnings": {
-      "items": {
-        "type": "string"
-      },
-      "title": "Warnings",
-      "type": "array"
+      "$ref": "#/$defs/CandidateBatch"
     }
   },
   "required": [
-    "provider",
-    "data_mode",
-    "status",
-    "snapshot_id",
-    "query_fingerprint"
+    "trip",
+    "candidates"
   ],
-  "title": "CandidateBatch",
+  "title": "CandidateRankingRequest",
   "type": "object",
   "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

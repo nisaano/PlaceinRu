@@ -1,0 +1,44 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "region_id": {
+      "title": "Region Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "relation_id": {
+      "exclusiveMinimum": 0,
+      "title": "Relation Id",
+      "type": "integer"
+    },
+    "area_id": {
+      "exclusiveMinimum": 0,
+      "title": "Area Id",
+      "type": "integer"
+    },
+    "query_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Query Sha256",
+      "type": "string"
+    },
+    "element_count": {
+      "minimum": 0,
+      "title": "Element Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "region_id",
+    "name",
+    "relation_id",
+    "area_id",
+    "query_sha256",
+    "element_count"
+  ],
+  "title": "OSMRegionImport",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

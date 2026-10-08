@@ -63,9 +63,13 @@ Transport details: mode, origin/destination station IDs, departure/arrival с ti
 
 ## RouteProposal и BudgetSummary
 
-RouteProposal: `proposal_id`, `trip_version`, `candidate_snapshot_id`, `status`, `region`, `transport_offer_ids[]`, `hotel_offer_ids[]`, `guide_offer_ids[]`, `days[]`, `budget_summary`, `validation`, `explanations[]`.
+RouteProposal: `proposal_id`, `trip_version`, `candidate_snapshot_id`, `ranking_version`, `ranked_candidates[]`, `status`, `region`, `transport_offer_ids[]`, `hotel_offer_ids[]`, `guide_offer_ids[]`, `days[]`, `budget_summary`, `validation`, `explanations[]`. `ranked_candidates` содержит candidate, score 0–100, компоненты, matched/unmatched interests, совпавшие BM25-термы и причины.
 
-Каждый day: `day_id`, `date`, `timezone`, `items[]`. Item: `item_id`, `object_id`, `offer_id?`, `kind`, `start_at`, `end_at`, `visit_duration_minutes`, `order`, `coordinates`, `pinned`, `cost_line_ids[]`. Accommodation и транспорт нельзя повторно суммировать из каждого дня.
+Каждый day: `day_id`, `date`, `timezone`, `items[]`. Item: `item_id`, `object_id`, `offer_id?`, `kind`, `start_at`, `end_at`, `visit_duration_minutes`, `order`, `relevance_score`, `coordinates`, `pinned`, `cost_line_ids[]`. Accommodation и транспорт нельзя повторно суммировать из каждого дня.
+
+`POST /v1/rank` принимает `TripRequest` и явный `CandidateBatch`. `trip-fit-bm25-v3` нормирует BM25 score относительно максимума текущего набора и объединяет его с тематическим покрытием интересов и заданными preference-компонентами (категория объекта, темп, семейные теги, желаемый гид). Прямое совпадение интереса получает полный тематический вклад; широкая связь по тематической группе — частичный вклад и не считается прямым `matched_interest`. Исключённые интересы фильтруются по прямому совпадению. Ответ сообщает `score_weights` и `unscored_factors`; сумма применённых весов нормируется к 1, отсутствующие во входе компоненты не участвуют. Итог 0–100 — относительная ранжировочная оценка, не вероятность, не обученная confidence и не оценка доступности/цены. Даты/сезон, бюджет, вместимость группы и тип транспорта остаются `unscored_factors`, если для них нет проверенных данных. Неизвестные значения в score не подставляются; явно отклонённая услуга гида отфильтровывает кандидатов с `exclusion_reasons`.
+
+`POST /v1/route/proposal` принимает те же request/candidates и строит только provisional-план: точки не повторяются автоматически, нехватка покрытия по дням видна в validation. Пустой день означает отсутствие отдельного подходящего объекта, а не подтверждённый отдых. Для OSM не выдумываются время/длительность посещения и перемещения. Budget summary не создаёт строк с фиктивной нулевой ценой.
 
 BudgetSummary: `known_total_minor`, `estimated_total_minor?`, `currency`, `line_items[]`, `unknown_categories[]`, `budget_limit_minor`, `budget_scope`, `complete`, `within_budget` (true/false/null), `calculated_by`, `calculated_at`. Каждая строка стоимости имеет уникальный ID, scope, источник, basis и quantity. `complete=false` не допускает обещания соблюдения полного бюджета. Оценки показываются отдельно от подтверждённых сумм. Production total поступает от Backend.
 
@@ -95,6 +99,7 @@ ChangeSet: `change_id`, `idempotency_key`, `base_trip_version`, `source` (chat/m
 | `POST /v1/classify-intent` | message + контекст | intents и confidence |
 | `POST /v1/recommend` | TripRequest + candidates snapshot | ранжированные варианты направлений/наборов |
 | `POST /v1/rank` | TripRequest + candidates | IDs, score components, reasons, exclusions |
+| `POST /v1/route/proposal` | TripRequest + CandidateBatch | provisional RouteProposal с ranking и днями |
 | `POST /v1/optimize-route` | request + ranked candidates + travel matrix | RouteProposal, unresolved inputs |
 | `POST /v1/recommend-guide` | request + реальные гиды | ранжированные гиды |
 | `POST /v1/chat/turn` | message, expected_state_version, UI context | orchestration: state, question, options, proposed changes |

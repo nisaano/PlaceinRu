@@ -1,0 +1,19 @@
+{
+  "dataset_id": "trip-fit-holdout-v1",
+  "split": "holdout",
+  "data_mode": "fixture",
+  "purpose": "Development holdout with relevance grades assigned from fixture descriptions before running the evaluator.",
+  "limitations": [
+    "All candidates and queries are synthetic fixtures.",
+    "Grades are authored by the developer, not collected from users or independent raters.",
+    "This is a small review set and does not establish production quality."
+  ],
+  "cases": [
+    {"id":"moscow-museum-focus","group":"museum_focus","region_id":"ru:region:77","trip":{"mode":"PLAN","destination":"Москва","destination_region_id":"ru:region:77","interests":["музеи","выставки"],"format":{"pace":"relaxed"}},"relevant":{"fixture:77:attraction:art-gallery":3,"fixture:77:attraction:culture-hall":3,"fixture:77:guide:city-culture":1},"must_rank_above":[["fixture:77:attraction:art-gallery","fixture:77:activity:food-walk"],["fixture:77:attraction:culture-hall","fixture:77:activity:food-walk"]]},
+    {"id":"oblast-family-nature-relaxed","group":"family_nature_relaxed","region_id":"ru:region:50","trip":{"mode":"PLAN","destination":"Московская область","destination_region_id":"ru:region:50","interests":["природа"],"format":{"pace":"relaxed"},"party":{"adults":2,"children_count":1}},"relevant":{"fixture:50:activity:forest-trail":3,"fixture:50:hotel:country-stay":2,"fixture:50:guide:nature-culture":1,"fixture:50:activity:lake-bike":1,"fixture:50:activity:family-quest":1}},
+    {"id":"oblast-family-nature-active","group":"family_nature_active","region_id":"ru:region:50","trip":{"mode":"PLAN","destination":"Московская область","destination_region_id":"ru:region:50","interests":["природа"],"format":{"pace":"active"},"party":{"adults":2,"children_count":1}},"relevant":{"fixture:50:activity:lake-bike":3,"fixture:50:activity:forest-trail":2,"fixture:50:activity:family-quest":1}},
+    {"id":"moscow-culture-gastronomy","group":"multi_interest","region_id":"ru:region:77","trip":{"mode":"PLAN","destination":"Москва","destination_region_id":"ru:region:77","interests":["культура","гастрономия"]},"relevant":{"fixture:77:activity:food-walk":3,"fixture:77:restaurant:family-cafe":2,"fixture:77:attraction:art-gallery":1,"fixture:77:attraction:culture-hall":1,"fixture:77:guide:city-culture":1}},
+    {"id":"oblast-children-science-culture","group":"children_culture","region_id":"ru:region:50","trip":{"mode":"PLAN","destination":"Московская область","destination_region_id":"ru:region:50","interests":["наука","музеи"],"party":{"adults":2,"children_count":2}},"relevant":{"fixture:50:attraction:science-space":3,"fixture:50:attraction:craft-center":2,"fixture:50:activity:family-quest":1}},
+    {"id":"moscow-guide-culture","group":"guide_yes","region_id":"ru:region:77","trip":{"mode":"PLAN","destination":"Москва","destination_region_id":"ru:region:77","interests":["история","музеи"],"guide":{"required":true}},"relevant":{"fixture:77:guide:city-culture":3,"fixture:77:attraction:culture-hall":2,"fixture:77:attraction:art-gallery":1}}
+  ]
+}

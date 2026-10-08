@@ -229,6 +229,8 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(state["trip"]["budget"]["amount_minor"], 1_000_000)
         self.assertEqual(state["trip"]["budget"]["basis"], "group")
         self.assertEqual(state["trip"]["budget"]["period"], "trip")
+        self.assertIn("Направление «Московская область» сохранено.", state["messages"][-1]["text"])
+        self.assertNotIn("Напишите, какое направление выбираете.", state["messages"][-1]["text"])
 
     def test_initial_question(self):
         self.assertEqual(self.state["pending_question"], "origin")

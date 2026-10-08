@@ -9,7 +9,8 @@
       "default": "manual",
       "enum": [
         "manual",
-        "fixture"
+        "fixture",
+        "cached"
       ],
       "title": "Data Mode",
       "type": "string"

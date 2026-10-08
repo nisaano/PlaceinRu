@@ -89,6 +89,13 @@
           "default": null,
           "title": "Rating"
         },
+        "source_tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Source Tags",
+          "type": "object"
+        },
         "source": {
           "$ref": "#/$defs/Source"
         }
@@ -287,7 +294,10 @@
       "type": "string"
     },
     "data_mode": {
-      "const": "fixture",
+      "enum": [
+        "fixture",
+        "cached"
+      ],
       "title": "Data Mode",
       "type": "string"
     },

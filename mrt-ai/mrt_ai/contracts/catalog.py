@@ -111,7 +111,84 @@ class Candidate(CatalogModel):
     opening_hours: str | None = None
     visit_duration_minutes: int | None = Field(default=None, ge=1)
     rating: float | None = Field(default=None, ge=0, le=5, allow_inf_nan=False)
+    source_tags: dict[str, str] = Field(default_factory=dict)
     source: Source
+
+
+class OSMRegionImport(CatalogModel):
+    region_id: str
+    name: str
+    relation_id: int = Field(gt=0)
+    area_id: int = Field(gt=0)
+    query_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    element_count: int = Field(ge=0)
+
+
+class OSMPlacesSnapshot(CatalogModel):
+    schema_version: Literal["1.0"] = "1.0"
+    data_mode: Literal["cached"] = "cached"
+    provider: Literal["OpenStreetMap"] = "OpenStreetMap"
+    license_reference: str
+    attribution: str
+    retrieved_at: AwareDatetime
+    osm_data_timestamp: AwareDatetime
+    snapshot_id: str = Field(pattern=r"^[0-9a-f]{64}$")
+    regions: list[OSMRegionImport]
+    candidates: list[Candidate]
+
+    @model_validator(mode="after")
+    def provenance_and_unique_ids(self):
+        ids = [candidate.object_id for candidate in self.candidates]
+        if len(ids) != len(set(ids)):
+            raise ValueError("Duplicate OpenStreetMap element IDs")
+        region_ids = {region.region_id for region in self.regions}
+        for candidate in self.candidates:
+            source = candidate.source
+            if (
+                not candidate.object_id.startswith("osm:")
+                or candidate.region_id not in region_ids
+                or source.provider != "OpenStreetMap"
+                or source.data_mode != "cached"
+                or source.verification != "provider_reported"
+                or source.source_url is None
+                or source.source_sha256 is None
+                or source.license_reference is None
+            ):
+                raise ValueError("OSM candidates must keep provider provenance and a region reference")
+        return self
+
+
+class WikidataPlacesSnapshot(CatalogModel):
+    schema_version: Literal["1.0"] = "1.0"
+    data_mode: Literal["cached"] = "cached"
+    provider: Literal["Wikidata"] = "Wikidata"
+    endpoint: HttpUrl
+    license_reference: str
+    attribution: str
+    retrieved_at: AwareDatetime
+    query_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    snapshot_id: str = Field(pattern=r"^[0-9a-f]{64}$")
+    candidates: list[Candidate]
+
+    @model_validator(mode="after")
+    def provenance_and_unique_ids(self):
+        ids = [candidate.object_id for candidate in self.candidates]
+        if len(ids) != len(set(ids)):
+            raise ValueError("Duplicate Wikidata item IDs")
+        for candidate in self.candidates:
+            source = candidate.source
+            if (
+                not candidate.object_id.startswith("wikidata:Q")
+                or candidate.region_id not in {"ru:region:77", "ru:region:50"}
+                or source.provider != "Wikidata"
+                or source.data_mode != "cached"
+                or source.verification != "provider_reported"
+                or source.source_url is None
+                or source.source_sha256 is None
+                or source.license_reference is None
+            ):
+                raise ValueError("Wikidata candidates must keep item provenance and a supported region")
+        return self
 
 
 class FixturePlaceCatalog(CatalogModel):
@@ -175,7 +252,7 @@ class Offer(CatalogModel):
 
 class CandidateQuery(CatalogModel):
     region_id: str
-    data_mode: Literal["manual", "fixture"] = "manual"
+    data_mode: Literal["manual", "fixture", "cached"] = "manual"
     kinds: list[Kind] = Field(default_factory=lambda: ["HOTEL", "TRANSPORT", "ATTRACTION", "RESTAURANT", "ACTIVITY", "GUIDE"], max_length=7)
     excluded_tags: list[str] = Field(default_factory=list, max_length=20)
     start_date: date | None = None
@@ -193,7 +270,7 @@ class CandidateQuery(CatalogModel):
 class PlaceSearchRequest(CatalogModel):
     region_id: str = Field(min_length=1, max_length=100)
     query: str = Field(min_length=1, max_length=500)
-    data_mode: Literal["fixture"]
+    data_mode: Literal["fixture", "cached"]
     ranking_method: Literal["bm25", "embedding"] = "bm25"
     top_k: int = Field(default=5, ge=1, le=20)
     kinds: list[Literal["HOTEL", "TRANSPORT", "ATTRACTION", "RESTAURANT", "ACTIVITY", "GUIDE"]] = Field(
@@ -220,7 +297,7 @@ class PlaceSearchHit(CatalogModel):
 class PlaceSearchResponse(CatalogModel):
     schema_version: Literal["1.0"] = "1.0"
     status: Literal["partial", "no_candidates", "outside_coverage"]
-    data_mode: Literal["fixture"]
+    data_mode: Literal["fixture", "cached"]
     ranking_version: Literal["bm25-lexical-v1", "sbert-large-nlu-ru-mean-v1"] = "bm25-lexical-v1"
     snapshot_id: str
     results: list[PlaceSearchHit] = Field(default_factory=list)
@@ -250,3 +327,114 @@ class CandidateBatch(CatalogModel):
         if any(o.object_id not in ids or o.data_mode != self.data_mode or o.query_fingerprint != self.query_fingerprint for o in self.offers):
             raise ValueError("Offer does not match batch/query")
         return self
+
+
+FitComponent = Annotated[float, Field(ge=0, le=1, allow_inf_nan=False)]
+
+
+class CandidateFitScore(CatalogModel):
+    candidate: Candidate
+    score: float = Field(ge=0, le=100, allow_inf_nan=False)
+    score_components: dict[str, FitComponent]
+    matched_interests: list[str] = Field(default_factory=list)
+    unmatched_interests: list[str] = Field(default_factory=list)
+    matched_terms: list[str] = Field(default_factory=list)
+    reasons: list[str] = Field(default_factory=list)
+
+
+class CandidateRankingResponse(CatalogModel):
+    schema_version: Literal["1.0"] = "1.0"
+    status: Literal["ranked", "no_candidates", "outside_coverage"]
+    data_mode: DataMode
+    ranking_version: Literal["trip-fit-bm25-v3"] = "trip-fit-bm25-v3"
+    score_meaning: str = (
+        "Относительная оценка соответствия в диапазоне 0–100, не вероятность и не гарантия."
+    )
+    score_weights: dict[str, FitComponent] = Field(default_factory=dict)
+    snapshot_id: str
+    results: list[CandidateFitScore] = Field(default_factory=list)
+    excluded_object_ids: list[str] = Field(default_factory=list)
+    exclusion_reasons: dict[str, str] = Field(default_factory=dict)
+    unscored_factors: list[str] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+
+
+class RouteBudgetLine(CatalogModel):
+    id: str
+    scope: Literal["estimated", "confirmed"]
+    source: str
+    basis: Literal["person", "group", "room_night", "stay", "leg"]
+    quantity: int = Field(ge=1)
+    amount_minor: int = Field(ge=0)
+    currency: Literal["RUB"] = "RUB"
+    status: Literal["estimated", "quoted"]
+
+
+class RouteBudgetSummary(CatalogModel):
+    known_total_minor: int = Field(ge=0)
+    estimated_total_minor: int | None = Field(default=None, ge=0)
+    currency: Literal["RUB"] = "RUB"
+    line_items: list[RouteBudgetLine] = Field(default_factory=list)
+    unknown_categories: list[str] = Field(default_factory=list)
+    budget_limit_minor: int | None = Field(default=None, ge=0)
+    budget_scope: Literal["trip", "day"] = "trip"
+    complete: bool = False
+    within_budget: bool | None = None
+    calculated_by: str = "synthetic-demo-planner"
+    calculated_at: datetime | None = None
+
+
+class RouteItem(CatalogModel):
+    item_id: str
+    object_id: str
+    kind: Kind
+    offer_id: str | None = None
+    start_at: datetime | str | None = None
+    end_at: datetime | str | None = None
+    visit_duration_minutes: int | None = Field(default=None, ge=1)
+    order: int = Field(ge=1)
+    relevance_score: float | None = Field(default=None, ge=0, le=100, allow_inf_nan=False)
+    coordinates: Coordinates | dict | None = None
+    pinned: bool = False
+    cost_line_ids: list[str] = Field(default_factory=list)
+
+
+class RouteDay(CatalogModel):
+    day_id: str
+    date: date
+    timezone: str = "Europe/Moscow"
+    items: list[RouteItem] = Field(default_factory=list)
+
+
+class RouteValidationIssue(CatalogModel):
+    code: str
+    severity: Literal["info", "warning", "error"] = "warning"
+    item_ids: list[str] = Field(default_factory=list)
+    explanation: str
+    suggested_actions: list[str] = Field(default_factory=list)
+
+
+class RouteValidation(CatalogModel):
+    status: Literal["provisional", "validated", "invalid"] = "provisional"
+    validator: str = "synthetic-demo-planner"
+    checked_at: datetime | None = None
+    input_version: int = 1
+    issues: list[RouteValidationIssue] = Field(default_factory=list)
+
+
+class RouteProposal(CatalogModel):
+    proposal_id: str
+    trip_version: int = Field(ge=1)
+    candidate_snapshot_id: str
+    ranking_version: Literal["trip-fit-bm25-v3"] = "trip-fit-bm25-v3"
+    score_weights: dict[str, FitComponent] = Field(default_factory=dict)
+    ranked_candidates: list[CandidateFitScore] = Field(default_factory=list)
+    status: Literal["provisional", "no_candidates", "outside_coverage", "invalid"] = "provisional"
+    region: str
+    transport_offer_ids: list[str] = Field(default_factory=list)
+    hotel_offer_ids: list[str] = Field(default_factory=list)
+    guide_offer_ids: list[str] = Field(default_factory=list)
+    days: list[RouteDay] = Field(default_factory=list)
+    budget_summary: RouteBudgetSummary
+    validation: RouteValidation
+    explanations: list[str] = Field(default_factory=list)

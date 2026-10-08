@@ -14,7 +14,10 @@
       "type": "string"
     },
     "data_mode": {
-      "const": "fixture",
+      "enum": [
+        "fixture",
+        "cached"
+      ],
       "title": "Data Mode",
       "type": "string"
     },

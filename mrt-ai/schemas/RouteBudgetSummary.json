@@ -1,0 +1,175 @@
+{
+  "$defs": {
+    "RouteBudgetLine": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "scope": {
+          "enum": [
+            "estimated",
+            "confirmed"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "basis": {
+          "enum": [
+            "person",
+            "group",
+            "room_night",
+            "stay",
+            "leg"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "quantity": {
+          "minimum": 1,
+          "title": "Quantity",
+          "type": "integer"
+        },
+        "amount_minor": {
+          "minimum": 0,
+          "title": "Amount Minor",
+          "type": "integer"
+        },
+        "currency": {
+          "const": "RUB",
+          "default": "RUB",
+          "title": "Currency",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "estimated",
+            "quoted"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "scope",
+        "source",
+        "basis",
+        "quantity",
+        "amount_minor",
+        "status"
+      ],
+      "title": "RouteBudgetLine",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "known_total_minor": {
+      "minimum": 0,
+      "title": "Known Total Minor",
+      "type": "integer"
+    },
+    "estimated_total_minor": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimated Total Minor"
+    },
+    "currency": {
+      "const": "RUB",
+      "default": "RUB",
+      "title": "Currency",
+      "type": "string"
+    },
+    "line_items": {
+      "items": {
+        "$ref": "#/$defs/RouteBudgetLine"
+      },
+      "title": "Line Items",
+      "type": "array"
+    },
+    "unknown_categories": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unknown Categories",
+      "type": "array"
+    },
+    "budget_limit_minor": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Budget Limit Minor"
+    },
+    "budget_scope": {
+      "default": "trip",
+      "enum": [
+        "trip",
+        "day"
+      ],
+      "title": "Budget Scope",
+      "type": "string"
+    },
+    "complete": {
+      "default": false,
+      "title": "Complete",
+      "type": "boolean"
+    },
+    "within_budget": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Within Budget"
+    },
+    "calculated_by": {
+      "default": "synthetic-demo-planner",
+      "title": "Calculated By",
+      "type": "string"
+    },
+    "calculated_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Calculated At"
+    }
+  },
+  "required": [
+    "known_total_minor"
+  ],
+  "title": "RouteBudgetSummary",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

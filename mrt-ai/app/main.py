@@ -5,13 +5,36 @@ from zoneinfo import ZoneInfo
 from fastapi import FastAPI, Header, HTTPException
 from pydantic import ValidationError
 
-from app.contracts import Edit, IntentProbe, Message, ParseRequest, RecommendRequest, SelectRegion, SessionCreate, SessionState, Turn
+from app.contracts import (
+    CandidateRankingRequest,
+    Edit,
+    IntentProbe,
+    Message,
+    ParseRequest,
+    RecommendRequest,
+    RoutePlannerRequest,
+    SelectRegion,
+    SessionCreate,
+    SessionState,
+    Turn,
+)
 from app.catalog import CatalogUnavailable, RegionCatalog
 from app.backend import BackendError, BackendTrip, BackendTripsClient
-from mrt_ai.contracts.catalog import CandidateBatch, CandidateQuery, Catalog, PlaceSearchRequest, PlaceSearchResponse, RegionRecommendations
+from mrt_ai.contracts.catalog import (
+    CandidateBatch,
+    CandidateQuery,
+    CandidateRankingResponse,
+    Catalog,
+    PlaceSearchRequest,
+    PlaceSearchResponse,
+    RegionRecommendations,
+    RouteProposal,
+)
 from app.providers import LocalCandidateProvider
+from mrt_ai.ranking import rank_trip_candidates
 from mrt_ai.retrieval.encoders.sbert import EmbeddingModelUnavailable, LocalSbertPlaceSearch
 from mrt_ai.retrieval.pipeline import MrtAiRetrievalPipeline
+from mrt_ai.planner import build_route_proposal_from_request
 from app.dialogue import QUESTIONS, get, missing, parse, reduce_trip
 from app.store import Conflict, Store
 
@@ -19,6 +42,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def create_app(database: Path | None = None, clock=None, catalog_path: Path | None = None,
+               osm_places_path: Path | None = None,
+               wikidata_places_path: Path | None = None,
                backend_url: str | None = None, backend_transport_factory=None,
                embedding_searcher: LocalSbertPlaceSearch | None = None,
                enable_intent_test: bool = False, intent_classifier=None):
@@ -26,7 +51,12 @@ def create_app(database: Path | None = None, clock=None, catalog_path: Path | No
     api.state.store = Store(database or ROOT / "data/runtime/sessions.sqlite3")
     now = clock or (lambda: datetime.now(timezone.utc))
     catalog = RegionCatalog(catalog_path or ROOT / "data/normalized/catalog.json")
-    provider = LocalCandidateProvider(catalog, ROOT / "data/fixtures/places.json")
+    provider = LocalCandidateProvider(
+        catalog,
+        ROOT / "data/fixtures/places.json",
+        osm_places_path or ROOT / "data/normalized/osm-places.json",
+        wikidata_places_path or ROOT / "data/normalized/wikidata-places.json",
+    )
     backend = BackendTripsClient(backend_url, backend_transport_factory)
     retrieval_pipeline = MrtAiRetrievalPipeline(embedding_searcher or LocalSbertPlaceSearch(
         ROOT / "models" / "embeddings" / "sbert_large_nlu_ru"
@@ -74,7 +104,7 @@ def create_app(database: Path | None = None, clock=None, catalog_path: Path | No
         try:
             return provider.query(body)
         except (CatalogUnavailable, OSError, ValueError) as error:
-            raise HTTPException(503, detail={"code": "PROVIDER_UNAVAILABLE", "message": "Локальный источник недоступен. Проверьте импорт и fixtures."}) from error
+            raise HTTPException(503, detail={"code": "PROVIDER_UNAVAILABLE", "message": str(error)}) from error
 
     @api.post("/v1/search/places", response_model=PlaceSearchResponse)
     def search_places(body: PlaceSearchRequest):
@@ -89,7 +119,7 @@ def create_app(database: Path | None = None, clock=None, catalog_path: Path | No
             if batch.status == "outside_coverage":
                 return PlaceSearchResponse(
                     status="outside_coverage",
-                    data_mode="fixture",
+                    data_mode=body.data_mode,
                     ranking_version=ranking_version,
                     snapshot_id=batch.snapshot_id,
                     warnings=batch.warnings,
@@ -102,7 +132,7 @@ def create_app(database: Path | None = None, clock=None, catalog_path: Path | No
             )
             return PlaceSearchResponse(
                 status="partial" if ranked.results else "no_candidates",
-                data_mode="fixture",
+                data_mode=body.data_mode,
                 ranking_version=ranked.ranking_version,
                 snapshot_id=batch.snapshot_id,
                 results=ranked.results,
@@ -114,7 +144,24 @@ def create_app(database: Path | None = None, clock=None, catalog_path: Path | No
                 "message": str(error),
             }) from error
         except (CatalogUnavailable, OSError, ValueError) as error:
-            raise HTTPException(status_code=503, detail={"code": "SEARCH_UNAVAILABLE", "message": "Локальный каталог поиска недоступен или повреждён."}) from error
+            raise HTTPException(status_code=503, detail={"code": "SEARCH_UNAVAILABLE", "message": str(error)}) from error
+
+    @api.post("/v1/rank", response_model=CandidateRankingResponse)
+    def rank_candidates(body: CandidateRankingRequest):
+        try:
+            return rank_trip_candidates(body.trip, body.candidates)
+        except ValueError as error:
+            raise HTTPException(status_code=422, detail={
+                "code": "RANKING_INPUT_INVALID",
+                "message": str(error),
+            }) from error
+
+    @api.post("/v1/route/proposal", response_model=RouteProposal)
+    def route_proposal(body: RoutePlannerRequest):
+        try:
+            return build_route_proposal_from_request(body)
+        except ValueError as error:
+            raise HTTPException(status_code=422, detail={"code": "ROUTE_PROPOSAL_UNAVAILABLE", "message": str(error)}) from error
 
     @api.post("/v1/sessions", response_model=SessionState, status_code=201)
     def create_session(body: SessionCreate):
@@ -230,6 +277,12 @@ def create_app(database: Path | None = None, clock=None, catalog_path: Path | No
             answer += "\n\n" + "\n".join(result["notices"])
         if state.pending_question:
             answer += "\n\n" + QUESTIONS[state.pending_question]
+        elif proposed.mode == "PLAN":
+            answer += (
+                f"\n\nНаправление «{proposed.destination}» сохранено. "
+                "В локальном стенде формируется предварительный черновик по синтетическим объектам. "
+                "Это не реальный маршрут: стоимость, доступность услуг и переезды не проверены."
+            )
         else:
             if state.recommendations.options:
                 names = ", ".join(option.name for option in state.recommendations.options)

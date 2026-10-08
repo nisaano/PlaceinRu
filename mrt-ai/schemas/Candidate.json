@@ -226,6 +226,13 @@
       "default": null,
       "title": "Rating"
     },
+    "source_tags": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Source Tags",
+      "type": "object"
+    },
     "source": {
       "$ref": "#/$defs/Source"
     }

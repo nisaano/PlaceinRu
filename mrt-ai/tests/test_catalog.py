@@ -290,6 +290,135 @@ class CatalogApiTests(unittest.TestCase):
         self.assertEqual(response.json()["status"], "no_candidates")
         self.assertEqual(response.json()["results"], [])
 
+    def test_trip_ranking_scores_candidates_and_excludes_unwanted_interests(self):
+        batch = self.client.post("/v1/candidates/query", json={
+            "region_id": "ru:region:50",
+            "data_mode": "fixture",
+            "kinds": ["ATTRACTION", "ACTIVITY", "RESTAURANT", "GUIDE"],
+        }).json()
+        trip_payload = trip(
+            mode="PLAN",
+            destination="Московская область",
+            destination_region_id="ru:region:50",
+            interests=["природа", "гастрономия"],
+            excluded_interests=["музеи"],
+            guide={"required": False},
+        ).model_dump(mode="json")
+        response = self.client.post("/v1/rank", json={
+            "trip": trip_payload,
+            "candidates": batch,
+        })
+        self.assertEqual(response.status_code, 200, response.text)
+        payload = response.json()
+        self.assertEqual(payload["ranking_version"], "trip-fit-bm25-v3")
+        self.assertIn("не вероятность", payload["score_meaning"])
+        self.assertAlmostEqual(sum(payload["score_weights"].values()), 1.0, places=3)
+        self.assertTrue(payload["results"])
+        self.assertEqual(
+            [row["score"] for row in payload["results"]],
+            sorted((row["score"] for row in payload["results"]), reverse=True),
+        )
+        self.assertTrue(all(0 <= row["score"] <= 100 for row in payload["results"]))
+        self.assertTrue(all("interest_match" in row["score_components"] for row in payload["results"]))
+        self.assertIn("fixture:50:attraction:craft-center", payload["excluded_object_ids"])
+        self.assertNotIn("fixture:50:activity:family-quest", payload["excluded_object_ids"])
+        self.assertIn("guide_not_requested", payload["exclusion_reasons"].values())
+        self.assertTrue(all(row["candidate"]["kind"] != "GUIDE" for row in payload["results"]))
+        self.assertTrue(all("музеи" not in row["matched_interests"] for row in payload["results"]))
+
+    def test_trip_ranking_changes_order_for_different_interests(self):
+        batch = self.client.post("/v1/candidates/query", json={
+            "region_id": "ru:region:50",
+            "data_mode": "fixture",
+            "kinds": ["ATTRACTION", "ACTIVITY", "RESTAURANT"],
+        }).json()
+        results_by_interest = {}
+        for interest in ("природа", "музеи", "гастрономия"):
+            trip_payload = trip(
+                mode="PLAN",
+                destination="Московская область",
+                destination_region_id="ru:region:50",
+                interests=[interest],
+            ).model_dump(mode="json")
+            response = self.client.post("/v1/rank", json={
+                "trip": trip_payload,
+                "candidates": batch,
+            })
+            self.assertEqual(response.status_code, 200, response.text)
+            results_by_interest[interest] = response.json()["results"][0]["candidate"]["object_id"]
+
+        self.assertIn(results_by_interest["природа"], {
+            "fixture:50:activity:forest-trail",
+            "fixture:50:activity:lake-bike",
+        })
+        self.assertIn(results_by_interest["музеи"], {
+            "fixture:50:attraction:craft-center",
+            "fixture:50:attraction:science-space",
+        })
+        self.assertEqual(results_by_interest["гастрономия"], "fixture:50:restaurant:local-table")
+        self.assertEqual(len(set(results_by_interest.values())), 3)
+
+    def test_trip_ranking_warns_when_catalog_has_no_match_for_interest(self):
+        batch = self.client.post("/v1/candidates/query", json={
+            "region_id": "ru:region:77",
+            "data_mode": "fixture",
+            "kinds": ["ATTRACTION", "ACTIVITY", "RESTAURANT", "GUIDE"],
+        }).json()
+        trip_payload = trip(
+            mode="PLAN",
+            destination="Москва",
+            destination_region_id="ru:region:77",
+            interests=["астрономия экзопланет"],
+        ).model_dump(mode="json")
+        response = self.client.post("/v1/rank", json={
+            "trip": trip_payload,
+            "candidates": batch,
+        })
+        self.assertEqual(response.status_code, 200, response.text)
+        payload = response.json()
+        self.assertTrue(payload["results"])
+        self.assertEqual(len({row["score"] for row in payload["results"]}), 1)
+        self.assertTrue(all("астрономия экзопланет" in row["unmatched_interests"] for row in payload["results"]))
+        self.assertTrue(any("порядок карточек нейтральный" in warning for warning in payload["warnings"]))
+
+    def test_museum_interest_does_not_give_full_match_to_gastronomy_walk(self):
+        batch = self.client.post("/v1/candidates/query", json={
+            "region_id": "ru:region:77",
+            "data_mode": "fixture",
+            "kinds": ["ATTRACTION", "ACTIVITY", "GUIDE"],
+        }).json()
+        trip_payload = trip(
+            mode="PLAN", destination="Москва", destination_region_id="ru:region:77",
+            interests=["музеи"], format={"pace": "relaxed"},
+        ).model_dump(mode="json")
+        response = self.client.post("/v1/rank", json={"trip": trip_payload, "candidates": batch})
+        self.assertEqual(response.status_code, 200, response.text)
+        results = response.json()["results"]
+        positions = {row["candidate"]["object_id"]: index for index, row in enumerate(results)}
+        gallery = "fixture:77:attraction:art-gallery"
+        food_walk = "fixture:77:activity:food-walk"
+        self.assertLess(positions[gallery], positions[food_walk])
+        food_result = next(row for row in results if row["candidate"]["object_id"] == food_walk)
+        self.assertNotIn("музеи", food_result["matched_interests"])
+        self.assertLess(food_result["score_components"]["interest_match"], 1.0)
+
+    def test_excluding_museums_keeps_gastronomy_walk_available(self):
+        batch = self.client.post("/v1/candidates/query", json={
+            "region_id": "ru:region:77",
+            "data_mode": "fixture",
+            "kinds": ["ATTRACTION", "ACTIVITY", "RESTAURANT", "GUIDE"],
+        }).json()
+        trip_payload = trip(
+            mode="PLAN", destination="Москва", destination_region_id="ru:region:77",
+            interests=["гастрономия"], excluded_interests=["музеи"],
+        ).model_dump(mode="json")
+        response = self.client.post("/v1/rank", json={"trip": trip_payload, "candidates": batch})
+        self.assertEqual(response.status_code, 200, response.text)
+        payload = response.json()
+        self.assertNotIn("fixture:77:activity:food-walk", payload["excluded_object_ids"])
+        self.assertIn("fixture:77:activity:food-walk", [row["candidate"]["object_id"] for row in payload["results"]])
+        self.assertIn("fixture:77:attraction:art-gallery", payload["excluded_object_ids"])
+
     def test_embedding_search_reports_unavailable_model_without_fallback(self):
         searcher = LocalSbertPlaceSearch(Path(self.temp.name) / "missing-model")
         with TestClient(create_app(
@@ -332,6 +461,60 @@ class CatalogApiTests(unittest.TestCase):
             result = client.post("/v1/recommend", json={"trip": trip().model_dump(mode="json")})
             self.assertEqual(result.json()["status"], "unavailable")
             self.assertEqual(client.post("/v1/sessions", json={}).status_code, 201)
+
+    def test_route_proposal_is_generated_for_fixture_catalog(self):
+        batch = self.client.post("/v1/candidates/query", json={"region_id": "ru:region:50", "data_mode": "fixture"}).json()
+        trip_payload = trip(
+            mode="PLAN",
+            destination="Московская область",
+            destination_region_id="ru:region:50",
+            dates={"start_date": "2026-10-10", "end_date": "2026-10-16"},
+            interests=["природа", "активный"],
+            budget={"amount_minor": 10000, "basis": "group", "period": "trip"},
+            party={"adults": 2, "children_count": 0},
+            guide={"required": False},
+        ).model_dump(mode="json")
+        response = self.client.post("/v1/route/proposal", json={"trip": trip_payload, "candidates": batch})
+        self.assertEqual(response.status_code, 200, response.text)
+        payload = response.json()
+        self.assertEqual(payload["status"], "provisional")
+        self.assertEqual(payload["region"], "ru:region:50")
+        self.assertTrue(payload["days"])
+        self.assertTrue(payload["explanations"])
+        self.assertEqual(payload["budget_summary"]["complete"], False)
+        scheduled_items = [item for day in payload["days"] for item in day["items"]]
+        self.assertTrue(scheduled_items)
+        self.assertTrue(all(item["relevance_score"] > 0 for item in scheduled_items))
+        object_ids = [item["object_id"] for item in scheduled_items]
+        self.assertEqual(len(object_ids), len(set(object_ids)))
+        self.assertEqual(payload["budget_summary"]["line_items"], [])
+        self.assertAlmostEqual(sum(payload["score_weights"].values()), 1.0, places=3)
+        self.assertTrue(any(issue["code"] == "insufficient_candidate_coverage" for issue in payload["validation"]["issues"]))
+
+    def test_short_demo_trip_uses_multiple_distinct_places_without_invented_times(self):
+        batch = self.client.post("/v1/candidates/query", json={
+            "region_id": "ru:region:50", "data_mode": "fixture",
+        }).json()
+        trip_payload = trip(
+            mode="PLAN", destination="Московская область",
+            destination_region_id="ru:region:50",
+            dates={"start_date": "2027-07-10", "end_date": "2027-07-11"},
+            interests=["природа", "музеи", "гастрономия"],
+            format={"pace": "active"},
+        ).model_dump(mode="json")
+        response = self.client.post("/v1/route/proposal", json={
+            "trip": trip_payload, "candidates": batch,
+        })
+        self.assertEqual(response.status_code, 200, response.text)
+        proposal = response.json()
+        days = proposal["days"]
+        self.assertEqual(len(days), 2)
+        self.assertTrue(all(len(day["items"]) >= 2 for day in days))
+        items = [item for day in days for item in day["items"]]
+        self.assertEqual(len({item["object_id"] for item in items}), len(items))
+        self.assertTrue(all(item["start_at"] is None and item["end_at"] is None for item in items))
+        self.assertFalse(proposal["budget_summary"]["complete"])
+        self.assertTrue(all(item["object_id"].startswith("fixture:") for item in items))
 
 
 if __name__ == "__main__":

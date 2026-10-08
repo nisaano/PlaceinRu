@@ -134,193 +134,6 @@
       "title": "Coordinates",
       "type": "object"
     },
-    "Offer": {
-      "additionalProperties": false,
-      "properties": {
-        "offer_id": {
-          "title": "Offer Id",
-          "type": "string"
-        },
-        "object_id": {
-          "title": "Object Id",
-          "type": "string"
-        },
-        "query_fingerprint": {
-          "title": "Query Fingerprint",
-          "type": "string"
-        },
-        "data_mode": {
-          "enum": [
-            "manual",
-            "fixture",
-            "cached",
-            "live"
-          ],
-          "title": "Data Mode",
-          "type": "string"
-        },
-        "availability": {
-          "default": "unknown",
-          "enum": [
-            "available",
-            "unavailable",
-            "unknown",
-            "on_request"
-          ],
-          "title": "Availability",
-          "type": "string"
-        },
-        "price": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/Price"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
-        },
-        "booking_url": {
-          "anyOf": [
-            {
-              "format": "uri",
-              "maxLength": 2083,
-              "minLength": 1,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Booking Url"
-        },
-        "booking_link_type": {
-          "anyOf": [
-            {
-              "enum": [
-                "offer",
-                "search",
-                "inquiry"
-              ],
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Booking Link Type"
-        },
-        "checked_at": {
-          "anyOf": [
-            {
-              "format": "date-time",
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Checked At"
-        },
-        "expires_at": {
-          "anyOf": [
-            {
-              "format": "date-time",
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Expires At"
-        }
-      },
-      "required": [
-        "offer_id",
-        "object_id",
-        "query_fingerprint",
-        "data_mode"
-      ],
-      "title": "Offer",
-      "type": "object"
-    },
-    "Price": {
-      "additionalProperties": false,
-      "properties": {
-        "amount_minor": {
-          "minimum": 0,
-          "title": "Amount Minor",
-          "type": "integer"
-        },
-        "currency": {
-          "const": "RUB",
-          "default": "RUB",
-          "title": "Currency",
-          "type": "string"
-        },
-        "basis": {
-          "enum": [
-            "person",
-            "group",
-            "room_night",
-            "stay",
-            "leg"
-          ],
-          "title": "Basis",
-          "type": "string"
-        },
-        "quantity": {
-          "minimum": 1,
-          "title": "Quantity",
-          "type": "integer"
-        },
-        "taxes_included": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Taxes Included"
-        },
-        "fees_included": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Fees Included"
-        },
-        "status": {
-          "enum": [
-            "quoted",
-            "estimated"
-          ],
-          "title": "Status",
-          "type": "string"
-        }
-      },
-      "required": [
-        "amount_minor",
-        "basis",
-        "quantity",
-        "status"
-      ],
-      "title": "Price",
-      "type": "object"
-    },
     "Source": {
       "additionalProperties": false,
       "properties": {
@@ -438,89 +251,59 @@
   },
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "const": "1.0",
-      "default": "1.0",
-      "title": "Schema Version",
-      "type": "string"
+    "candidate": {
+      "$ref": "#/$defs/Candidate"
     },
-    "provider": {
-      "title": "Provider",
-      "type": "string"
+    "score": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Score",
+      "type": "number"
     },
-    "data_mode": {
-      "enum": [
-        "manual",
-        "fixture",
-        "cached",
-        "live"
-      ],
-      "title": "Data Mode",
-      "type": "string"
-    },
-    "status": {
-      "enum": [
-        "partial",
-        "no_candidates",
-        "outside_coverage"
-      ],
-      "title": "Status",
-      "type": "string"
-    },
-    "snapshot_id": {
-      "title": "Snapshot Id",
-      "type": "string"
-    },
-    "query_fingerprint": {
-      "title": "Query Fingerprint",
-      "type": "string"
-    },
-    "candidates": {
-      "items": {
-        "$ref": "#/$defs/Candidate"
+    "score_components": {
+      "additionalProperties": {
+        "maximum": 1,
+        "minimum": 0,
+        "type": "number"
       },
-      "title": "Candidates",
-      "type": "array"
+      "title": "Score Components",
+      "type": "object"
     },
-    "offers": {
-      "items": {
-        "$ref": "#/$defs/Offer"
-      },
-      "title": "Offers",
-      "type": "array"
-    },
-    "unavailable_kinds": {
-      "items": {
-        "enum": [
-          "REGION",
-          "HOTEL",
-          "TRANSPORT",
-          "ATTRACTION",
-          "RESTAURANT",
-          "ACTIVITY",
-          "GUIDE"
-        ],
-        "type": "string"
-      },
-      "title": "Unavailable Kinds",
-      "type": "array"
-    },
-    "warnings": {
+    "matched_interests": {
       "items": {
         "type": "string"
       },
-      "title": "Warnings",
+      "title": "Matched Interests",
+      "type": "array"
+    },
+    "unmatched_interests": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unmatched Interests",
+      "type": "array"
+    },
+    "matched_terms": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Matched Terms",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
       "type": "array"
     }
   },
   "required": [
-    "provider",
-    "data_mode",
-    "status",
-    "snapshot_id",
-    "query_fingerprint"
+    "candidate",
+    "score",
+    "score_components"
   ],
-  "title": "CandidateBatch",
+  "title": "CandidateFitScore",
   "type": "object",
   "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

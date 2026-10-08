@@ -3,7 +3,7 @@ from typing import Annotated, Literal
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
-from mrt_ai.contracts.catalog import RegionRecommendations
+from mrt_ai.contracts.catalog import CandidateBatch, RegionRecommendations
 
 
 class Model(BaseModel):
@@ -103,6 +103,15 @@ class TripRequest(Model):
         if set(self.interests) & set(self.excluded_interests):
             raise ValueError("Интерес не может одновременно быть выбран и исключён")
         return self
+
+
+class CandidateRankingRequest(Model):
+    trip: TripRequest
+    candidates: CandidateBatch
+
+
+class RoutePlannerRequest(CandidateRankingRequest):
+    pass
 
 
 class Message(Model):

@@ -9,10 +9,13 @@
 | [CHATBOT_CONCEPT.md](CHATBOT_CONCEPT.md) | Разбор визуального концепта: 10 панелей, состояния UI и адаптация бронирования |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Модули, потоки данных, модели, карта и миграция |
 | [ML_STRUCTURE.md](ML_STRUCTURE.md) | Текущая структура mrt-ai, модели, лицензии и план RuBERT-классификатора |
+| [ML_DEVELOPMENT_PLAN.md](ML_DEVELOPMENT_PLAN.md) | Этапы и критерии разработки ML/AI-модуля по результатам аудита |
+| [ML_PROJECT_STATUS.md](ML_PROJECT_STATUS.md) | Что реализовано, ограничения и следующая конкретная задача |
 | [CONTRACTS.md](CONTRACTS.md) | Предлагаемый Backend ↔ ML контракт и изменения поездки |
 | [PROVIDERS.md](PROVIDERS.md) | Проверенные источники, ограничения доступа и режимы без API |
 | [ROADMAP.md](ROADMAP.md) | Очерёдность реализации, результаты этапов и приёмка |
 | [EVALUATION.md](EVALUATION.md) | Датасеты, метрики, тестовые сценарии |
+| [TRIP_FIT_BLIND_REVIEW.md](TRIP_FIT_BLIND_REVIEW.md) | Как размечать релевантность карточек без просмотра score и порядка модели |
 | [CHANGELOG.md](CHANGELOG.md) | Хронологический дневник фактически выполненных изменений и ограничений |
 | [sources/PlaceinRu_TZ_ML_MVP.txt](sources/PlaceinRu_TZ_ML_MVP.txt) | Извлечённый текст исходного ТЗ, без форматирования Word |
 | [../PROJECT_CONTEXT.md](../PROJECT_CONTEXT.md) | Короткая память проекта и фактический статус |
